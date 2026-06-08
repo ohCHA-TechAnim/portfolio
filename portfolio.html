@@ -93,18 +93,17 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .stepper-vertical .step-tab .stitle{margin-top:0}
 
 /* 탑다운 리니어 리그 (바디 리그) */
-.rig-linear{display:flex;flex-direction:column;gap:18px;margin:24px 0}
-.rig-row{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:center;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:border-color .25s}
+.rig-linear{display:flex;flex-direction:column;gap:28px;margin:24px 0}
+.rig-row{display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:border-color .25s}
 .rig-row:hover{border-color:var(--accent-dim)}
-.rig-row:nth-child(even){grid-template-columns:1.3fr 1fr}
-.rig-row:nth-child(even) .rig-info{order:2}
-.rig-row:nth-child(even) .rig-media{order:1}
-@media(max-width:680px){.rig-row,.rig-row:nth-child(even){grid-template-columns:1fr}.rig-row:nth-child(even) .rig-info{order:1}.rig-row:nth-child(even) .rig-media{order:2}}
-.rig-info .rig-num{font-size:12px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:8px}
-.rig-info .rig-title{font-size:18px;color:var(--text);font-weight:400;margin-bottom:10px}
-.rig-info .rig-desc{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.7}
-.rig-media{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#0d1114;aspect-ratio:16/10}
+.rig-row .rig-media{order:1}
+.rig-row .rig-info{order:2}
+.rig-media{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#0d1114;width:100%;max-width:760px;margin:0 auto;aspect-ratio:16/9}
 .rig-media img{width:100%;height:100%;object-fit:contain;display:block}
+.rig-info{margin-top:16px;text-align:center;max-width:680px;margin-left:auto;margin-right:auto}
+.rig-info .rig-num{font-size:12px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:8px}
+.rig-info .rig-title{font-size:19px;color:var(--text);font-weight:400;margin-bottom:10px}
+.rig-info .rig-desc{font-size:14px;color:var(--text-dim);font-weight:300;line-height:1.7}
 .step-tab{position:relative;text-align:left;padding:14px 16px;border:1px solid var(--line);background:var(--bg-card);border-radius:11px;cursor:pointer;transition:all .25s;overflow:hidden}
 .step-tab .snum{font-size:11px;letter-spacing:2px;color:var(--text-faint);font-weight:700;transition:color .25s}
 .step-tab .stitle{font-size:13px;color:var(--text-dim);font-weight:400;margin-top:5px;line-height:1.4;transition:color .25s}
@@ -597,7 +596,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
           <span class="tool"><span class="ico ico-logo"><img src="gif/unreal_White.png" alt="Unreal Engine"></span>Unreal Engine</span>
         </div>
-        <div class="media"><img src="gif/FirtsDescendant_01.gif" alt="" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line)"><div class="caption" data-i18n="a0.cap"></div></div>
+        <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/B619JNrayFo?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption" data-i18n="a0.cap"></div></div>
       </div>
 
       <div class="proj">

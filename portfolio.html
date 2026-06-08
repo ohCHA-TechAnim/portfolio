@@ -413,20 +413,24 @@ footer .contact a{color:var(--accent);text-decoration:none}
             <div class="rnd-body">
               <div class="rnd-inner">
                 <div class="rnd-block">
-                  <div class="rb-tag">PROBLEM</div>
+                  <div class="rb-tag">01 · REFERENCE & GOAL</div>
                   <div class="rb-title" data-i18n="r1.rb1t"></div>
                   <div class="rb-text" data-i18n="r1.rb1d"></div>
                 </div>
                 <div class="rnd-block">
-                  <div class="rb-tag">APPROACH</div>
+                  <div class="rb-tag">02 · FACIAL DESIGN</div>
                   <div class="rb-title" data-i18n="r1.rb2t"></div>
                   <div class="rb-text" data-i18n="r1.rb2d"></div>
-                  <div class="rb-media"><div class="ph" data-i18n="r1.rb2m"></div></div>
                 </div>
                 <div class="rnd-block">
-                  <div class="rb-tag">RESULT</div>
+                  <div class="rb-tag">03 · RIG STRUCTURE</div>
                   <div class="rb-title" data-i18n="r1.rb3t"></div>
                   <div class="rb-text" data-i18n="r1.rb3d"></div>
+                </div>
+                <div class="rnd-block">
+                  <div class="rb-tag">04 · RESULT</div>
+                  <div class="rb-title" data-i18n="r1.rb4t"></div>
+                  <div class="rb-text" data-i18n="r1.rb4d"></div>
                 </div>
               </div>
             </div>
@@ -600,7 +604,7 @@ ko:{
 "r1.phtext":"gif/facial_step1~4.gif 넣기",
 "r1.st1":"서페이스 추적","r1.st2":"비파괴 오프셋","r1.st3":"본 케이지 · 79본","r1.st4":"핸드키 레이어링",
 "r1.d1":"블렌드쉐입으로 변형되는 메쉬의 표면 좌표를, Surface Constraint가 적용된 헬퍼들이 실시간으로 추적합니다.","r1.d2":"블렌드쉐입 애니메이션과 컨트롤러 입력을 동기화하여, 원본 데이터를 훼손하지 않는 비파괴 오프셋 수정 워크플로우를 구현했습니다.","r1.d3":"컨트롤러와 표면 헬퍼의 좌표를 연산해 구조적으로 분리된 스키닝용 본 케이지를 구동합니다. 총 79개 본으로 실시간 엔진에 최적화했습니다.","r1.d4":"모션 캡처 데이터 위에 아티스트의 핸드키를 레이어링하여, 효율적이면서도 고품질의 페이셜 연기를 구현했습니다.",
-"r1.rndlabel":"R&D 과정 자세히 보기","r1.rb1t":"블렌드쉐입과 본 기반 리깅의 트레이드오프","r1.rb1d":"블렌드쉐입은 표정 품질이 높지만 엔진에서 용량·연산 부담이 크고, 본 기반은 가볍지만 미세한 표정 표현이 어렵습니다. 두 방식의 장점만 취하는 구조가 필요했습니다.","r1.rb2t":"Surface Constraint 헬퍼 + 분리된 본 케이지","r1.rb2d":"블렌드쉐입으로 변형된 메쉬 표면을 헬퍼가 추적하고, Expression·Script Controller로 그 좌표를 본 트랜스폼으로 변환했습니다. 컨트롤 구조와 스키닝용 본 케이지를 분리해 비파괴 워크플로우를 확보했습니다.","r1.rb2m":"gif/facial_rnd.webp 넣기 (구조 다이어그램/과정)","r1.rb3t":"79본 · 실시간 엔진 최적화","r1.rb3d":"최종적으로 총 79개 본으로 경량화하면서도 블렌드쉐입 수준의 표정 디테일을 유지했고, FaceCap 캡처 + 핸드키 레이어링 워크플로우로 제작 효율과 품질을 동시에 달성했습니다.",
+"r1.rndlabel":"R&D 과정 자세히 보기","r1.rb1t":"레퍼런스 분석과 하이브리드 설계 목표","r1.rb1d":"정위님·김동석님의 Facial Rig 영상, Snappers Advanced Facial Rig, Blender Rigify 등을 분석했습니다. FaceCap 기반 페이셜 캡처(블렌드쉐입)와 핸드키 애니메이션을 결합하되, 아나토미에 따라 근육 결 방향으로 본을 배치하는 것을 목표로 잡았습니다.","r1.rb2t":"아나토미 기반 본 배치 설계","r1.rb2d":"눈은 안구 중심(A)에서 눈꺼풀 헬퍼(B)로의 방향벡터에 반지름을 곱하는 수식 A+Unit(B-A)*C로 구면 운동을 구현했습니다. 이마는 곡률을 고려해 한쪽 2개씩, 턱·입은 깨물근/턱끝근, 광대는 한쪽 7개 헬퍼 등 해부학적 근육 결을 따라 본을 배치했습니다.","r1.rb3t":"3중 헬퍼 구조와 FaceCap 파이프라인","r1.rb3d":"각 위치에 헬퍼 3개를 배치했습니다. ①Surface Constraint로 블렌드쉐입 표면을 따라가는 헬퍼, ②포지션 리스트·제로·스크립트로 컨트롤러 수동 제어를 받는 헬퍼, ③폴리싱 단계 디테일 수정용 헬퍼. FaceCap(아이폰)→FBX→모퍼 이식→페이셜 케이지 스킨랩→Surface Constraint 배치→스크립트 컨트롤러 연결→최종 본 스키닝 순으로 파이프라인을 구축했고, 케이지는 재활용 가능하게 만들었습니다.","r1.rb4t":"79본 경량화 · Alembic Export 성공","r1.rb4d":"블렌드쉐입 표면을 헬퍼가 실시간 추적하고, 컨트롤러로 비파괴 오프셋을 더하며, 총 79개 본으로 경량화해 Alembic Export까지 성공했습니다. FaceCap 데이터 위에 핸드키를 레이어링하여 직관적 컨트롤과 고품질을 동시에 확보했습니다.",
 "r1.g1":"표면 추적 GIF","r1.c1":"헬퍼가 블렌드쉐입 표면을 실시간 추적","r1.g2":"FaceCap+핸드키 레이어링 GIF","r1.c2":"캡처 데이터 위에 핸드키 레이어링",
 "r2.title":"Stretch & Squash 바디 리깅","r2.lead":"Scale Expression 기반 신축 시스템과 IK/FK, Auto Clavicle, Foot Roll을 갖춘 풀 바디 리그.",
 "r2.s":"Scale Expression으로 Stretch & Squash 구현, IK/FK pelvis 블렌드 지원.","r2.p":"Auto Clavicle은 팔 움직임 -30°~70° 구간에서 어깨를 자동 제어합니다.","r2.so":"바이패드를 컨트롤러로 활용해 전체 스케일 애니메이션, 레이어·BIP 호환을 유지합니다.",
@@ -643,7 +647,7 @@ en:{
 "r1.phtext":"place gif/facial_step1~4.gif",
 "r1.st1":"Surface Tracking","r1.st2":"Non-Destructive Offset","r1.st3":"Bone Cage · 79 bones","r1.st4":"Hand-Key Layering",
 "r1.d1":"Helpers with Surface Constraints track the surface coordinates of the blendshape-deformed mesh in real time.","r1.d2":"Synchronized controller inputs with blendshape animation, enabling a non-destructive offset workflow that preserves the original data.","r1.d3":"Computes controller and surface-helper coordinates to drive a structurally separated skinning bone cage. Optimized for real-time engines with 79 bones total.","r1.d4":"Layered artistic hand-key on top of motion capture data to achieve efficient yet high-fidelity facial performance.",
-"r1.rndlabel":"View R&D process","r1.rb1t":"Trade-off: blendshape vs bone-based rigging","r1.rb1d":"Blendshapes give high expression quality but are heavy on engine memory and computation; bone-based is lightweight but struggles with subtle expressions. A structure taking only the strengths of both was needed.","r1.rb2t":"Surface Constraint helpers + separated bone cage","r1.rb2d":"Helpers track the blendshape-deformed mesh surface, and Expression/Script Controllers convert those coordinates into bone transforms. The control structure and skinning bone cage were separated to secure a non-destructive workflow.","r1.rb2m":"place gif/facial_rnd.webp (structure diagram)","r1.rb3t":"79 bones · real-time engine optimized","r1.rb3d":"Finally optimized to 79 bones while keeping blendshape-level expression detail, achieving both production efficiency and quality via the FaceCap capture + hand-key layering workflow.",
+"r1.rndlabel":"View R&D process","r1.rb1t":"Reference analysis & hybrid design goal","r1.rb1d":"Analyzed facial rig videos by industry riggers, Snappers Advanced Facial Rig, and Blender Rigify. The goal: combine FaceCap-based facial capture (blendshapes) with hand-key animation, placing bones along muscle flow based on anatomy.","r1.rb2t":"Anatomy-based bone placement","r1.rb2d":"For the eyes, spherical motion was built with the formula A+Unit(B-A)*C — a direction vector from eyeball center (A) to eyelid helper (B), scaled by radius. Bones were placed along anatomical muscle flow: two per side on the forehead for curvature, masseter/mentalis around the jaw and mouth, seven helpers per side around the cheeks.","r1.rb3t":"Triple-helper structure & FaceCap pipeline","r1.rb3d":"Three helpers per location: (1) tracking the blendshape surface via Surface Constraint, (2) receiving manual control through position list/zero/script, (3) for detail tweaks during polishing. Pipeline: FaceCap (iPhone) → FBX → morpher transfer → facial cage skin-wrap → Surface Constraint placement → script controller link → final bone skinning. The cage is reusable.","r1.rb4t":"79 bones · Alembic Export success","r1.rb4d":"Helpers track the blendshape surface in real time, controllers add non-destructive offsets, and the rig was optimized to 79 bones with successful Alembic Export. Hand-key layered on FaceCap data secured both intuitive control and high fidelity.",
 "r1.g1":"Surface tracking GIF","r1.c1":"Helpers tracking blendshape surface in real time","r1.g2":"FaceCap+hand-key layering GIF","r1.c2":"Hand-key layering over capture data",
 "r2.title":"Stretch & Squash Body Rig","r2.lead":"A full-body rig with Scale Expression stretch system, IK/FK, Auto Clavicle, and Foot Roll.",
 "r2.s":"Stretch & Squash via Scale Expression, with IK/FK pelvis blend support.","r2.p":"Auto Clavicle controls the shoulder automatically across -30°~70° of arm movement.","r2.so":"Uses biped as controller for full-scale animation while keeping layer/BIP compatibility.",
@@ -686,7 +690,7 @@ zh:{
 "r1.phtext":"放入 gif/facial_step1~4.gif",
 "r1.st1":"表面追踪","r1.st2":"非破坏性偏移","r1.st3":"骨骼笼 · 79根","r1.st4":"手K叠加",
 "r1.d1":"应用了Surface Constraint的辅助体实时追踪blendshape变形网格的表面坐标。","r1.d2":"将blendshape动画与控制器输入同步，实现了不破坏原始数据的非破坏性偏移工作流。","r1.d3":"运算控制器与表面辅助体的坐标，驱动结构上分离的蒙皮用骨骼笼。共79根骨骼，针对实时引擎优化。","r1.d4":"在动作捕捉数据之上叠加美术师的手K，实现高效且高质量的面部表演。",
-"r1.rndlabel":"查看研发过程","r1.rb1t":"blendshape与骨骼绑定的取舍","r1.rb1d":"blendshape表情质量高但在引擎中容量·运算负担大，骨骼方式轻量但难以表现细微表情。需要只取两者优点的结构。","r1.rb2t":"Surface Constraint辅助体 + 分离的骨骼笼","r1.rb2d":"辅助体追踪blendshape变形的网格表面，通过Expression·Script Controller将坐标转换为骨骼变换。将控制结构与蒙皮骨骼笼分离，确保非破坏性工作流。","r1.rb2m":"放入 gif/facial_rnd.webp（结构图）","r1.rb3t":"79根骨骼 · 实时引擎优化","r1.rb3d":"最终优化至79根骨骼同时保持blendshape级别的表情细节，通过FaceCap捕捉+手K叠加工作流同时实现制作效率与质量。",
+"r1.rndlabel":"查看研发过程","r1.rb1t":"参考分析与混合设计目标","r1.rb1d":"分析了业界绑定师的面部绑定视频、Snappers Advanced Facial Rig、Blender Rigify等。目标是结合FaceCap面部捕捉（blendshape）与手K动画，并依据解剖学沿肌肉走向布置骨骼。","r1.rb2t":"基于解剖学的骨骼布置","r1.rb2d":"眼部用公式A+Unit(B-A)*C实现球面运动——从眼球中心(A)到眼睑辅助体(B)的方向向量乘以半径。沿解剖肌肉走向布置骨骼：额头每侧2根以表现曲率，下巴和嘴部布置咬肌/颏肌，颧骨每侧7个辅助体。","r1.rb3t":"三重辅助体结构与FaceCap管线","r1.rb3d":"每个位置布置3个辅助体：①通过Surface Constraint追踪blendshape表面，②通过position list/zero/script接受控制器手动控制，③用于打磨阶段的细节修改。管线：FaceCap(iPhone)→FBX→morpher移植→面部笼skin-wrap→Surface Constraint布置→脚本控制器连接→最终骨骼蒙皮。笼可复用。","r1.rb4t":"79根骨骼 · Alembic导出成功","r1.rb4d":"辅助体实时追踪blendshape表面，控制器添加非破坏性偏移，优化至79根骨骼并成功Alembic导出。在FaceCap数据上叠加手K，同时确保直观控制与高质量。",
 "r1.s1t":"表面追踪","r1.s":"Surface Constraint辅助体实时参照blendshape网格的表面坐标。","r1.p":"运算控制器与辅助体坐标，驱动结构上分离的蒙皮用骨骼笼。","r1.s3t":"优化","r1.so":"以共79根骨骼轻量化，保持骨骼方式的轻容量并实现引擎友好设计。",
 "r1.g1":"表面追踪 GIF","r1.c1":"辅助体实时追踪blendshape表面","r1.g2":"FaceCap+手K分层 GIF","r1.c2":"在捕捉数据之上叠加手K",
 "r2.title":"Stretch & Squash身体绑定","r2.lead":"具备Scale Expression伸缩系统、IK/FK、Auto Clavicle、Foot Roll的全身绑定。",

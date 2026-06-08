@@ -132,6 +132,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .bm-part{fill:var(--bg-soft);stroke:var(--line);stroke-width:1.5;cursor:pointer;transition:all .25s}
 .bm-part:hover{fill:var(--accent-dim);stroke:var(--accent)}
 .bm-part.active{fill:var(--accent);stroke:var(--accent);filter:drop-shadow(0 0 8px var(--accent-glow))}
+.bm-joint{fill:var(--line);opacity:.85;pointer-events:none}
+.bm-detail{fill:none;stroke:var(--text-faint);stroke-width:1;opacity:.5;pointer-events:none}
 .bm-stage{display:flex;flex-direction:column}
 .bm-extra{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
 .bm-extra button{padding:9px 14px;border:1px solid var(--line);background:var(--bg-card);color:var(--text-dim);border-radius:9px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;transition:all .2s}
@@ -470,40 +472,74 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <div class="bodymap" id="bodymap">
           <div class="bm-figure">
             <svg viewBox="0 0 240 520" xmlns="http://www.w3.org/2000/svg">
+              <!-- neck joint (분절) -->
+              <rect class="bm-joint" x="108" y="56" width="24" height="14" rx="4"/>
+
               <!-- head : 헬멧형, 클릭 시 페이셜로 이동 -->
               <g class="bm-part bm-head" data-part="head" style="cursor:pointer">
                 <title>→ Facial Rig</title>
-                <path d="M104 22 c0 -9 7 -15 16 -15 c9 0 16 6 16 15 l0 20 c0 11 -7 19 -16 19 c-9 0 -16 -8 -16 -19 z"/>
-                <rect x="112" y="60" width="16" height="12" rx="2"/>
+                <path d="M120 8 c14 0 23 11 23 26 c0 16 -10 28 -23 28 c-13 0 -23 -12 -23 -28 c0 -15 9 -26 23 -26 z"/>
               </g>
 
-              <!-- clavicle L : 왼쪽 어깨패드 -->
-              <path class="bm-part" data-part="clavicle" d="M116 74 l0 14 l-26 4 c-3 -8 0 -14 8 -17 c5 -2 12 -2 18 -1 z"/>
-              <!-- clavicle R : 오른쪽 어깨패드 -->
-              <path class="bm-part" data-part="clavicle" d="M124 74 l0 14 l26 4 c3 -8 0 -14 -8 -17 c-5 -2 -12 -2 -18 -1 z"/>
+              <!-- clavicle / shoulder L -->
+              <path class="bm-part" data-part="clavicle" d="M112 70 l0 16 c-14 0 -26 4 -34 12 c-2 -12 4 -22 16 -26 c6 -2 12 -2 18 -2 z"/>
+              <!-- clavicle / shoulder R -->
+              <path class="bm-part" data-part="clavicle" d="M128 70 l0 16 c14 0 26 4 34 12 c2 -12 -4 -22 -16 -26 c-6 -2 -12 -2 -18 -2 z"/>
 
-              <!-- torso : 가슴판 + 복부 (갑옷형) -->
-              <path class="bm-part" data-part="torso" d="M96 94 h48 l4 16 l-6 14 h-44 l-6 -14 z M92 130 h56 l-4 40 c-1 12 -6 22 -10 30 h-28 c-4 -8 -9 -18 -10 -30 z"/>
+              <!-- torso : 가슴판 -->
+              <path class="bm-part" data-part="torso" d="M90 92 c10 -4 50 -4 60 0 c4 18 4 36 -2 50 c-8 8 -46 8 -54 0 c-6 -14 -6 -32 -4 -50 z M88 150 c8 -4 56 -4 64 0 c2 14 -2 30 -10 42 c-2 4 -32 4 -34 0 c-8 -12 -12 -28 -10 -42 z"/>
+              <!-- 가슴 디테일 라인 -->
+              <path class="bm-detail" d="M120 96 l0 44"/>
+              <path class="bm-detail" d="M100 100 c8 10 32 10 40 0"/>
 
-              <!-- arm L : 상박+하박 (분절) -->
-              <path class="bm-part" data-part="arm" d="M86 96 l-22 6 l-6 40 l14 4 l8 -34 l8 -6 z M70 150 l14 2 l-8 56 l-16 -2 l4 -40 z"/>
-              <!-- arm R -->
-              <path class="bm-part" data-part="arm" d="M154 96 l22 6 l6 40 l-14 4 l-8 -34 l-8 -6 z M170 150 l-14 2 l8 56 l16 -2 l-4 -40 z"/>
+              <!-- waist joint -->
+              <rect class="bm-joint" x="98" y="194" width="44" height="10" rx="4"/>
 
-              <!-- hand L : 글러브형 -->
-              <path class="bm-part" data-part="hand" d="M56 210 l16 0 l3 22 l-7 12 l-12 -4 l-2 -18 z"/>
+              <!-- pelvis (torso에 포함) -->
+              <path class="bm-part" data-part="torso" d="M96 206 h48 c2 14 -4 26 -14 32 l-8 -16 l-8 16 c-10 -6 -16 -18 -14 -32 z" style="display:none"/>
+
+              <!-- upper arm L -->
+              <path class="bm-part" data-part="arm" d="M78 100 c-12 2 -20 10 -24 24 c-3 12 -5 22 -6 32 l16 3 c2 -12 5 -24 9 -34 c3 -8 7 -14 11 -18 z"/>
+              <!-- elbow joint L -->
+              <circle class="bm-joint" cx="68" cy="162" r="8"/>
+              <!-- lower arm L -->
+              <path class="bm-part" data-part="arm" d="M62 166 l14 1 c-1 14 -4 30 -8 44 l-14 -2 c2 -16 5 -30 8 -43 z"/>
+
+              <!-- upper arm R -->
+              <path class="bm-part" data-part="arm" d="M162 100 c12 2 20 10 24 24 c3 12 5 22 6 32 l-16 3 c-2 -12 -5 -24 -9 -34 c-3 -8 -7 -14 -11 -18 z"/>
+              <!-- elbow joint R -->
+              <circle class="bm-joint" cx="172" cy="162" r="8"/>
+              <!-- lower arm R -->
+              <path class="bm-part" data-part="arm" d="M178 166 l-14 1 c1 14 4 30 8 44 l14 -2 c-2 -16 -5 -30 -8 -43 z"/>
+
+              <!-- hand L -->
+              <path class="bm-part" data-part="hand" d="M52 212 l16 0 c2 10 1 22 -3 30 c-3 6 -10 8 -15 4 c-4 -4 -5 -14 -3 -22 c1 -6 3 -10 5 -12 z"/>
               <!-- hand R -->
-              <path class="bm-part" data-part="hand" d="M184 210 l-16 0 l-3 22 l7 12 l12 -4 l2 -18 z"/>
+              <path class="bm-part" data-part="hand" d="M188 212 l-16 0 c-2 10 -1 22 3 30 c3 6 10 8 15 4 c4 -4 5 -14 3 -22 c-1 -6 -3 -10 -5 -12 z"/>
 
-              <!-- leg L : 대퇴+종아리 (분절) -->
-              <path class="bm-part" data-part="leg" d="M98 202 h22 l-2 50 l-4 18 h-14 l-3 -22 z M97 274 h18 l-2 60 l-4 56 h-12 l-3 -56 z"/>
-              <!-- leg R -->
-              <path class="bm-part" data-part="leg" d="M142 202 h-22 l2 50 l4 18 h14 l3 -22 z M143 274 h-18 l2 60 l4 56 h12 l3 -56 z"/>
+              <!-- thigh L -->
+              <path class="bm-part" data-part="leg" d="M100 238 h20 l-2 50 c-1 12 -3 22 -5 30 l-14 0 c-2 -10 -3 -22 -3 -34 z"/>
+              <!-- knee joint L -->
+              <circle class="bm-joint" cx="106" cy="324" r="9"/>
+              <!-- calf L -->
+              <path class="bm-part" data-part="leg" d="M98 332 l16 0 c0 18 -2 40 -4 58 l-12 0 c-2 -18 -2 -40 0 -58 z"/>
 
-              <!-- foot L : 부츠형 -->
-              <path class="bm-part" data-part="foot" d="M93 394 h20 l2 18 l-12 4 h-20 l0 -10 l10 -4 z"/>
+              <!-- thigh R -->
+              <path class="bm-part" data-part="leg" d="M140 238 h-20 l2 50 c1 12 3 22 5 30 l14 0 c2 -10 3 -22 3 -34 z"/>
+              <!-- knee joint R -->
+              <circle class="bm-joint" cx="134" cy="324" r="9"/>
+              <!-- calf R -->
+              <path class="bm-part" data-part="leg" d="M142 332 l-16 0 c0 18 2 40 4 58 l12 0 c2 -18 2 -40 0 -58 z"/>
+
+              <!-- ankle joint L -->
+              <rect class="bm-joint" x="98" y="388" width="16" height="8" rx="3"/>
+              <!-- foot L -->
+              <path class="bm-part" data-part="foot" d="M98 398 h16 c2 8 2 16 0 22 l-22 2 c-4 0 -6 -4 -4 -10 c2 -6 8 -10 10 -16 z"/>
+
+              <!-- ankle joint R -->
+              <rect class="bm-joint" x="126" y="388" width="16" height="8" rx="3"/>
               <!-- foot R -->
-              <path class="bm-part" data-part="foot" d="M147 394 h-20 l-2 18 l12 4 h20 l0 -10 l-10 -4 z"/>
+              <path class="bm-part" data-part="foot" d="M142 398 h-16 c-2 8 -2 16 0 22 l22 2 c4 0 6 -4 4 -10 c-2 -6 -8 -10 -10 -16 z"/>
             </svg>
           </div>
 

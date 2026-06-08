@@ -809,8 +809,18 @@ buildSidenav('about');
     imgs.forEach((m,idx)=>m.classList.toggle('show',idx===cur));
     descs.forEach((d,idx)=>d.style.display=idx===cur?'block':'none');
     if(dnum) dnum.textContent='STEP 0'+(cur+1);
+    // 활성 이미지가 정상 로드되었으면 placeholder 숨김
+    const ph=stepper.querySelector('.step-media .ph');
+    if(ph){
+      const active=imgs[cur];
+      const loaded=active && active.complete && active.naturalWidth>0;
+      ph.style.display=loaded?'none':'flex';
+    }
   }
   tabs.forEach((t,idx)=>t.addEventListener('click',()=>show(idx)));
+  imgs.forEach((m,idx)=>{
+    m.addEventListener('load',()=>{ if(idx===cur) show(cur); });
+  });
   stepper.querySelector('.step-nav.prev').addEventListener('click',()=>show(cur-1));
   stepper.querySelector('.step-nav.next').addEventListener('click',()=>show(cur+1));
   show(0);

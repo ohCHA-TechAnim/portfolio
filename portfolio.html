@@ -124,6 +124,28 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .rnd-block .rb-media img{width:100%;display:block}
 .rnd-block .rb-media .ph{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:12px;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 10px,var(--bg-card) 10px,var(--bg-card) 20px)}
 
+/* 휴머노이드 바디맵 (Custom Body Rig) */
+.bodymap{display:grid;grid-template-columns:280px 1fr;gap:20px;margin:24px 0}
+@media(max-width:760px){.bodymap{grid-template-columns:1fr}}
+.bm-figure{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;align-items:center;justify-content:center;position:relative}
+.bm-figure svg{width:100%;height:auto;max-height:420px}
+.bm-part{fill:var(--bg-soft);stroke:var(--line);stroke-width:1.5;cursor:pointer;transition:all .25s}
+.bm-part:hover{fill:var(--accent-dim);stroke:var(--accent)}
+.bm-part.active{fill:var(--accent);stroke:var(--accent);filter:drop-shadow(0 0 8px var(--accent-glow))}
+.bm-stage{display:flex;flex-direction:column}
+.bm-extra{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.bm-extra button{padding:9px 14px;border:1px solid var(--line);background:var(--bg-card);color:var(--text-dim);border-radius:9px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;transition:all .2s}
+.bm-extra button:hover{border-color:var(--accent-dim);color:var(--text)}
+.bm-extra button.active{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+.bm-media{position:relative;flex:1;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0d1114;min-height:280px;display:flex;align-items:center;justify-content:center}
+.bm-media img{width:100%;height:100%;object-fit:contain;display:none}
+.bm-media img.show{display:block}
+.bm-media .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-faint);font-size:13px;gap:8px;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 10px,var(--bg-card) 10px,var(--bg-card) 20px)}
+.bm-media .ph .icon{font-size:26px;opacity:.5}
+.bm-label{margin-top:14px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--line);border-radius:11px}
+.bm-label .bl-name{font-size:14px;color:var(--accent);font-weight:700;margin-bottom:5px}
+.bm-label .bl-desc{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.6}
+
 .sidenav{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:80;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
 .sidenav .snav-item{display:flex;align-items:center;gap:10px;text-decoration:none;justify-content:flex-end;cursor:pointer}
 .sidenav .dot{width:22px;height:4px;border-radius:3px;background:var(--line);transition:all .3s cubic-bezier(.2,.7,.3,1);flex-shrink:0}
@@ -195,6 +217,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .media .caption{padding:11px 15px;font-size:12px;color:var(--text-dim);font-weight:300;border-top:1px solid var(--line);background:var(--bg-card)}
 .media-ph{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-faint);font-size:13px;gap:8px;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 10px,var(--bg-card) 10px,var(--bg-card) 20px)}
 .media-ph .icon{font-size:26px;opacity:.5}
+.media-yt{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+.media-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 .media-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:680px){.media-grid{grid-template-columns:1fr}}
 
@@ -293,8 +317,8 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <div class="result-card"><div class="big" data-i18n="p1.r2b"></div><div class="cap" data-i18n="p1.r2c"></div></div>
         </div>
         <div class="media-grid">
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="p1.g1"></span></div><div class="caption" data-i18n="p1.c1"></div></div>
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="p1.g2"></span></div><div class="caption" data-i18n="p1.c2"></div></div>
+          <div class="media"><img src="gif/plugin_retarget1.gif" alt=""><div class="caption" data-i18n="p1.c1"></div></div>
+          <div class="media"><img src="gif/plugin_retarget2.gif" alt=""><div class="caption" data-i18n="p1.c2"></div></div>
         </div>
       </div>
 
@@ -310,7 +334,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <div class="result-row">
           <div class="result-card"><div class="big" data-i18n="p2.r1b"></div><div class="cap" data-i18n="p2.r1c"></div></div>
         </div>
-        <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="p2.g1"></span></div><div class="caption" data-i18n="p2.c1"></div></div>
+        <div class="media"><img src="gif/plugin_export.gif" alt=""><div class="caption" data-i18n="p2.c1"></div></div>
       </div>
 
       <div class="proj">
@@ -327,8 +351,8 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <div class="result-card"><div class="big" data-i18n="p3.r2b"></div><div class="cap" data-i18n="p3.r2c"></div></div>
         </div>
         <div class="media-grid">
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="p3.g1"></span></div><div class="caption" data-i18n="p3.c1"></div></div>
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="p3.g2"></span></div><div class="caption" data-i18n="p3.c2"></div></div>
+          <div class="media"><img src="gif/plugin_setup1.gif" alt=""><div class="caption" data-i18n="p3.c1"></div></div>
+          <div class="media"><img src="gif/plugin_setup2.gif" alt=""><div class="caption" data-i18n="p3.c2"></div></div>
         </div>
       </div>
 
@@ -341,7 +365,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <div class="story-cell"><div class="st">FEATURE</div><p data-i18n="p4.p"></p></div>
           <div class="story-cell"><div class="st">SPEC</div><p data-i18n="p4.so"></p></div>
         </div>
-        <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="p4.g1"></span></div><div class="caption" data-i18n="p4.c1"></div></div>
+        <div class="media"><img src="gif/plugin_rigmgr.gif" alt=""><div class="caption" data-i18n="p4.c1"></div></div>
       </div>
 
       <div class="proj">
@@ -354,8 +378,8 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p5.so"></p></div>
         </div>
         <div class="media-grid">
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="p5.g1"></span></div><div class="caption" data-i18n="p5.c1"></div></div>
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="p5.g2"></span></div><div class="caption" data-i18n="p5.c2"></div></div>
+          <div class="media"><img src="gif/plugin_morph1.gif" alt=""><div class="caption" data-i18n="p5.c1"></div></div>
+          <div class="media"><img src="gif/plugin_morph2.gif" alt=""><div class="caption" data-i18n="p5.c2"></div></div>
         </div>
       </div>
     </div>
@@ -442,14 +466,56 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <div class="proj-num">02 — CUSTOM BODY RIG</div>
         <h3 data-i18n="r2.title"></h3>
         <p class="lead" data-i18n="r2.lead"></p>
-        <div class="story">
-          <div class="story-cell"><div class="st">BODY</div><p data-i18n="r2.s"></p></div>
-          <div class="story-cell"><div class="st">AUTO</div><p data-i18n="r2.p"></p></div>
-          <div class="story-cell"><div class="st">EXTRA</div><p data-i18n="r2.so"></p></div>
-        </div>
-        <div class="media-grid">
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="r2.g1"></span></div><div class="caption" data-i18n="r2.c1"></div></div>
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="r2.g2"></span></div><div class="caption" data-i18n="r2.c2"></div></div>
+
+        <div class="bodymap" id="bodymap">
+          <div class="bm-figure">
+            <svg viewBox="0 0 200 440" xmlns="http://www.w3.org/2000/svg">
+              <!-- head (비활성 장식) -->
+              <circle cx="100" cy="34" r="22" fill="var(--bg-soft)" stroke="var(--line)" stroke-width="1.5"/>
+              <!-- torso : 몸통 -->
+              <rect class="bm-part" data-part="torso" x="74" y="64" width="52" height="96" rx="14"/>
+              <!-- clavicle : 어깨 (Auto Clavicle) -->
+              <rect class="bm-part" data-part="clavicle" x="60" y="66" width="80" height="20" rx="10"/>
+              <!-- arm L : 팔 -->
+              <rect class="bm-part" data-part="arm" x="40" y="78" width="20" height="96" rx="10"/>
+              <!-- arm R (같은 part) -->
+              <rect class="bm-part" data-part="arm" x="140" y="78" width="20" height="96" rx="10"/>
+              <!-- hand L : 손 -->
+              <circle class="bm-part" data-part="hand" cx="50" cy="186" r="13"/>
+              <!-- hand R -->
+              <circle class="bm-part" data-part="hand" cx="150" cy="186" r="13"/>
+              <!-- leg L : 다리 -->
+              <rect class="bm-part" data-part="leg" x="76" y="164" width="20" height="130" rx="10"/>
+              <!-- leg R -->
+              <rect class="bm-part" data-part="leg" x="104" y="164" width="20" height="130" rx="10"/>
+              <!-- foot L : 발 (Foot Roll) -->
+              <rect class="bm-part" data-part="foot" x="70" y="300" width="30" height="18" rx="8"/>
+              <!-- foot R -->
+              <rect class="bm-part" data-part="foot" x="100" y="300" width="30" height="18" rx="8"/>
+            </svg>
+          </div>
+
+          <div class="bm-stage">
+            <div class="bm-extra">
+              <button data-part="ikfk" data-i18n="r2.bx1"></button>
+              <button data-part="scale" data-i18n="r2.bx2"></button>
+            </div>
+            <div class="bm-media">
+              <img data-bm-img="torso" src="gif/body_torso.gif" alt="">
+              <img data-bm-img="clavicle" src="gif/body_clavicle.gif" alt="">
+              <img data-bm-img="arm" src="gif/body_arm.gif" alt="">
+              <img data-bm-img="hand" src="gif/body_hand.gif" alt="">
+              <img data-bm-img="leg" src="gif/body_leg.gif" alt="">
+              <img data-bm-img="foot" src="gif/body_foot.gif" alt="">
+              <img data-bm-img="ikfk" src="gif/body_ikfk.gif" alt="">
+              <img data-bm-img="scale" src="gif/body_scale.gif" alt="">
+              <div class="ph"><span class="icon">&#9654;</span><span data-i18n="r2.phtext"></span></div>
+            </div>
+            <div class="bm-label">
+              <div class="bl-name" id="bmName"></div>
+              <div class="bl-desc" id="bmDesc"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -480,8 +546,8 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <div class="ip-badge"><span class="x">ER ×</span><span class="ip">GUILTY GEAR</span><span class="ch" data-i18n="a1.ch2"></span></div>
         </div>
         <div class="media-grid">
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="a1.g1"></span></div><div class="caption">ER × Persona 5 The Royal — ⓒ Nimble Neuron</div></div>
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="a1.g2"></span></div><div class="caption">ER × Guilty Gear — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/AjOONh3eT_M?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER × Persona 5 The Royal — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/QEb9GMPu3gk?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER × Guilty Gear — ⓒ Nimble Neuron</div></div>
         </div>
       </div>
 
@@ -489,21 +555,21 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <div class="proj-num">02 — CHARACTER SKIN MOTION</div>
         <h3 data-i18n="a2.title"></h3>
         <p class="lead" data-i18n="a2.lead"></p>
-        <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="a2.g1"></span></div><div class="caption">ER · Isaac — ⓒ Nimble Neuron</div></div>
+        <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/4QCUIjr-wP4?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER · Isaac — ⓒ Nimble Neuron</div></div>
       </div>
 
       <div class="proj">
         <div class="proj-num">03 — IN-GAME MOTION</div>
         <h3 data-i18n="a3.title"></h3>
-        <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="a3.g1"></span></div><div class="caption">ER · Alonso — ⓒ Nimble Neuron</div></div>
+        <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/FYZve9TWifA?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER · Alonso — ⓒ Nimble Neuron</div></div>
       </div>
 
       <div class="proj">
         <div class="proj-num">04 — VICTORY ANIMATION & DEMO REEL</div>
         <h3 data-i18n="a4.title"></h3>
         <div class="media-grid">
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="a4.g1"></span></div><div class="caption">ER Victory Animation — ⓒ Nimble Neuron</div></div>
-          <div class="media"><div class="media-ph"><span class="icon">&#9654;</span><span data-i18n="a4.g2"></span></div><div class="caption">Game Animation Reel 2020 / 2023</div></div>
+          <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/3GsJIqkVyw4?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER Victory Animation — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/RukpP-9s5FU?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">Game Animation Reel 2020 / 2023</div></div>
         </div>
       </div>
     </div>
@@ -606,9 +672,17 @@ ko:{
 "r1.d1":"블렌드쉐입으로 변형되는 메쉬의 표면 좌표를, Surface Constraint가 적용된 헬퍼들이 실시간으로 추적합니다.","r1.d2":"블렌드쉐입 애니메이션과 컨트롤러 입력을 동기화하여, 원본 데이터를 훼손하지 않는 비파괴 오프셋 수정 워크플로우를 구현했습니다.","r1.d3":"컨트롤러와 표면 헬퍼의 좌표를 연산해 구조적으로 분리된 스키닝용 본 케이지를 구동합니다. 총 79개 본으로 실시간 엔진에 최적화했습니다.","r1.d4":"모션 캡처 데이터 위에 아티스트의 핸드키를 레이어링하여, 효율적이면서도 고품질의 페이셜 연기를 구현했습니다.",
 "r1.rndlabel":"R&D 과정 자세히 보기","r1.rb1t":"레퍼런스 분석과 하이브리드 설계 목표","r1.rb1d":"정위님·김동석님의 Facial Rig 영상, Snappers Advanced Facial Rig, Blender Rigify 등을 분석했습니다. FaceCap 기반 페이셜 캡처(블렌드쉐입)와 핸드키 애니메이션을 결합하되, 아나토미에 따라 근육 결 방향으로 본을 배치하는 것을 목표로 잡았습니다.","r1.rb2t":"아나토미 기반 본 배치 설계","r1.rb2d":"눈은 안구 중심(A)에서 눈꺼풀 헬퍼(B)로의 방향벡터에 반지름을 곱하는 수식 A+Unit(B-A)*C로 구면 운동을 구현했습니다. 이마는 곡률을 고려해 한쪽 2개씩, 턱·입은 깨물근/턱끝근, 광대는 한쪽 7개 헬퍼 등 해부학적 근육 결을 따라 본을 배치했습니다.","r1.rb3t":"3중 헬퍼 구조와 FaceCap 파이프라인","r1.rb3d":"각 위치에 헬퍼 3개를 배치했습니다. ①Surface Constraint로 블렌드쉐입 표면을 따라가는 헬퍼, ②포지션 리스트·제로·스크립트로 컨트롤러 수동 제어를 받는 헬퍼, ③폴리싱 단계 디테일 수정용 헬퍼. FaceCap(아이폰)→FBX→모퍼 이식→페이셜 케이지 스킨랩→Surface Constraint 배치→스크립트 컨트롤러 연결→최종 본 스키닝 순으로 파이프라인을 구축했고, 케이지는 재활용 가능하게 만들었습니다.","r1.rb4t":"79본 경량화 · Alembic Export 성공","r1.rb4d":"블렌드쉐입 표면을 헬퍼가 실시간 추적하고, 컨트롤러로 비파괴 오프셋을 더하며, 총 79개 본으로 경량화해 Alembic Export까지 성공했습니다. FaceCap 데이터 위에 핸드키를 레이어링하여 직관적 컨트롤과 고품질을 동시에 확보했습니다.",
 "r1.g1":"표면 추적 GIF","r1.c1":"헬퍼가 블렌드쉐입 표면을 실시간 추적","r1.g2":"FaceCap+핸드키 레이어링 GIF","r1.c2":"캡처 데이터 위에 핸드키 레이어링",
-"r2.title":"Stretch & Squash 바디 리깅","r2.lead":"Scale Expression 기반 신축 시스템과 IK/FK, Auto Clavicle, Foot Roll을 갖춘 풀 바디 리그.",
-"r2.s":"Scale Expression으로 Stretch & Squash 구현, IK/FK pelvis 블렌드 지원.","r2.p":"Auto Clavicle은 팔 움직임 -30°~70° 구간에서 어깨를 자동 제어합니다.","r2.so":"바이패드를 컨트롤러로 활용해 전체 스케일 애니메이션, 레이어·BIP 호환을 유지합니다.",
-"r2.g1":"몸통/팔 Stretch GIF","r2.c1":"Stretch & Squash + IK/FK","r2.g2":"Foot Roll / IKFK Match GIF","r2.c2":"3축 Foot Roll · 포즈 매치 알고리즘",
+"r2.title":"Stretch & Squash 풀바디 리그","r2.lead":"신체 부위를 눌러 각 셋업을 확인하세요. Scale Expression 기반 신축 시스템과 IK/FK, Auto Clavicle, Foot Roll을 갖춘 풀 바디 리그입니다.",
+"r2.phtext":"신체 부위를 클릭하세요",
+"r2.bx1":"IK / FK Match","r2.bx2":"전체 스케일",
+"r2.n_torso":"몸통 — Stretch & Squash","r2.d_torso":"Scale Expression으로 Stretch & Squash를 구현하고, IK/FK pelvis 블렌드를 지원합니다.",
+"r2.n_clavicle":"어깨 — Auto Clavicle","r2.d_clavicle":"팔 움직임 -30°~70° 구간에서 어깨 부분이 자동으로 제어됩니다.",
+"r2.n_arm":"팔 — Twist & IK/FK","r2.d_arm":"늘어나는 트위스트본과 IK/FK 블렌드를 갖춘 팔 리깅입니다.",
+"r2.n_hand":"손 — 관절 컨트롤러","r2.d_hand":"각 관절별 컨트롤러와 손가락 줄기별 컨트롤러, 중수골까지 제어하는 손 리깅입니다.",
+"r2.n_leg":"다리 — Twist & IK/FK","r2.d_leg":"늘어나는 트위스트본과 IK/FK 블렌드를 갖춘 다리 리깅입니다.",
+"r2.n_foot":"발 — Foot Roll (3축)","r2.d_foot":"뒤꿈치 축·앞꿈치 축·발목까지 총 3개 축으로 사용 가능한 Foot Roll 기능입니다.",
+"r2.n_ikfk":"IK / FK Match","r2.d_ikfk":"커스텀 어트리뷰트에 포즈 매치 알고리즘을 넣어 IK/FK 전환이 용이하도록 했습니다.",
+"r2.n_scale":"전체 스케일 애니메이션","r2.d_scale":"기존 바이패드로 불가능한 전체 스케일 애니메이션이 가능합니다. 바이패드를 컨트롤러로 이용해 레이어·BIP·복사/붙여넣기를 그대로 사용할 수 있습니다.",
 "an.btitle":"Animation Works","an.bsub":"",
 "a1.title":"IP 콜라보 스킨 — Persona 5 · Guilty Gear","a1.lead":"리타게팅을 기반으로 세컨더리 추가와 전체 애니메이션 수정 작업을 진행했습니다.","a1.ch1":"팬서 · 라우라","a1.ch2":"엘페르트 · 아야","a1.g1":"ER × Persona 5 콜라보 영상","a1.g2":"ER × Guilty Gear 콜라보 영상",
 "a2.title":"캐릭터 스킨 모션 — 아이작","a2.lead":"리타게팅을 기반으로 세컨더리 추가와 전체 애니메이션 수정 작업을 진행했습니다.","a2.g1":"오만의 군단장 아이작 스킨 영상",
@@ -649,9 +723,17 @@ en:{
 "r1.d1":"Helpers with Surface Constraints track the surface coordinates of the blendshape-deformed mesh in real time.","r1.d2":"Synchronized controller inputs with blendshape animation, enabling a non-destructive offset workflow that preserves the original data.","r1.d3":"Computes controller and surface-helper coordinates to drive a structurally separated skinning bone cage. Optimized for real-time engines with 79 bones total.","r1.d4":"Layered artistic hand-key on top of motion capture data to achieve efficient yet high-fidelity facial performance.",
 "r1.rndlabel":"View R&D process","r1.rb1t":"Reference analysis & hybrid design goal","r1.rb1d":"Analyzed facial rig videos by industry riggers, Snappers Advanced Facial Rig, and Blender Rigify. The goal: combine FaceCap-based facial capture (blendshapes) with hand-key animation, placing bones along muscle flow based on anatomy.","r1.rb2t":"Anatomy-based bone placement","r1.rb2d":"For the eyes, spherical motion was built with the formula A+Unit(B-A)*C — a direction vector from eyeball center (A) to eyelid helper (B), scaled by radius. Bones were placed along anatomical muscle flow: two per side on the forehead for curvature, masseter/mentalis around the jaw and mouth, seven helpers per side around the cheeks.","r1.rb3t":"Triple-helper structure & FaceCap pipeline","r1.rb3d":"Three helpers per location: (1) tracking the blendshape surface via Surface Constraint, (2) receiving manual control through position list/zero/script, (3) for detail tweaks during polishing. Pipeline: FaceCap (iPhone) → FBX → morpher transfer → facial cage skin-wrap → Surface Constraint placement → script controller link → final bone skinning. The cage is reusable.","r1.rb4t":"79 bones · Alembic Export success","r1.rb4d":"Helpers track the blendshape surface in real time, controllers add non-destructive offsets, and the rig was optimized to 79 bones with successful Alembic Export. Hand-key layered on FaceCap data secured both intuitive control and high fidelity.",
 "r1.g1":"Surface tracking GIF","r1.c1":"Helpers tracking blendshape surface in real time","r1.g2":"FaceCap+hand-key layering GIF","r1.c2":"Hand-key layering over capture data",
-"r2.title":"Stretch & Squash Body Rig","r2.lead":"A full-body rig with Scale Expression stretch system, IK/FK, Auto Clavicle, and Foot Roll.",
-"r2.s":"Stretch & Squash via Scale Expression, with IK/FK pelvis blend support.","r2.p":"Auto Clavicle controls the shoulder automatically across -30°~70° of arm movement.","r2.so":"Uses biped as controller for full-scale animation while keeping layer/BIP compatibility.",
-"r2.g1":"Body/arm Stretch GIF","r2.c1":"Stretch & Squash + IK/FK","r2.g2":"Foot Roll / IKFK Match GIF","r2.c2":"3-axis Foot Roll · pose match algorithm",
+"r2.title":"Stretch & Squash Full-Body Rig","r2.lead":"Click a body part to see each setup. A full-body rig with Scale Expression stretch system, IK/FK, Auto Clavicle, and Foot Roll.",
+"r2.phtext":"Click a body part",
+"r2.bx1":"IK / FK Match","r2.bx2":"Full Scale",
+"r2.n_torso":"Torso — Stretch & Squash","r2.d_torso":"Stretch & Squash via Scale Expression, with IK/FK pelvis blend support.",
+"r2.n_clavicle":"Shoulder — Auto Clavicle","r2.d_clavicle":"The shoulder is automatically controlled across -30deg to 70deg of arm movement.",
+"r2.n_arm":"Arm — Twist & IK/FK","r2.d_arm":"Arm rig with stretchy twist bones and IK/FK blend.",
+"r2.n_hand":"Hand — Joint Controllers","r2.d_hand":"Hand rig controlling per-joint controllers, per-finger controllers, and the metacarpals.",
+"r2.n_leg":"Leg — Twist & IK/FK","r2.d_leg":"Leg rig with stretchy twist bones and IK/FK blend.",
+"r2.n_foot":"Foot — Foot Roll (3-axis)","r2.d_foot":"Foot Roll usable across three axes: heel pivot, toe pivot, and ankle.",
+"r2.n_ikfk":"IK / FK Match","r2.d_ikfk":"A pose-match algorithm in custom attributes makes IK/FK switching seamless.",
+"r2.n_scale":"Full-Scale Animation","r2.d_scale":"Enables full-scale animation impossible with standard biped. Using biped as a controller keeps layers, BIP, and copy/paste fully usable.",
 "an.btitle":"Animation Works","an.bsub":"",
 "a1.title":"IP Collaboration Skins — Persona 5 · Guilty Gear","a1.lead":"Built on retargeting, added secondary motion and reworked the full animation.","a1.ch1":"Panther · Laura","a1.ch2":"Elphelt · Aya","a1.g1":"ER × Persona 5 collab video","a1.g2":"ER × Guilty Gear collab video",
 "a2.title":"Character Skin Motion — Isaac","a2.lead":"Built on retargeting, added secondary motion and reworked the full animation.","a2.g1":"Isaac skin video",
@@ -693,9 +775,17 @@ zh:{
 "r1.rndlabel":"查看研发过程","r1.rb1t":"参考分析与混合设计目标","r1.rb1d":"分析了业界绑定师的面部绑定视频、Snappers Advanced Facial Rig、Blender Rigify等。目标是结合FaceCap面部捕捉（blendshape）与手K动画，并依据解剖学沿肌肉走向布置骨骼。","r1.rb2t":"基于解剖学的骨骼布置","r1.rb2d":"眼部用公式A+Unit(B-A)*C实现球面运动——从眼球中心(A)到眼睑辅助体(B)的方向向量乘以半径。沿解剖肌肉走向布置骨骼：额头每侧2根以表现曲率，下巴和嘴部布置咬肌/颏肌，颧骨每侧7个辅助体。","r1.rb3t":"三重辅助体结构与FaceCap管线","r1.rb3d":"每个位置布置3个辅助体：①通过Surface Constraint追踪blendshape表面，②通过position list/zero/script接受控制器手动控制，③用于打磨阶段的细节修改。管线：FaceCap(iPhone)→FBX→morpher移植→面部笼skin-wrap→Surface Constraint布置→脚本控制器连接→最终骨骼蒙皮。笼可复用。","r1.rb4t":"79根骨骼 · Alembic导出成功","r1.rb4d":"辅助体实时追踪blendshape表面，控制器添加非破坏性偏移，优化至79根骨骼并成功Alembic导出。在FaceCap数据上叠加手K，同时确保直观控制与高质量。",
 "r1.s1t":"表面追踪","r1.s":"Surface Constraint辅助体实时参照blendshape网格的表面坐标。","r1.p":"运算控制器与辅助体坐标，驱动结构上分离的蒙皮用骨骼笼。","r1.s3t":"优化","r1.so":"以共79根骨骼轻量化，保持骨骼方式的轻容量并实现引擎友好设计。",
 "r1.g1":"表面追踪 GIF","r1.c1":"辅助体实时追踪blendshape表面","r1.g2":"FaceCap+手K分层 GIF","r1.c2":"在捕捉数据之上叠加手K",
-"r2.title":"Stretch & Squash身体绑定","r2.lead":"具备Scale Expression伸缩系统、IK/FK、Auto Clavicle、Foot Roll的全身绑定。",
-"r2.s":"以Scale Expression实现Stretch & Squash，支持IK/FK pelvis混合。","r2.p":"Auto Clavicle在手臂运动-30°~70°区间自动控制肩部。","r2.so":"将biped用作控制器实现全身缩放动画，同时保持图层·BIP兼容。",
-"r2.g1":"身体/手臂Stretch GIF","r2.c1":"Stretch & Squash + IK/FK","r2.g2":"Foot Roll / IKFK Match GIF","r2.c2":"三轴Foot Roll · 姿势匹配算法",
+"r2.title":"Stretch & Squash全身绑定","r2.lead":"点击身体部位查看各项设置。具备Scale Expression伸缩系统、IK/FK、Auto Clavicle、Foot Roll的全身绑定。",
+"r2.phtext":"点击身体部位",
+"r2.bx1":"IK / FK Match","r2.bx2":"整体缩放",
+"r2.n_torso":"躯干 — Stretch & Squash","r2.d_torso":"以Scale Expression实现Stretch & Squash，支持IK/FK pelvis混合。",
+"r2.n_clavicle":"肩部 — Auto Clavicle","r2.d_clavicle":"在手臂运动-30°~70°区间自动控制肩部。",
+"r2.n_arm":"手臂 — Twist & IK/FK","r2.d_arm":"具备伸缩扭曲骨骼与IK/FK混合的手臂绑定。",
+"r2.n_hand":"手部 — 关节控制器","r2.d_hand":"控制各关节控制器、各手指控制器及掌骨的手部绑定。",
+"r2.n_leg":"腿部 — Twist & IK/FK","r2.d_leg":"具备伸缩扭曲骨骼与IK/FK混合的腿部绑定。",
+"r2.n_foot":"脚部 — Foot Roll (3轴)","r2.d_foot":"可用脚跟轴·脚尖轴·脚踝共3个轴的Foot Roll功能。",
+"r2.n_ikfk":"IK / FK Match","r2.d_ikfk":"在自定义属性中加入姿势匹配算法，使IK/FK切换更便捷。",
+"r2.n_scale":"整体缩放动画","r2.d_scale":"实现标准biped无法做到的整体缩放动画。将biped用作控制器，图层·BIP·复制/粘贴均可正常使用。",
 "an.btitle":"动画作品","an.bsub":"",
 "a1.title":"IP联动皮肤 — Persona 5 · Guilty Gear","a1.lead":"以重定向为基础，进行了次级动作的追加与整体动画的修改。","a1.ch1":"潘瑟 · 劳拉","a1.ch2":"艾尔菲特 · 阿娅","a1.g1":"ER × Persona 5 联动视频","a1.g2":"ER × Guilty Gear 联动视频",
 "a2.title":"角色皮肤动作 — 艾萨克","a2.lead":"以重定向为基础，进行了次级动作的追加与整体动画的修改。","a2.g1":"傲慢的军团长艾萨克皮肤视频",
@@ -721,6 +811,7 @@ function setLang(lang){
   // 열려있는 R&D 아코디언 높이 재계산
   const openRnd=document.querySelector('.rnd.open .rnd-body');
   if(openRnd) openRnd.style.maxHeight=openRnd.scrollHeight+'px';
+  if(typeof window.bmRefresh==='function') window.bmRefresh();
 }
 document.querySelectorAll('.langsw button').forEach(btn=>{
   btn.addEventListener('click',()=>setLang(btn.dataset.lang));
@@ -839,6 +930,44 @@ buildSidenav('about');
       body.style.maxHeight=open?body.scrollHeight+'px':'0';
     });
   }
+})();
+
+// 휴머노이드 바디맵 (Custom Body Rig)
+(function(){
+  const map=document.getElementById('bodymap');
+  if(!map) return;
+  const parts=[...map.querySelectorAll('.bm-part')];
+  const extras=[...map.querySelectorAll('.bm-extra button')];
+  const imgs=[...map.querySelectorAll('[data-bm-img]')];
+  const ph=map.querySelector('.bm-media .ph');
+  const nameEl=document.getElementById('bmName');
+  const descEl=document.getElementById('bmDesc');
+  const lang=()=>document.documentElement.lang||'ko';
+
+  function select(part){
+    parts.forEach(p=>p.classList.toggle('active',p.dataset.part===part));
+    extras.forEach(b=>b.classList.toggle('active',b.dataset.part===part));
+    imgs.forEach(m=>m.classList.toggle('show',m.dataset.bmImg===part));
+    const active=imgs.find(m=>m.dataset.bmImg===part);
+    if(ph){
+      const loaded=active&&active.complete&&active.naturalWidth>0;
+      ph.style.display=loaded?'none':'flex';
+    }
+    const dict=I18N[lang()]||I18N.ko;
+    if(nameEl) nameEl.textContent=dict['r2.n_'+part]||'';
+    if(descEl) descEl.textContent=dict['r2.d_'+part]||'';
+  }
+  parts.forEach(p=>p.addEventListener('click',()=>select(p.dataset.part)));
+  extras.forEach(b=>b.addEventListener('click',()=>select(b.dataset.part)));
+  imgs.forEach(m=>m.addEventListener('load',()=>{
+    if(m.classList.contains('show')) select(m.dataset.bmImg);
+  }));
+  // 언어 전환 시 현재 선택 라벨 갱신
+  window.bmRefresh=()=>{
+    const active=parts.find(p=>p.classList.contains('active'))||extras.find(b=>b.classList.contains('active'));
+    if(active) select(active.dataset.part);
+  };
+  select('torso');
 })();
 </script>
 </body>

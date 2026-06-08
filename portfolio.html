@@ -401,7 +401,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="Script Controller"></span>Script Controller</span>
       </div>
 
-      <div class="proj">
+      <div class="proj" id="facialProj">
         <div class="proj-num">01 — CUSTOM FACIAL RIG</div>
         <h3 data-i18n="r1.title"></h3>
         <p class="lead" data-i18n="r1.lead"></p>
@@ -463,42 +463,47 @@ footer .contact a{color:var(--accent);text-decoration:none}
       </div>
 
       <div class="proj">
-        <div class="proj-num">02 — CUSTOM BODY RIG</div>
+        <div class="proj-num">02 — CUSTOM HUMANOID RIG</div>
         <h3 data-i18n="r2.title"></h3>
         <p class="lead" data-i18n="r2.lead"></p>
 
         <div class="bodymap" id="bodymap">
           <div class="bm-figure">
             <svg viewBox="0 0 240 520" xmlns="http://www.w3.org/2000/svg">
-              <!-- head (장식, 비활성) -->
-              <path d="M120 20 c14 0 24 11 24 27 c0 17 -10 30 -24 30 c-14 0 -24 -13 -24 -30 c0 -16 10 -27 24 -27 z" fill="var(--bg-soft)" stroke="var(--line)" stroke-width="1.5"/>
-              <path d="M112 76 h16 v18 h-16 z" fill="var(--bg-soft)" stroke="var(--line)" stroke-width="1.5"/>
+              <!-- head : 클릭 시 페이셜(01)로 이동 -->
+              <g class="bm-part bm-head" data-part="head" style="cursor:pointer">
+                <title>→ Facial Rig</title>
+                <ellipse cx="120" cy="42" rx="20" ry="24"/>
+                <rect x="112" y="64" width="16" height="16" rx="3"/>
+              </g>
 
-              <!-- clavicle : 어깨/쇄골 라인 -->
-              <path class="bm-part" data-part="clavicle" d="M82 92 c12 -8 64 -8 76 0 c6 4 8 12 8 18 c-18 -10 -74 -10 -92 0 c0 -6 2 -14 8 -18 z"/>
+              <!-- clavicle L : 왼쪽 쇄골 -->
+              <path class="bm-part" data-part="clavicle" d="M118 86 v16 c-12 -2 -24 0 -34 6 c2 -10 6 -16 14 -19 c6 -2 13 -3 20 -3 z"/>
+              <!-- clavicle R : 오른쪽 쇄골 -->
+              <path class="bm-part" data-part="clavicle" d="M122 86 v16 c12 -2 24 0 34 6 c-2 -10 -6 -16 -14 -19 c-6 -2 -13 -3 -20 -3 z"/>
 
-              <!-- torso : 몸통 -->
-              <path class="bm-part" data-part="torso" d="M88 112 c14 6 50 6 64 0 c4 22 6 40 4 70 c-1 18 -6 34 -10 44 c-17 6 -35 6 -52 0 c-4 -10 -9 -26 -10 -44 c-2 -30 0 -48 4 -70 z"/>
+              <!-- torso : 몸통 (슬림, 각진 형태) -->
+              <path class="bm-part" data-part="torso" d="M92 106 h56 l-3 60 l-5 56 h-40 l-5 -56 l-3 -60 z"/>
 
-              <!-- arm L : 왼팔 (어깨~손목) -->
-              <path class="bm-part" data-part="arm" d="M78 110 c-12 4 -20 12 -24 26 c-6 24 -10 54 -14 78 c-1 8 -1 14 0 20 l14 2 c2 -22 8 -50 14 -74 c4 -16 10 -30 16 -40 c-2 -5 -4 -8 -6 -12 z"/>
+              <!-- arm L : 왼팔 -->
+              <path class="bm-part" data-part="arm" d="M84 110 l-18 4 l-12 96 l16 2 l10 -82 l8 -10 z"/>
               <!-- arm R : 오른팔 -->
-              <path class="bm-part" data-part="arm" d="M162 110 c12 4 20 12 24 26 c6 24 10 54 14 78 c1 8 1 14 0 20 l-14 2 c-2 -22 -8 -50 -14 -74 c-4 -16 -10 -30 -16 -40 c2 -5 4 -8 6 -12 z"/>
+              <path class="bm-part" data-part="arm" d="M156 110 l18 4 l12 96 l-16 2 l-10 -82 l-8 -10 z"/>
 
               <!-- hand L -->
-              <path class="bm-part" data-part="hand" d="M40 234 c8 -2 16 0 18 6 c2 8 0 20 -4 28 c-3 6 -10 8 -15 4 c-5 -4 -7 -14 -6 -24 c1 -8 3 -12 7 -14 z"/>
+              <path class="bm-part" data-part="hand" d="M52 214 l16 0 l3 28 l-9 8 l-12 -6 l2 -30 z"/>
               <!-- hand R -->
-              <path class="bm-part" data-part="hand" d="M200 234 c-8 -2 -16 0 -18 6 c-2 8 0 20 4 28 c3 6 10 8 15 4 c5 -4 7 -14 6 -24 c-1 -8 -3 -12 -7 -14 z"/>
+              <path class="bm-part" data-part="hand" d="M188 214 l-16 0 l-3 28 l9 8 l12 -6 l-2 -30 z"/>
 
               <!-- leg L : 왼다리 -->
-              <path class="bm-part" data-part="leg" d="M92 230 c10 4 22 4 26 2 c0 26 -2 56 -4 86 c-2 28 -5 54 -8 76 l-18 0 c-3 -24 -6 -52 -7 -82 c-1 -28 0 -58 11 -82 z"/>
+              <path class="bm-part" data-part="leg" d="M96 226 h22 l-2 90 l-4 80 h-18 l-2 -82 l4 -88 z"/>
               <!-- leg R : 오른다리 -->
-              <path class="bm-part" data-part="leg" d="M148 230 c-10 4 -22 4 -26 2 c0 26 2 56 4 86 c2 28 5 54 8 76 l18 0 c3 -24 6 -52 7 -82 c1 -28 0 -58 -11 -82 z"/>
+              <path class="bm-part" data-part="leg" d="M144 226 h-22 l2 90 l4 80 h18 l2 -82 l-4 -88 z"/>
 
-              <!-- foot L : 왼발 -->
-              <path class="bm-part" data-part="foot" d="M86 398 l20 0 c2 10 2 20 0 28 c-1 6 -6 10 -16 10 c-12 0 -20 -4 -22 -10 c-2 -6 4 -10 10 -14 c5 -3 7 -8 8 -14 z"/>
-              <!-- foot R : 오른발 -->
-              <path class="bm-part" data-part="foot" d="M154 398 l-20 0 c-2 10 -2 20 0 28 c1 6 6 10 16 10 c12 0 20 -4 22 -10 c2 -6 -4 -10 -10 -14 c-5 -3 -7 -8 -8 -14 z"/>
+              <!-- foot L -->
+              <path class="bm-part" data-part="foot" d="M90 400 h22 l2 22 l-10 6 h-20 l-2 -16 l8 -12 z"/>
+              <!-- foot R -->
+              <path class="bm-part" data-part="foot" d="M150 400 h-22 l-2 22 l10 6 h20 l2 -16 l-8 -12 z"/>
             </svg>
           </div>
 
@@ -679,7 +684,7 @@ ko:{
 "r1.d1":"블렌드쉐입으로 변형되는 메쉬의 표면 좌표를, Surface Constraint가 적용된 헬퍼들이 실시간으로 추적합니다.","r1.d2":"블렌드쉐입 애니메이션과 컨트롤러 입력을 동기화하여, 원본 데이터를 훼손하지 않는 비파괴 오프셋 수정 워크플로우를 구현했습니다.","r1.d3":"컨트롤러와 표면 헬퍼의 좌표를 연산해 구조적으로 분리된 스키닝용 본 케이지를 구동합니다. 총 79개 본으로 실시간 엔진에 최적화했습니다.","r1.d4":"모션 캡처 데이터 위에 아티스트의 핸드키를 레이어링하여, 효율적이면서도 고품질의 페이셜 연기를 구현했습니다.",
 "r1.rndlabel":"R&D 과정 자세히 보기","r1.rb1t":"레퍼런스 분석과 하이브리드 설계 목표","r1.rb1d":"정위님·김동석님의 Facial Rig 영상, Snappers Advanced Facial Rig, Blender Rigify 등을 분석했습니다. FaceCap 기반 페이셜 캡처(블렌드쉐입)와 핸드키 애니메이션을 결합하되, 아나토미에 따라 근육 결 방향으로 본을 배치하는 것을 목표로 잡았습니다.","r1.rb2t":"아나토미 기반 본 배치 설계","r1.rb2d":"눈은 안구 중심(A)에서 눈꺼풀 헬퍼(B)로의 방향벡터에 반지름을 곱하는 수식 A+Unit(B-A)*C로 구면 운동을 구현했습니다. 이마는 곡률을 고려해 한쪽 2개씩, 턱·입은 깨물근/턱끝근, 광대는 한쪽 7개 헬퍼 등 해부학적 근육 결을 따라 본을 배치했습니다.","r1.rb3t":"3중 헬퍼 구조와 FaceCap 파이프라인","r1.rb3d":"각 위치에 헬퍼 3개를 배치했습니다. ①Surface Constraint로 블렌드쉐입 표면을 따라가는 헬퍼, ②포지션 리스트·제로·스크립트로 컨트롤러 수동 제어를 받는 헬퍼, ③폴리싱 단계 디테일 수정용 헬퍼. FaceCap(아이폰)→FBX→모퍼 이식→페이셜 케이지 스킨랩→Surface Constraint 배치→스크립트 컨트롤러 연결→최종 본 스키닝 순으로 파이프라인을 구축했고, 케이지는 재활용 가능하게 만들었습니다.","r1.rb4t":"79본 경량화 · Alembic Export 성공","r1.rb4d":"블렌드쉐입 표면을 헬퍼가 실시간 추적하고, 컨트롤러로 비파괴 오프셋을 더하며, 총 79개 본으로 경량화해 Alembic Export까지 성공했습니다. FaceCap 데이터 위에 핸드키를 레이어링하여 직관적 컨트롤과 고품질을 동시에 확보했습니다.",
 "r1.g1":"표면 추적 GIF","r1.c1":"헬퍼가 블렌드쉐입 표면을 실시간 추적","r1.g2":"FaceCap+핸드키 레이어링 GIF","r1.c2":"캡처 데이터 위에 핸드키 레이어링",
-"r2.title":"Stretch & Squash 풀바디 리그","r2.lead":"신체 부위를 눌러 각 셋업을 확인하세요. Scale Expression 기반 신축 시스템과 IK/FK, Auto Clavicle, Foot Roll을 갖춘 풀 바디 리그입니다.",
+"r2.title":"커스텀 휴머노이드 리그","r2.lead":"신체 부위를 눌러 각 셋업을 확인하세요. 머리를 누르면 페이셜 리그로 이동합니다. Scale Expression 기반 신축 시스템과 IK/FK, Auto Clavicle, Foot Roll을 갖춘 풀바디 리그입니다.",
 "r2.phtext":"신체 부위를 클릭하세요",
 "r2.bx1":"IK / FK Match","r2.bx2":"전체 스케일",
 "r2.n_torso":"몸통 — Stretch & Squash","r2.d_torso":"Scale Expression으로 Stretch & Squash를 구현하고, IK/FK pelvis 블렌드를 지원합니다.",
@@ -730,7 +735,7 @@ en:{
 "r1.d1":"Helpers with Surface Constraints track the surface coordinates of the blendshape-deformed mesh in real time.","r1.d2":"Synchronized controller inputs with blendshape animation, enabling a non-destructive offset workflow that preserves the original data.","r1.d3":"Computes controller and surface-helper coordinates to drive a structurally separated skinning bone cage. Optimized for real-time engines with 79 bones total.","r1.d4":"Layered artistic hand-key on top of motion capture data to achieve efficient yet high-fidelity facial performance.",
 "r1.rndlabel":"View R&D process","r1.rb1t":"Reference analysis & hybrid design goal","r1.rb1d":"Analyzed facial rig videos by industry riggers, Snappers Advanced Facial Rig, and Blender Rigify. The goal: combine FaceCap-based facial capture (blendshapes) with hand-key animation, placing bones along muscle flow based on anatomy.","r1.rb2t":"Anatomy-based bone placement","r1.rb2d":"For the eyes, spherical motion was built with the formula A+Unit(B-A)*C — a direction vector from eyeball center (A) to eyelid helper (B), scaled by radius. Bones were placed along anatomical muscle flow: two per side on the forehead for curvature, masseter/mentalis around the jaw and mouth, seven helpers per side around the cheeks.","r1.rb3t":"Triple-helper structure & FaceCap pipeline","r1.rb3d":"Three helpers per location: (1) tracking the blendshape surface via Surface Constraint, (2) receiving manual control through position list/zero/script, (3) for detail tweaks during polishing. Pipeline: FaceCap (iPhone) → FBX → morpher transfer → facial cage skin-wrap → Surface Constraint placement → script controller link → final bone skinning. The cage is reusable.","r1.rb4t":"79 bones · Alembic Export success","r1.rb4d":"Helpers track the blendshape surface in real time, controllers add non-destructive offsets, and the rig was optimized to 79 bones with successful Alembic Export. Hand-key layered on FaceCap data secured both intuitive control and high fidelity.",
 "r1.g1":"Surface tracking GIF","r1.c1":"Helpers tracking blendshape surface in real time","r1.g2":"FaceCap+hand-key layering GIF","r1.c2":"Hand-key layering over capture data",
-"r2.title":"Stretch & Squash Full-Body Rig","r2.lead":"Click a body part to see each setup. A full-body rig with Scale Expression stretch system, IK/FK, Auto Clavicle, and Foot Roll.",
+"r2.title":"Custom Humanoid Rig","r2.lead":"Click a body part to see each setup. Click the head to jump to the facial rig. A full-body rig with Scale Expression stretch, IK/FK, Auto Clavicle, and Foot Roll.",
 "r2.phtext":"Click a body part",
 "r2.bx1":"IK / FK Match","r2.bx2":"Full Scale",
 "r2.n_torso":"Torso — Stretch & Squash","r2.d_torso":"Stretch & Squash via Scale Expression, with IK/FK pelvis blend support.",
@@ -782,7 +787,7 @@ zh:{
 "r1.rndlabel":"查看研发过程","r1.rb1t":"参考分析与混合设计目标","r1.rb1d":"分析了业界绑定师的面部绑定视频、Snappers Advanced Facial Rig、Blender Rigify等。目标是结合FaceCap面部捕捉（blendshape）与手K动画，并依据解剖学沿肌肉走向布置骨骼。","r1.rb2t":"基于解剖学的骨骼布置","r1.rb2d":"眼部用公式A+Unit(B-A)*C实现球面运动——从眼球中心(A)到眼睑辅助体(B)的方向向量乘以半径。沿解剖肌肉走向布置骨骼：额头每侧2根以表现曲率，下巴和嘴部布置咬肌/颏肌，颧骨每侧7个辅助体。","r1.rb3t":"三重辅助体结构与FaceCap管线","r1.rb3d":"每个位置布置3个辅助体：①通过Surface Constraint追踪blendshape表面，②通过position list/zero/script接受控制器手动控制，③用于打磨阶段的细节修改。管线：FaceCap(iPhone)→FBX→morpher移植→面部笼skin-wrap→Surface Constraint布置→脚本控制器连接→最终骨骼蒙皮。笼可复用。","r1.rb4t":"79根骨骼 · Alembic导出成功","r1.rb4d":"辅助体实时追踪blendshape表面，控制器添加非破坏性偏移，优化至79根骨骼并成功Alembic导出。在FaceCap数据上叠加手K，同时确保直观控制与高质量。",
 "r1.s1t":"表面追踪","r1.s":"Surface Constraint辅助体实时参照blendshape网格的表面坐标。","r1.p":"运算控制器与辅助体坐标，驱动结构上分离的蒙皮用骨骼笼。","r1.s3t":"优化","r1.so":"以共79根骨骼轻量化，保持骨骼方式的轻容量并实现引擎友好设计。",
 "r1.g1":"表面追踪 GIF","r1.c1":"辅助体实时追踪blendshape表面","r1.g2":"FaceCap+手K分层 GIF","r1.c2":"在捕捉数据之上叠加手K",
-"r2.title":"Stretch & Squash全身绑定","r2.lead":"点击身体部位查看各项设置。具备Scale Expression伸缩系统、IK/FK、Auto Clavicle、Foot Roll的全身绑定。",
+"r2.title":"自定义人形绑定","r2.lead":"点击身体部位查看各项设置。点击头部可跳转至面部绑定。具备Scale Expression伸缩系统、IK/FK、Auto Clavicle、Foot Roll的全身绑定。",
 "r2.phtext":"点击身体部位",
 "r2.bx1":"IK / FK Match","r2.bx2":"整体缩放",
 "r2.n_torso":"躯干 — Stretch & Squash","r2.d_torso":"以Scale Expression实现Stretch & Squash，支持IK/FK pelvis混合。",
@@ -964,7 +969,18 @@ buildSidenav('about');
     if(nameEl) nameEl.textContent=dict['r2.n_'+part]||'';
     if(descEl) descEl.textContent=dict['r2.d_'+part]||'';
   }
-  parts.forEach(p=>p.addEventListener('click',()=>select(p.dataset.part)));
+  parts.forEach(p=>p.addEventListener('click',()=>{
+    if(p.dataset.part==='head'){
+      const fp=document.getElementById('facialProj');
+      if(fp){
+        const off=(document.querySelector('.tabbar')?.offsetHeight||0)+(document.querySelector('.topbar')?.offsetHeight||0)+20;
+        const y=fp.getBoundingClientRect().top+window.pageYOffset-off;
+        window.scrollTo({top:y,behavior:'smooth'});
+      }
+      return;
+    }
+    select(p.dataset.part);
+  }));
   extras.forEach(b=>b.addEventListener('click',()=>select(b.dataset.part)));
   imgs.forEach(m=>m.addEventListener('load',()=>{
     if(m.classList.contains('show')) select(m.dataset.bmImg);

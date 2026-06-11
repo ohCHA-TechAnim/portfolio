@@ -22,11 +22,20 @@
 @font-face{font-family:'NexonLv2';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic Bold.woff') format('woff');font-weight:700;font-display:swap}
 
 :root{
-  --bg:#161b1f; --bg-soft:#1b2125; --bg-card:#1f262b;
-  --line:#2c353b; --text:#d4dadd; --text-dim:#8f9aa0; --text-faint:#646f76;
-  --accent:#6db3ac; --accent-dim:#4a7d77; --accent-glow:rgba(109,179,172,0.12);
+  --bg:#0d1117; --bg-soft:#11161d; --bg-card:#151b23; --bg-raised:#1c242e; --bg-media:#000;
+  --line:rgba(255,255,255,0.07); --line-strong:rgba(255,255,255,0.13);
+  --text:#e8edf2; --text-dim:#9aa7b4; --text-faint:#5f6b78;
+  --accent:#6fd3c7; --accent-dim:rgba(111,211,199,0.35); --accent-glow:rgba(111,211,199,0.10);
+  --space-section:clamp(96px,12vh,160px); --space-block:48px; --space-card:24px;
+  --radius-card:12px; --radius-media:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+.svgi{display:block;pointer-events:none}
+.lightbox{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.92);padding:4vmin}
+.lightbox[hidden]{display:none}
+.lightbox-img{max-width:100%;max-height:100%;border-radius:var(--radius-media)}
+.lightbox-close{position:absolute;top:20px;right:20px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:var(--text);cursor:pointer}
+.lightbox-close:hover{background:rgba(255,255,255,.2)}
 html{scroll-behavior:smooth}
 body{font-family:'NexonLv2',sans-serif;background:var(--bg);color:var(--text);font-weight:400;line-height:1.7;overflow-x:hidden}
 ::selection{background:var(--accent);color:var(--bg)}
@@ -45,16 +54,15 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .langsw button:hover{color:var(--text)}
 .langsw button.active{background:var(--accent-dim);color:#fff}
 
-.hero{min-height:auto;display:flex;flex-direction:column;justify-content:center;padding:140px 0 50px;position:relative}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vh,140px) 0 64px;position:relative}
 .hero .role-tag{font-size:12px;letter-spacing:5px;color:var(--accent);font-weight:700;margin-bottom:22px;opacity:0;animation:fadeUp .8s .1s forwards}
 .hero h1{font-size:clamp(40px,9vw,90px);font-weight:700;line-height:1;letter-spacing:-2px;margin-bottom:18px;opacity:0;animation:fadeUp .8s .25s forwards}
-.hero h1 .accent{color:var(--accent);text-shadow:0 0 40px var(--accent-glow)}
+.hero h1 .accent{color:var(--accent)}
 .hero .ko-name{font-size:clamp(16px,3vw,22px);color:var(--text-dim);font-weight:300;margin-bottom:30px;opacity:0;animation:fadeUp .8s .4s forwards;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .hero .ko-name b{color:var(--text);font-weight:400}
 .hero .ko-name .exp-badge{font-size:12px;font-weight:700;letter-spacing:0.5px;color:var(--accent);background:var(--bg-card);border:1px solid var(--accent-dim);border-radius:20px;padding:4px 13px}
 .hero .intro{max-width:580px;font-size:15px;color:var(--text-dim);font-weight:300;margin-bottom:42px;opacity:0;animation:fadeUp .8s .55s forwards}
-.hero .meta-row{display:flex;flex-direction:column;gap:22px;opacity:0;animation:fadeUp .8s .7s forwards}
-.hero .meta-phone-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.hero .meta-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .7s forwards}
 .hero .meta-item .label{font-size:11px;letter-spacing:2px;color:var(--text-faint);margin-bottom:5px}
 .hero .meta-item .val{font-size:14px}
 .hero .meta-item .val a{color:var(--accent);text-decoration:none}
@@ -68,7 +76,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .hero .socials a:hover svg{fill:var(--accent)}
 
 .summary{padding:80px 0 0}
-.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 @media(max-width:760px){.summary-grid{grid-template-columns:1fr}}
 .sum-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:26px}
 .sum-card .sum-label{font-size:11px;letter-spacing:3px;color:var(--accent);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:9px}
@@ -80,7 +88,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .career-item .ci-date{font-size:11px;color:var(--text-faint);white-space:nowrap}
 .award-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
 .award-item:last-child{border-bottom:none}
-.award-item .aw-medal{font-size:16px;flex-shrink:0}
+.award-badge{display:inline-flex;align-items:center;flex-shrink:0;padding:2px 8px;border:1px solid var(--accent-dim);border-radius:4px;color:var(--accent);font-size:11px;font-weight:600;letter-spacing:.05em;margin-top:1px}
 .award-item .aw-text{font-size:13px;color:var(--text)}
 .award-item .aw-org{font-size:11px;color:var(--text-faint);font-weight:300;margin-top:2px}
 .role-list{display:flex;flex-direction:column;gap:9px}
@@ -104,13 +112,20 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .stepper-vertical .step-tab .snum{margin-bottom:0}
 .stepper-vertical .step-tab .stitle{margin-top:0}
 
-/* 탑다운 리니어 리그 (바디 리그) */
-.rig-linear{display:flex;flex-direction:column;gap:28px;margin:24px 0}
-.rig-row{display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px;transition:border-color .25s}
-.rig-row:hover{border-color:var(--accent-dim)}
+/* 바디 리그 — 2열 그리드 + 대표 풀폭 */
+.rig-linear{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin:24px 0}
+.rig-row{display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-card);padding:16px;transition:border-color .25s}
+.rig-row:hover{border-color:var(--line-strong)}
 .rig-row .rig-media{order:1}
 .rig-row .rig-info{order:2}
-.rig-media{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#0d1114;width:100%;max-width:760px;margin:0 auto;aspect-ratio:16/9}
+.rig-row.feature{grid-column:1/-1}
+@media(max-width:768px){.rig-linear{grid-template-columns:1fr}}
+.rig-info{margin-top:14px;text-align:center;max-width:680px;margin-left:auto;margin-right:auto}
+.rig-info .rig-num{font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:6px}
+.rig-info .rig-title{font-size:17px;color:var(--text);font-weight:400;margin-bottom:8px}
+.rig-row.feature .rig-info .rig-title{font-size:19px}
+.rig-info .rig-desc{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.65}
+.rig-media{border:1px solid var(--line);border-radius:var(--radius-media);overflow:hidden;background:var(--bg-media);width:100%;aspect-ratio:16/9}
 .rig-media img{width:100%;height:100%;object-fit:contain;display:block}
 .rig-info{margin-top:16px;text-align:center;max-width:680px;margin-left:auto;margin-right:auto}
 .rig-info .rig-num{font-size:12px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:8px}
@@ -146,7 +161,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .rnd-toggle:hover{background:var(--bg-soft)}
 .rnd-toggle .rl{display:flex;align-items:center;gap:10px;letter-spacing:1px}
 .rnd-toggle .rl::before{content:'R&D';font-size:10px;letter-spacing:1px;color:var(--accent);background:var(--accent-glow);border:1px solid var(--accent-dim);border-radius:5px;padding:3px 7px}
-.rnd-toggle .chev{font-size:13px;color:var(--text-faint);transition:transform .3s}
+.rnd-toggle .chev{display:flex;color:var(--text-faint);transition:transform .3s}
 .rnd.open .rnd-toggle .chev{transform:rotate(180deg)}
 .rnd-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.7,.3,1)}
 .rnd-inner{padding:4px 20px 22px}
@@ -166,11 +181,13 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .sidenav .nav-label{font-size:11px;letter-spacing:1px;color:var(--text-faint);opacity:0;transform:translateX(6px);transition:all .25s;white-space:nowrap}
 .sidenav .snav-item:hover .dot{background:var(--text-dim);width:30px}
 .sidenav .snav-item:hover .nav-label{opacity:1;transform:translateX(0);color:var(--text-dim)}
-.sidenav .snav-item.active .dot{background:var(--accent);width:38px;box-shadow:0 0 12px var(--accent-glow)}
+.sidenav .snav-item.active .dot{background:var(--accent);width:38px}
 .sidenav .snav-item.active .nav-label{opacity:1;transform:translateX(0);color:var(--accent)}
-@media(max-width:900px){.sidenav{right:8px;gap:9px}.sidenav .nav-label{display:none}.sidenav .snav-item{padding:3px 0}.sidenav .dot{width:18px}.sidenav .snav-item.active .dot{width:30px}.sidenav .snav-item:hover .dot{width:22px}}
+.sidenav .nav-label{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:1440px){.sidenav{display:none}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@keyframes bounce{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .tabsec{padding:70px 0 100px}
 .tabbar{position:sticky;top:54px;z-index:50;display:flex;gap:4px;background:var(--bg-soft);border:1px solid var(--line);border-radius:14px;padding:6px;margin-bottom:50px;backdrop-filter:blur(8px)}
@@ -185,14 +202,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .panel.active{display:block}
 @keyframes panelIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-.banner{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);margin-bottom:14px;min-height:200px;display:flex;align-items:flex-end;background:var(--bg-card)}
-.banner-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0.64;filter:saturate(1.1)}
-.banner-img-logo{object-fit:contain;object-position:99% 0%;opacity:0.71;filter:saturate(1.1);padding:24px}
-.banner-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,27,31,.4) 0%,rgba(22,27,31,.65) 65%,var(--bg) 100%),linear-gradient(90deg,rgba(22,27,31,.85) 0%,rgba(22,27,31,.45) 45%,rgba(22,27,31,.2) 100%)}
+.banner{position:relative;border-radius:var(--radius-card);overflow:hidden;border:1px solid var(--line);margin-bottom:14px;padding:0;background:var(--bg-card)}
+.banner::after{content:attr(data-index);position:absolute;right:24px;bottom:-24px;font-size:160px;font-weight:800;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none}
 .banner-ph{position:absolute;inset:0;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 12px,var(--bg-card) 12px,var(--bg-card) 24px);display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:13px;opacity:.5}
-.banner-logos{position:absolute;right:30px;top:50%;transform:translateY(-50%);z-index:1;display:flex;gap:22px;align-items:center;opacity:0.13;pointer-events:none}
-.banner-logos img{height:90px;width:auto;object-fit:contain;filter:grayscale(0.2)}
-@media(max-width:680px){.banner-logos{right:16px;gap:14px}.banner-logos img{height:56px}}
+@media(max-width:680px){}
 .banner-content{position:relative;z-index:2;padding:34px}
 .banner-content .ctx{font-size:12px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:8px}
 .banner-content h2{font-size:clamp(24px,5vw,38px);font-weight:700;letter-spacing:-0.5px;margin-bottom:6px}
@@ -208,7 +221,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .ico-logo{background:var(--bg-soft);border:1px solid var(--line);padding:4px}
 .ico-logo img{width:100%;height:100%;object-fit:contain;display:block}
 
-.proj{margin-bottom:64px;padding-bottom:64px;border-bottom:1px solid var(--line)}
+.proj{margin-bottom:var(--space-block);padding-bottom:var(--space-block);border-bottom:1px solid var(--line)}
+.proj:last-child{margin-bottom:0;border-bottom:none}
 .proj:last-child{border-bottom:none}
 .proj-num{font-size:12px;letter-spacing:3px;color:var(--accent-dim);font-weight:700;margin-bottom:8px}
 .proj h3{font-size:clamp(22px,4vw,30px);font-weight:700;letter-spacing:-0.5px;margin-bottom:10px}
@@ -221,18 +235,22 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .story-cell .st{font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:10px}
 .story-cell p{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.65}
 
-.result-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px}
-.result-card{flex:1;min-width:150px;background:linear-gradient(135deg,var(--bg-card),var(--bg-soft));border:1px solid var(--accent-dim);border-radius:12px;padding:20px}
-.result-card .big{font-size:26px;font-weight:700;color:var(--accent);text-shadow:0 0 20px var(--accent-glow);letter-spacing:-1px}
-.result-card .cap{font-size:12px;color:var(--text-dim);font-weight:300;margin-top:4px}
+.result-row{display:flex;gap:44px;flex-wrap:wrap;padding:20px 0;margin:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.result-card{flex:0 1 auto;background:none;border:none;border-radius:0;padding:0}
+.result-card .big{font-size:clamp(26px,3vw,34px);font-weight:700;color:var(--accent);letter-spacing:-0.5px;line-height:1.1}
+.result-card .cap{font-size:13px;color:var(--text-dim);font-weight:300;margin-top:6px}
 
 .media{margin:14px 0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg-soft)}
 .media img{width:100%;display:block}
-.media .caption{padding:11px 15px;font-size:12px;color:var(--text-dim);font-weight:300;border-top:1px solid var(--line);background:var(--bg-card)}
+.media .caption{padding:12px 16px;font-size:13px;line-height:1.5;color:var(--text-dim);font-weight:300;border-top:1px solid var(--line);background:var(--bg-raised)}
 .media-ph{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-faint);font-size:13px;gap:8px;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 10px,var(--bg-card) 10px,var(--bg-card) 20px)}
 .media-ph .icon{font-size:26px;opacity:.5}
-.media-yt{position:relative;width:100%;aspect-ratio:16/9;background:#000}
-.media-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.yt-facade{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--bg-media);cursor:pointer}
+.yt-facade>img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+.yt-facade:hover>img{transform:scale(1.03)}
+.yt-play{position:absolute;inset:0;margin:auto;width:62px;height:62px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(13,17,23,.8);border:1px solid var(--line-strong);color:var(--text);backdrop-filter:blur(4px);transition:background .2s ease,color .2s ease}
+.yt-facade:hover .yt-play{background:var(--accent);color:#0d1117}
+.yt-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* 가로 스크롤 캐러셀 (영상 여러 개) */
 .vid-carousel{position:relative;margin-top:8px}
@@ -259,13 +277,20 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .ip-badge .ip{font-size:14px;color:var(--accent);font-weight:700;letter-spacing:0.3px}
 .ip-badge .ch{font-size:12px;color:var(--text-dim);font-weight:300}
 
-footer{padding:90px 0 60px;border-top:1px solid var(--line);text-align:center;margin-top:40px}
-footer .thanks{font-size:clamp(24px,5vw,40px);font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:20px;text-shadow:0 0 30px var(--accent-glow)}
-footer .contact{color:var(--text-dim);font-size:14px;font-weight:300}
-footer .contact a{color:var(--accent);text-decoration:none}
+footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;margin-top:var(--space-block)}
+.footer-fineprint{color:var(--text-faint);font-size:12px;font-weight:300}
+.footer-fineprint a{color:var(--text-dim);text-decoration:none}
+.footer-fineprint a:hover{color:var(--accent)}
 </style>
 </head>
 <body>
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
 
 <div class="topbar">
   <div class="logo">oh<span>CHA</span> · Technical Artist</div>
@@ -274,7 +299,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
     <div class="langsw">
       <button data-lang="ko" class="active">KO</button>
       <button data-lang="en">EN</button>
-      <button data-lang="zh">中</button>
+      <button data-lang="zh">ZH</button>
     </div>
   </div>
 </div>
@@ -289,9 +314,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
     <p class="intro" data-i18n="hero.intro"></p>
     <div class="meta-row">
       <div class="meta-item meta-current"><div class="label" data-i18n="hero.m1k"></div><div class="val" data-i18n="hero.m1v"></div></div>
-      <div class="meta-phone-row">
-        <div class="meta-item"><div class="label">PHONE</div><div class="val">010-5910-0837</div></div>
-        <div class="socials">
+      <div class="socials">
           <a href="https://chaseunghyeon.artstation.com" target="_blank" title="ArtStation" aria-label="ArtStation">
             <svg viewBox="0 0 24 24"><path d="M0 17.723l2.027 3.505h.001a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.943-.388-1.323L15.728 2.836a2.424 2.424 0 0 0-2.018-1.073H9.578l11.793 20.413 2.392-4.143c.16-.281.237-.594.237-.945v-.34zM7.563 6.864L1.667 17.08h11.79L7.563 6.864z"/></svg>
           </a>
@@ -301,11 +324,10 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <a href="mailto:ckekdnlt@naver.com" title="Email" aria-label="Email">
             <svg viewBox="0 0 24 24"><path d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H1.5C.65 21 0 20.35 0 19.5v-15C0 3.65.65 3 1.5 3h21c.85 0 1.5.65 1.5 1.5zm-1.5 0L12 12 1.5 4.5h21zm-21 15h21V6.79l-10.5 7.5L1.5 6.79V19.5z"/></svg>
           </a>
-        </div>
       </div>
     </div>
   </div>
-  <div class="scroll-hint"><span data-i18n="hero.scroll"></span><span class="arrow">&#9661;</span></div>
+  <div class="scroll-hint" aria-hidden="true"><span data-i18n="hero.scroll"></span><span class="arrow"><svg class="svgi" width="18" height="18"><use href="#i-chevron-down"/></svg></span></div>
 </header>
 
 <section class="tabsec">
@@ -318,9 +340,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
     </div>
 
     <div class="panel" id="plugin">
-      <div class="banner">
-        <img class="banner-img" src="gif/ER_Banner.jpg" alt="">
-        <div class="banner-fade"></div>
+      <div class="banner" data-index="01">
         <div class="banner-content">
           <div class="ctx">ETERNAL RETURN · NIMBLE NEURON · ANIMATION TEAM</div>
           <h2 data-i18n="pl.btitle"></h2>
@@ -331,25 +351,25 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <span class="tlabel">TOOLKIT</span>
         <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
         <span class="tool"><span class="ico ico-logo"><img src="gif/python.png" alt="Python"></span>Python</span>
-        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="MaxScript"></span>MaxScript</span>
+        <span class="tool">MaxScript</span>
       </div>
 
       <div class="proj">
         <div class="proj-num">01 — BATCH RETARGETING TOOL</div>
         <h3 data-i18n="p1.title"></h3>
         <p class="lead" data-i18n="p1.lead"></p>
-        <div class="story">
-          <div class="story-cell"><div class="st">SITUATION</div><p data-i18n="p1.s"></p></div>
-          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p1.p"></p></div>
-          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p1.so"></p></div>
-        </div>
         <div class="result-row">
           <div class="result-card"><div class="big" data-i18n="p1.r1b"></div><div class="cap" data-i18n="p1.r1c"></div></div>
           <div class="result-card"><div class="big" data-i18n="p1.r2b"></div><div class="cap" data-i18n="p1.r2c"></div></div>
         </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p1.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p1.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p1.i"></p></div>
+        </div>
         <div class="media-grid">
-          <div class="media"><img src="gif/plugin_retarget1.webp" alt=""><div class="caption" data-i18n="p1.c1"></div></div>
-          <div class="media"><img src="gif/plugin_retarget2.webp" alt=""><div class="caption" data-i18n="p1.c2"></div></div>
+          <div class="media"><img src="gif/plugin_retarget1.webp" alt="3ds Max 배치 리타게팅 툴 — 파일 리스트와 일괄 처리 UI"><div class="caption" data-i18n="p1.c1"></div></div>
+          <div class="media"><img src="gif/plugin_retarget2.webp" alt="배치 리타게팅 처리 결과 뷰포트"><div class="caption" data-i18n="p1.c2"></div></div>
         </div>
       </div>
 
@@ -357,33 +377,33 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <div class="proj-num">02 — BATCH EXPORT TOOL</div>
         <h3 data-i18n="p2.title"></h3>
         <p class="lead" data-i18n="p2.lead"></p>
-        <div class="story">
-          <div class="story-cell"><div class="st">SITUATION</div><p data-i18n="p2.s"></p></div>
-          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p2.p"></p></div>
-          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p2.so"></p></div>
-        </div>
         <div class="result-row">
           <div class="result-card"><div class="big" data-i18n="p2.r1b"></div><div class="cap" data-i18n="p2.r1c"></div></div>
         </div>
-        <div class="media"><img src="gif/plugin_export.webp" alt=""><div class="caption" data-i18n="p2.c1"></div></div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p2.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p2.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p2.i"></p></div>
+        </div>
+        <div class="media"><img src="gif/plugin_export.webp" alt="Selection Sets 기반 일괄 익스포트 툴 실행 화면"><div class="caption" data-i18n="p2.c1"></div></div>
       </div>
 
       <div class="proj">
         <div class="proj-num">03 — CHARACTER SETUP TOOL</div>
         <h3 data-i18n="p3.title"></h3>
         <p class="lead" data-i18n="p3.lead"></p>
-        <div class="story">
-          <div class="story-cell"><div class="st">SITUATION</div><p data-i18n="p3.s"></p></div>
-          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p3.p"></p></div>
-          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p3.so"></p></div>
-        </div>
         <div class="result-row">
           <div class="result-card"><div class="big" data-i18n="p3.r1b"></div><div class="cap" data-i18n="p3.r1c"></div></div>
           <div class="result-card"><div class="big" data-i18n="p3.r2b"></div><div class="cap" data-i18n="p3.r2c"></div></div>
         </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p3.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p3.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p3.i"></p></div>
+        </div>
         <div class="media-grid">
-          <div class="media"><img src="gif/plugin_setup1.webp" alt=""><div class="caption" data-i18n="p3.c1"></div></div>
-          <div class="media"><img src="gif/plugin_setup2.webp" alt=""><div class="caption" data-i18n="p3.c2"></div></div>
+          <div class="media"><img src="gif/plugin_setup1.webp" alt="캐릭터 셋업 자동화 툴 — Fig 파일 리스트와 포즈 로드"><div class="caption" data-i18n="p3.c1"></div></div>
+          <div class="media"><img src="gif/plugin_setup2.webp" alt="Twist·관절 본 자동 생성 결과 뷰포트"><div class="caption" data-i18n="p3.c2"></div></div>
         </div>
       </div>
 
@@ -391,12 +411,13 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <div class="proj-num">04 — RIGGING MANAGER</div>
         <h3 data-i18n="p4.title"></h3>
         <p class="lead" data-i18n="p4.lead"></p>
+        <div class="toolrow"><span class="tlabel">SPEC</span><span class="tool">Python 3.11</span><span class="tool">pymxs</span><span class="tool">3ds Max 2025+</span><span class="tool">EN · KO · ZH · JP</span></div>
         <div class="story">
-          <div class="story-cell"><div class="st">CONCEPT</div><p data-i18n="p4.s"></p></div>
-          <div class="story-cell"><div class="st">FEATURE</div><p data-i18n="p4.p"></p></div>
-          <div class="story-cell"><div class="st">SPEC</div><p data-i18n="p4.so"></p></div>
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p4.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p4.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p4.i"></p></div>
         </div>
-        <div class="media"><img src="gif/plugin_rigmgr.webp" alt=""><div class="caption" data-i18n="p4.c1"></div></div>
+        <div class="media"><img src="gif/plugin_rigmgr.webp" alt="Rigging Manager — 리깅·검증·스키닝 통합 인터페이스"><div class="caption" data-i18n="p4.c1"></div></div>
       </div>
 
       <div class="proj">
@@ -404,21 +425,19 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <h3 data-i18n="p5.title"></h3>
         <p class="lead" data-i18n="p5.lead"></p>
         <div class="story">
-          <div class="story-cell"><div class="st">SITUATION</div><p data-i18n="p5.s"></p></div>
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p5.s"></p></div>
           <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p5.p"></p></div>
           <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p5.so"></p></div>
         </div>
         <div class="media-grid">
-          <div class="media"><img src="gif/plugin_morph1.webp" alt=""><div class="caption" data-i18n="p5.c1"></div></div>
-          <div class="media"><img src="gif/plugin_morph2.webp" alt=""><div class="caption" data-i18n="p5.c2"></div></div>
+          <div class="media"><img src="gif/plugin_morph1.webp" alt="모프 프리셋 툴 — 페이셜 시안 제작 UI"><div class="caption" data-i18n="p5.c1"></div></div>
+          <div class="media"><img src="gif/plugin_morph2.webp" alt="모프 애니메이션 원클릭 복사 결과"><div class="caption" data-i18n="p5.c2"></div></div>
         </div>
       </div>
     </div>
 
     <div class="panel" id="rigging">
-      <div class="banner" style="background:radial-gradient(ellipse at 70% 50%,var(--bg-soft),var(--bg-card))">
-        <img class="banner-img banner-img-logo" src="gif/3dsmax.png" alt="3ds Max">
-        <div class="banner-fade"></div>
+      <div class="banner" data-index="02">
         <div class="banner-content">
           <div class="ctx">RIGGING SHOWCASE · 3DS MAX</div>
           <h2 data-i18n="rg.btitle"></h2>
@@ -428,8 +447,8 @@ footer .contact a{color:var(--accent);text-decoration:none}
       <div class="toolrow">
         <span class="tlabel">TOOLKIT</span>
         <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
-        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="Expression Controller"></span>Expression Controller</span>
-        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="Script Controller"></span>Script Controller</span>
+        <span class="tool">Expression Controller</span>
+        <span class="tool">Script Controller</span>
       </div>
 
       <div class="proj" id="facialProj">
@@ -446,13 +465,13 @@ footer .contact a{color:var(--accent);text-decoration:none}
           </div>
           <div class="step-stage">
             <div class="step-media">
-              <img data-step-img="0" src="gif/facial_step1.webp" alt="">
-              <img data-step-img="1" src="gif/facial_step2.webp" alt="">
-              <img data-step-img="2" src="gif/facial_step3.webp" alt="">
-              <img data-step-img="3" src="gif/facial_step4.webp" alt="">
-              <div class="ph"><span class="icon">&#9654;</span><span data-i18n="r1.phtext"></span></div>
-              <button class="step-nav prev" aria-label="prev">&#8249;</button>
-              <button class="step-nav next" aria-label="next">&#8250;</button>
+              <img data-step-img="0" src="gif/facial_step1.webp" alt="페이셜 리그 STEP 01 — 서페이스 추적 셋업">
+              <img data-step-img="1" src="gif/facial_step2.webp" alt="페이셜 리그 STEP 02 — 비파괴 오프셋 레이어">
+              <img data-step-img="2" src="gif/facial_step3.webp" alt="페이셜 리그 STEP 03 — 본 케이지 79본 구조">
+              <img data-step-img="3" src="gif/facial_step4.webp" alt="페이셜 리그 STEP 04 — 핸드키 레이어링 최종 결과">
+              <div class="ph"><span class="icon"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span><span data-i18n="r1.phtext"></span></div>
+              <button class="step-nav prev" aria-label="prev"><svg class="svgi" width="20" height="20"><use href="#i-chevron-left"/></svg></button>
+              <button class="step-nav next" aria-label="next"><svg class="svgi" width="20" height="20"><use href="#i-chevron-right"/></svg></button>
             </div>
             <div class="step-desc">
               <div class="d-num" id="facialDnum">STEP 01</div>
@@ -464,7 +483,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
           </div>
 
           <div class="rnd" id="facialRnd">
-            <button class="rnd-toggle"><span class="rl" data-i18n="r1.rndlabel"></span><span class="chev">&#9660;</span></button>
+            <button class="rnd-toggle"><span class="rl" data-i18n="r1.rndlabel"></span><span class="chev"><svg class="svgi" width="16" height="16"><use href="#i-chevron-down"/></svg></span></button>
             <div class="rnd-body">
               <div class="rnd-inner">
                 <div class="rnd-block">
@@ -506,7 +525,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
                 <div class="rig-desc" data-i18n="r2.d1"></div>
               </div>
               <div class="rig-media">
-                <img src="gif/body_torso.webp" alt="" loading="lazy">
+                <img src="gif/body_torso.webp" alt="바디 리그 — 몸통 Stretch & Squash" loading="lazy">
               </div>
             </div>
             <div class="rig-row">
@@ -516,7 +535,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
                 <div class="rig-desc" data-i18n="r2.d2"></div>
               </div>
               <div class="rig-media">
-                <img src="gif/body_arm.webp" alt="" loading="lazy">
+                <img src="gif/body_arm.webp" alt="바디 리그 — 팔 Twist와 IK/FK 블렌드" loading="lazy">
               </div>
             </div>
             <div class="rig-row">
@@ -526,7 +545,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
                 <div class="rig-desc" data-i18n="r2.d3"></div>
               </div>
               <div class="rig-media">
-                <img src="gif/body_clavicle.webp" alt="" loading="lazy">
+                <img src="gif/body_clavicle.webp" alt="바디 리그 — Auto Clavicle 자동 어깨 제어" loading="lazy">
               </div>
             </div>
             <div class="rig-row">
@@ -536,7 +555,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
                 <div class="rig-desc" data-i18n="r2.d4"></div>
               </div>
               <div class="rig-media">
-                <img src="gif/body_hand.webp" alt="" loading="lazy">
+                <img src="gif/body_hand.webp" alt="바디 리그 — 손 관절·손가락 컨트롤러" loading="lazy">
               </div>
             </div>
             <div class="rig-row">
@@ -546,7 +565,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
                 <div class="rig-desc" data-i18n="r2.d5"></div>
               </div>
               <div class="rig-media">
-                <img src="gif/body_leg.webp" alt="" loading="lazy">
+                <img src="gif/body_leg.webp" alt="바디 리그 — 다리 Twist와 IK/FK 블렌드" loading="lazy">
               </div>
             </div>
             <div class="rig-row">
@@ -556,27 +575,27 @@ footer .contact a{color:var(--accent);text-decoration:none}
                 <div class="rig-desc" data-i18n="r2.d6"></div>
               </div>
               <div class="rig-media">
-                <img src="gif/body_foot.webp" alt="" loading="lazy">
+                <img src="gif/body_foot.webp" alt="바디 리그 — 3축 Foot Roll" loading="lazy">
               </div>
             </div>
-            <div class="rig-row">
+            <div class="rig-row feature">
               <div class="rig-info">
                 <div class="rig-num">07</div>
                 <div class="rig-title" data-i18n="r2.st7"></div>
                 <div class="rig-desc" data-i18n="r2.d7"></div>
               </div>
               <div class="rig-media">
-                <img src="gif/body_ikfk.webp" alt="" loading="lazy">
+                <img src="gif/body_ikfk.webp" alt="바디 리그 — IK/FK Match 포즈 전환" loading="lazy">
               </div>
             </div>
-            <div class="rig-row">
+            <div class="rig-row feature">
               <div class="rig-info">
                 <div class="rig-num">08</div>
                 <div class="rig-title" data-i18n="r2.st8"></div>
                 <div class="rig-desc" data-i18n="r2.d8"></div>
               </div>
               <div class="rig-media">
-                <img src="gif/body_scale.webp" alt="" loading="lazy">
+                <img src="gif/body_scale.webp" alt="바디 리그 — 전체 스케일 애니메이션" loading="lazy">
               </div>
             </div>
           </div>
@@ -584,9 +603,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
     </div>
 
     <div class="panel" id="anim">
-      <div class="banner">
-        <img class="banner-img" src="gif/ER_Banner.jpg" alt="">
-        <div class="banner-fade"></div>
+      <div class="banner" data-index="03">
         <div class="banner-content">
           <div class="ctx">ETERNAL RETURN · NIMBLE NEURON</div>
           <h2 data-i18n="an.btitle"></h2>
@@ -608,7 +625,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
           <span class="tool"><span class="ico ico-logo"><img src="gif/unreal_White.png" alt="Unreal Engine"></span>Unreal Engine</span>
         </div>
-        <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/B619JNrayFo?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption" data-i18n="a0.cap"></div></div>
+        <div class="media"><div class="yt-facade" data-id="B619JNrayFo" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/B619JNrayFo/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a0.cap"></div></div>
       </div>
 
       <div class="proj">
@@ -620,8 +637,8 @@ footer .contact a{color:var(--accent);text-decoration:none}
           <div class="ip-badge"><span class="x">ER ×</span><span class="ip">GUILTY GEAR</span><span class="ch" data-i18n="a1.ch2"></span></div>
         </div>
         <div class="media-grid">
-          <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/AjOONh3eT_M?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER × Persona 5 The Royal — ⓒ Nimble Neuron</div></div>
-          <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/QEb9GMPu3gk?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER × Guilty Gear — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="yt-facade" data-id="AjOONh3eT_M" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/AjOONh3eT_M/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Persona 5 The Royal — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="yt-facade" data-id="QEb9GMPu3gk" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/QEb9GMPu3gk/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Guilty Gear — ⓒ Nimble Neuron</div></div>
         </div>
       </div>
 
@@ -630,33 +647,33 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <h3 data-i18n="a2.title"></h3>
         <p class="lead" data-i18n="a2.lead"></p>
         <div class="vid-carousel">
-          <button class="vid-arrow va-prev" aria-label="prev">&#8249;</button>
+          <button class="vid-arrow va-prev" aria-label="prev"><svg class="svgi" width="18" height="18"><use href="#i-chevron-left"/></svg></button>
           <div class="vid-track" id="skinTrack">
-            <div class="vid-card"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/4QCUIjr-wP4?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER · Isaac — ⓒ Nimble Neuron</div></div>
+            <div class="vid-card"><div class="yt-facade" data-id="4QCUIjr-wP4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/4QCUIjr-wP4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Isaac — ⓒ Nimble Neuron</div></div>
             <!-- 추가 영상: 아래 형식으로 vid-card 복사해서 ID만 교체
-            <div class="vid-card"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">캐릭터명 — ⓒ Nimble Neuron</div></div>
+            <div class="vid-card"><div class="yt-facade" data-id="VIDEO_ID" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/VIDEO_ID/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">캐릭터명 — ⓒ Nimble Neuron</div></div>
             -->
           </div>
-          <button class="vid-arrow va-next" aria-label="next">&#8250;</button>
+          <button class="vid-arrow va-next" aria-label="next"><svg class="svgi" width="18" height="18"><use href="#i-chevron-right"/></svg></button>
         </div>
       </div>
 
       <div class="proj">
         <div class="proj-num">04 — IN-GAME MOTION</div>
         <h3 data-i18n="a3.title"></h3>
-        <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/FYZve9TWifA?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">ER · Alonso — ⓒ Nimble Neuron</div></div>
+        <div class="media"><div class="yt-facade" data-id="FYZve9TWifA" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/FYZve9TWifA/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Alonso — ⓒ Nimble Neuron</div></div>
       </div>
 
       <div class="proj">
         <div class="proj-num">05 — OUT-GAME MOTION</div>
         <h3 data-i18n="a4.title"></h3>
-        <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/3GsJIqkVyw4?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption" data-i18n="a4.cap"></div></div>
+        <div class="media"><div class="yt-facade" data-id="3GsJIqkVyw4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/3GsJIqkVyw4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a4.cap"></div></div>
       </div>
 
       <div class="proj">
         <div class="proj-num">06 — DEMO REEL</div>
         <h3 data-i18n="a5.title"></h3>
-        <div class="media"><div class="media-yt"><iframe src="https://www.youtube-nocookie.com/embed/RukpP-9s5FU?rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><div class="caption">Game Animation Reel 2020 / 2023</div></div>
+        <div class="media"><div class="yt-facade" data-id="RukpP-9s5FU" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/RukpP-9s5FU/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">Game Animation Reel 2020 / 2023</div></div>
       </div>
     </div>
 
@@ -681,11 +698,11 @@ footer .contact a{color:var(--accent);text-decoration:none}
         <div class="sum-card">
           <div class="sum-label" data-i18n="sum.award"></div>
           <div class="award-item">
-            <span class="aw-medal">&#127942;</span>
+            <span class="award-badge" data-i18n="sum.badge"></span>
             <div><div class="aw-text" data-i18n="sum.a1"></div><div class="aw-org" data-i18n="sum.aorg"></div></div>
           </div>
           <div class="award-item">
-            <span class="aw-medal">&#127942;</span>
+            <span class="award-badge" data-i18n="sum.badge"></span>
             <div><div class="aw-text" data-i18n="sum.a2"></div><div class="aw-org" data-i18n="sum.aorg"></div></div>
           </div>
         </div>
@@ -714,12 +731,7 @@ footer .contact a{color:var(--accent);text-decoration:none}
 
 <footer>
   <div class="wrap">
-    <div class="thanks">THANK YOU FOR WATCHING</div>
-    <p class="contact">
-      <span data-i18n="ft.name"></span><br>
-      <a href="mailto:ckekdnlt@naver.com">ckekdnlt@naver.com</a> · 010-5910-0837<br>
-      <a href="https://chaseunghyeon.artstation.com" target="_blank">ArtStation</a>
-    </p>
+    <p class="footer-fineprint"><span data-i18n="ft.name"></span> · <a href="mailto:ckekdnlt@naver.com">ckekdnlt@naver.com</a> · <a href="https://www.linkedin.com/in/seunghyeon-cha-69b915247" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://chaseunghyeon.artstation.com" target="_blank" rel="noopener">ArtStation</a></p>
   </div>
 </footer>
 
@@ -730,23 +742,23 @@ ko:{
 "hero.name":"<b>차승현</b> &nbsp;·&nbsp; 테크니컬 애니메이터 <span class=\"exp-badge\">총 경력 4년 3개월</span>",
 "hero.intro":"4년간의 게임 애니메이션 제작 경험을 바탕으로, 애니메이터의 작업 흐름을 깊이 이해하는 테크니컬 애니메이터입니다. 리깅·물리 셋업과 파이프라인 자동화로 팀의 생산성을 끌어올립니다.",
 "hero.m1k":"CURRENT","hero.m1v":"넥슨게임즈 · 퍼스트 디센던트 · 테크니컬 애니메이션팀","hero.scroll":"SCROLL DOWN",
-"sum.career":"CAREER","sum.c1n":"넥슨게임즈 (주)","sum.c1r":"테크니컬 애니메이션팀 · 정규직","sum.c2n":"님블뉴런 (주)","sum.c2r":"애니메이션팀 · 정규직","sum.c3n":"님블뉴런 (주) · 외주","sum.c3r":"애니메이션팀 · 리깅 / 애니메이션 컨버팅","sum.award":"AWARDS","sum.a1":"대한민국 게임대상 우수상","sum.a2":"대한민국 게임대상 인기상","sum.aorg":"문화체육관광부 · 2021 · 이터널 리턴","sum.proj":"PROJECTS","sum.p1":"넥슨게임즈 · AAA · Unreal Engine 5 · PC/Console","sum.p2":"님블뉴런 · PC · 개발~출시~라이브 전 과정","sum.role":"ROLE","sum.r1":"캐릭터 · 프랍 리깅 및 물리 셋업","sum.r2":"인하우스 파이프라인 플러그인 개발","sum.r3":"키 애니메이션 · 모션캡처 · 리타게팅","sum.r4":"팀 간 기술 소통 및 문서화",
+"sum.career":"CAREER","sum.c1n":"넥슨게임즈 (주)","sum.c1r":"테크니컬 애니메이션팀 · 정규직","sum.c2n":"님블뉴런 (주)","sum.c2r":"애니메이션팀 · 정규직","sum.c3n":"님블뉴런 (주) · 외주","sum.c3r":"애니메이션팀 · 리깅 / 애니메이션 컨버팅","sum.award":"AWARDS","sum.badge":"수상","sum.a1":"대한민국 게임대상 우수상","sum.a2":"대한민국 게임대상 인기상","sum.aorg":"문화체육관광부 · 2021 · 이터널 리턴","sum.proj":"PROJECTS","sum.p1":"넥슨게임즈 · AAA · Unreal Engine 5 · PC/Console","sum.p2":"님블뉴런 · PC · 개발~출시~라이브 전 과정","sum.role":"ROLE","sum.r1":"캐릭터 · 프랍 리깅 및 물리 셋업","sum.r2":"인하우스 파이프라인 플러그인 개발","sum.r3":"키 애니메이션 · 모션캡처 · 리타게팅","sum.r4":"팀 간 기술 소통 및 문서화",
 "tab.plugin":"플러그인","tab.rigging":"리깅","tab.anim":"애니메이션","tab.about":"커리어","nav.home":"HOME",
 "ph.banner":"[ banner-img src 경로 교체 ] 배너 이미지",
 "pl.btitle":"In-House Pipeline Tools","pl.bsub":"반복 작업을 시스템으로 대체해 팀 전체의 생산성을 끌어올린 자동화 툴",
 "p1.title":"리타게팅 일괄 처리 시스템","p1.lead":"수십 개 파일에 같은 리타게팅을 수동 반복하던 비효율을, 리스트 기반 일괄 처리로 전환했습니다.",
-"p1.s":"이터널 리턴은 이터널 리턴에서 캐릭터 스킨 70종을 LOD 단계별로 각각 두 개씩 작업했는데, 스킨마다 동일한 리타게팅을 반복해야 했습니다.","p1.p":"파일을 하나씩 열어 수동 처리하는 과정에서 시간 소모와 작업자 간 결과 편차가 발생했습니다.","p1.so":"복수 Max 파일을 리스트화해 애니메이션 데이터를 일괄 추출·이식·저장하는 툴을 개발했습니다.",
+"p1.s":"이터널 리턴에서 캐릭터 스킨 70종을 LOD 단계별로 각각 두 개씩 작업했는데, 스킨마다 동일한 리타게팅을 반복해야 했습니다. 파일을 하나씩 열어 수동 처리하는 과정에서 시간 소모와 작업자 간 결과 편차가 발생했습니다.","p1.so":"복수 Max 파일을 리스트화해 애니메이션 데이터를 일괄 추출·이식·저장하는 툴을 개발했습니다.","p1.i":"리타게팅 작업 기간을 4일에서 2일로 단축하고, 작업자 간 결과 편차와 휴먼 에러를 제거했습니다.",
 "p1.r1b":"4일 → 2일","p1.r1c":"리타게팅 작업 기간 단축","p1.r2b":"편차 제거","p1.r2c":"균일한 결과물 · 휴먼 에러 감소",
 "p1.g1":"데이터 일괄 추출 GIF","p1.c1":"지정 파일들의 애니메이션 데이터 일괄 추출","p1.g2":"일괄 이식 GIF","p1.c2":"리깅 파일에 애니메이션 일괄 이식",
 "p2.title":"Selection Sets 기반 일괄 익스포트","p2.lead":"필요한 본만 자동 선별해 일괄 FBX 익스포트, 엔진 용량까지 최적화했습니다.",
-"p2.s":"수십 개 애니메이션 파일을 매번 수동으로 익스포트 대상을 지정해야 했습니다.","p2.p":"실수로 불필요한 더미·본이 함께 익스포트되어 엔진 용량을 낭비하는 일이 잦았습니다.","p2.so":"Selection Sets에 포함된 본·메쉬만 자동 선택해 지정 파일을 일괄 익스포트하도록 구현했습니다.",
+"p2.s":"수십 개 애니메이션 파일을 매번 수동으로 익스포트 대상을 지정해야 했고, 실수로 불필요한 더미·본이 함께 익스포트되어 엔진 용량을 낭비하는 일이 잦았습니다.","p2.so":"Selection Sets에 포함된 본·메쉬만 자동 선택해 지정 파일을 일괄 익스포트하도록 구현했습니다.","p2.i":"전사 최적화 요청 시 추가 공수 없이 즉시 대응할 수 있는 체계를 갖췄습니다.",
 "p2.r1b":"선제적 대응","p2.r1c":"전사 최적화 요청 시 추가 공수 없이 즉시 대응","p2.g1":"Selection Sets 기반 일괄 익스포트 GIF","p2.c1":"포함된 본만 자동 선택하여 Batch Export",
 "p3.title":"바이패드 자동 셋업 & FX 본 생성","p3.lead":"Merge 방식의 위치 틀어짐 문제를, 규칙 기반 자동 생성으로 해결했습니다.",
-"p3.s":"초기에는 FX·트위스트 본을 외부 파일에서 Merge하는 방식으로 제작했습니다.","p3.p":"Merge 시 미세한 위치 틀어짐이 생겨, 엔진에서 투사체가 엉뚱한 곳에서 발사되는 이슈가 있었습니다.","p3.so":"바이패드 Fig 파일을 리스트업한 후 관리해 원클릭 포즈 로드, Twist·관절 본을 규칙대로 자동 생성·부착했습니다.",
+"p3.s":"초기에는 FX·트위스트 본을 외부 파일에서 Merge하는 방식으로 제작했는데, Merge 시 미세한 위치 틀어짐이 생겨 엔진에서 투사체가 엉뚱한 곳에서 발사되는 이슈가 있었습니다.","p3.so":"바이패드 Fig 파일을 리스트업한 후 관리해 원클릭 포즈 로드, Twist·관절 본을 규칙대로 자동 생성·부착했습니다.","p3.i":"위치 오차 0 — 엔진 투사체 좌표 이슈를 해결했습니다.",
 "p3.r1b":"위치 오차 0","p3.r1c":"엔진 투사체 좌표 이슈 해결","p3.r2b":"균일 품질","p3.r2c":"공통 규칙 본 누락 없이 자동 생성",
 "p3.g1":"원클릭 포즈 로드 GIF","p3.c1":"캐릭터별 figure mode 원클릭 호출","p3.g2":"본 자동 생성 GIF","p3.c2":"Twist·관절 보조 본 자동 생성/부착",
 "p4.title":"레이어 기반 비파괴 스키닝 파이프라인","p4.lead":"Maya의 ngSkinTools 레이어 스키닝을 3ds Max에서 구현, 리깅부터 스키닝까지 하나로 통합했습니다.",
-"p4.s":"리깅·검증·스키닝 워크플로우를 단일 인터페이스에서 선형적으로 처리합니다.","p4.p":"레이어 기반 비파괴 스키닝으로 작업자가 웨이트 페인팅을 자유롭게 시도할 수 있습니다.","p4.so":"Python 3.11 · pymxs · 3ds Max 2025+ · 영/한/중/일 4개 언어 지원.",
+"p4.s":"리깅·검증·스키닝이 여러 창과 수작업 단계로 흩어져 있어 작업 흐름이 끊기고 실수 여지가 많았습니다.","p4.p":"레이어 기반 비파괴 스키닝으로 작업자가 웨이트 페인팅을 자유롭게 시도할 수 있습니다.","p4.so":"리깅·검증·스키닝 워크플로우를 단일 인터페이스에서 선형적으로 처리하고, 레이어 기반 비파괴 스키닝으로 웨이트 페인팅을 자유롭게 시도할 수 있게 했습니다.","p4.i":"리깅부터 스키닝까지 한 흐름으로 표준화해 캐릭터 셋업 효율을 끌어올렸습니다.",
 "p4.g1":"레이어 기반 스키닝 시스템 GIF","p4.c1":"비파괴 레이어 스키닝 워크플로우",
 "p5.title":"페이셜 모프 프리셋 & 원클릭 이식","p5.lead":"페이셜 애니메이션을 프리셋화하고, 같은 모프타겟을 가진 캐릭터 간 원클릭 복사를 구현했습니다.",
 "p5.s":"AD·팀장과 페이셜 시안을 여러 개 교환할 필요가 있었고, 페이셜 모션 재활용도 잦았습니다.","p5.p":"모프 애니메이션을 프리셋화해 시안을 빠르게 제작, 동일 모프타겟 캐릭터에 원클릭 복사하도록 했습니다.","p5.so":"성우 후시녹음용 립모션 시안을 신속히 제작해 녹음·최종 수정 프로세스를 가속했습니다.",
@@ -766,30 +778,30 @@ ko:{
 "a2.title":"캐릭터 스킨 리타게팅","a2.lead":"기존 모션을 신규 스킨에 리타게팅하고, 세컨더리 추가와 전체 애니메이션 수정 작업을 진행했습니다. 다수의 스킨 작업물을 가로로 넘겨볼 수 있습니다.","a2.g1":"캐릭터 스킨 영상",
 "a3.title":"인게임 모션 — 알론소","a3.g1":"알론소 인게임 애니메이션 영상",
 "a4.title":"아웃게임 모션","a4.cap":"ER 아웃게임 모션 — ⓒ Nimble Neuron","a5.title":"데모릴",
-"ft.name":"차승현 · Animation Technical Artist"
+"ft.name":"차승현 · Animation Technical Artist",
 },
 en:{
 "hero.role":"ANIMATION TECHNICAL ARTIST · RIGGER",
 "hero.name":"<b>Cha Seunghyeon</b> &nbsp;·&nbsp; Technical Animator <span class=\"exp-badge\">4 yrs 3 mos</span>",
 "hero.intro":"A Technical Animator with 4 years of game animation experience, with a deep understanding of animators' workflows. I boost team productivity through rigging, physics setup, and pipeline automation.",
 "hero.m1k":"CURRENT","hero.m1v":"Nexon Games · The First Descendant · Technical Animation Team","hero.scroll":"SCROLL DOWN",
-"sum.career":"CAREER","sum.c1n":"Nexon Games","sum.c1r":"Technical Animation Team · Full-time","sum.c2n":"Nimble Neuron","sum.c2r":"Animation Team · Full-time","sum.c3n":"Nimble Neuron · Contract","sum.c3r":"Animation Team · Rigging / Anim Converting","sum.award":"AWARDS","sum.a1":"Korea Game Awards — Excellence","sum.a2":"Korea Game Awards — Popularity","sum.aorg":"Ministry of Culture · 2021 · Eternal Return","sum.proj":"PROJECTS","sum.p1":"Nexon Games · AAA · Unreal Engine 5 · PC/Console","sum.p2":"Nimble Neuron · PC · Dev to Live service","sum.role":"ROLE","sum.r1":"Character & prop rigging, physics setup","sum.r2":"In-house pipeline plugin development","sum.r3":"Key animation · mocap · retargeting","sum.r4":"Cross-team technical comms & docs",
+"sum.career":"CAREER","sum.c1n":"Nexon Games","sum.c1r":"Technical Animation Team · Full-time","sum.c2n":"Nimble Neuron","sum.c2r":"Animation Team · Full-time","sum.c3n":"Nimble Neuron · Contract","sum.c3r":"Animation Team · Rigging / Anim Converting","sum.award":"AWARDS","sum.badge":"AWARD","sum.a1":"Korea Game Awards — Excellence","sum.a2":"Korea Game Awards — Popularity","sum.aorg":"Ministry of Culture · 2021 · Eternal Return","sum.proj":"PROJECTS","sum.p1":"Nexon Games · AAA · Unreal Engine 5 · PC/Console","sum.p2":"Nimble Neuron · PC · Dev to Live service","sum.role":"ROLE","sum.r1":"Character & prop rigging, physics setup","sum.r2":"In-house pipeline plugin development","sum.r3":"Key animation · mocap · retargeting","sum.r4":"Cross-team technical comms & docs",
 "tab.plugin":"PLUGIN","tab.rigging":"RIGGING","tab.anim":"ANIMATION","tab.about":"CAREER","nav.home":"HOME",
 "ph.banner":"[ replace banner-img src ] Banner image",
 "pl.btitle":"In-House Pipeline Tools","pl.bsub":"Automation tools that replaced repetitive work with systems, boosting team-wide productivity",
 "p1.title":"Batch Retargeting System","p1.lead":"Converted the inefficiency of manually repeating retargeting across dozens of files into list-based batch processing.",
-"p1.s":"Eternal Return had 20 characters and 70 skins, requiring identical retargeting for each skin.","p1.p":"Opening and processing files one by one caused time loss and inconsistency between artists.","p1.so":"Developed a tool that lists multiple Max files and batch-extracts, transfers, and saves animation data.",
+"p1.s":"Eternal Return had 70 character skins, each worked at two LOD levels — every skin required the same retargeting. Opening and processing files one by one caused time loss and inconsistency between artists.","p1.so":"Developed a tool that lists multiple Max files and batch-extracts, transfers, and saves animation data.","p1.i":"Cut retargeting time from 4 days to 2 and removed variance and human error between artists.",
 "p1.r1b":"4 days → 2 days","p1.r1c":"Retargeting time reduced","p1.r2b":"No variance","p1.r2c":"Consistent results · fewer human errors",
 "p1.g1":"Batch extract GIF","p1.c1":"Batch extraction of animation data from listed files","p1.g2":"Batch transfer GIF","p1.c2":"Batch transfer of animation to rig files",
 "p2.title":"Selection Sets Batch Export","p2.lead":"Auto-selects only required bones for batch FBX export, optimizing engine file size.",
-"p2.s":"Dozens of animation files required manually setting export targets each time.","p2.p":"Accidental export of unnecessary dummies/bones frequently wasted engine memory.","p2.so":"Implemented batch export selecting only bones/meshes in the Selection Sets across listed files.",
+"p2.s":"Dozens of animation files required manually setting export targets each time, and unnecessary dummies/bones were often exported by mistake, wasting engine memory.","p2.so":"Implemented batch export selecting only bones/meshes in the Selection Sets across listed files.","p2.i":"Enabled instant response to company-wide optimization requests without extra effort.",
 "p2.r1b":"Proactive","p2.r1c":"Instant response to company-wide optimization requests without extra effort","p2.g1":"Selection Sets batch export GIF","p2.c1":"Auto-selecting included bones for Batch Export",
 "p3.title":"Auto Biped Setup & FX Bone Generation","p3.lead":"Solved Merge-based offset issues with rule-based automatic generation.",
-"p3.s":"Initially, FX and twist bones were produced by merging from external files.","p3.p":"Merging caused subtle offsets, leading to projectiles firing from wrong coordinates in-engine.","p3.so":"Managed figure mode files for one-click pose loading and auto-generated/attached twist and joint bones by rule.",
+"p3.s":"FX and twist bones were initially merged from external files, but merging caused subtle offsets — projectiles fired from wrong coordinates in-engine.","p3.so":"Managed figure mode files for one-click pose loading and auto-generated/attached twist and joint bones by rule.","p3.i":"Zero offset — resolved the engine projectile coordinate issues.",
 "p3.r1b":"Zero offset","p3.r1c":"Resolved engine projectile coordinate issues","p3.r2b":"Uniform quality","p3.r2c":"Common-rule bones auto-generated without omission",
 "p3.g1":"One-click pose load GIF","p3.c1":"One-click figure mode call per character","p3.g2":"Auto bone generation GIF","p3.c2":"Auto generation/attachment of twist and joint bones",
 "p4.title":"Layer-Based Non-Destructive Skinning Pipeline","p4.lead":"Implemented Maya's ngSkinTools layer skinning in 3ds Max, unifying rigging to skinning in one tool.",
-"p4.s":"Processes rigging, validation, and skinning linearly within a single interface.","p4.p":"Layer-based non-destructive skinning lets artists freely experiment with weight painting.","p4.so":"Python 3.11 · pymxs · 3ds Max 2025+ · supports EN/KO/ZH/JP.",
+"p4.s":"Rigging, validation, and skinning were scattered across separate windows and manual steps, breaking flow and inviting mistakes.","p4.p":"Layer-based non-destructive skinning lets artists freely experiment with weight painting.","p4.so":"Handles the rigging–validation–skinning workflow linearly in one interface, with layer-based non-destructive skinning for free weight-painting iteration.","p4.i":"Standardized character setup from rigging to skinning in a single flow, raising efficiency.",
 "p4.g1":"Layer-based skinning system GIF","p4.c1":"Non-destructive layer skinning workflow",
 "p5.title":"Facial Morph Presets & One-Click Transfer","p5.lead":"Turned facial animation into presets and enabled one-click copy between characters sharing morph targets.",
 "p5.s":"Needed to exchange multiple facial drafts with AD/lead, and facial motion reuse was frequent.","p5.p":"Made morph animation into presets for fast drafts, with one-click copy to characters sharing morph targets.","p5.so":"Quickly produced lip-sync drafts for voice-actor recording, accelerating the recording and final-edit process.",
@@ -809,30 +821,30 @@ en:{
 "a2.title":"Character Skin Retargeting","a2.lead":"Retargeted existing motion onto new skins, added secondary motion, and reworked the full animation. Swipe horizontally through multiple skin works.","a2.g1":"Character skin video",
 "a3.title":"In-Game Motion — Alonso","a3.g1":"Alonso in-game animation video",
 "a4.title":"Out-Game Motion","a4.cap":"ER Out-Game Motion — ⓒ Nimble Neuron","a5.title":"Demo Reel",
-"ft.name":"Cha Seunghyeon · Animation Technical Artist"
+"ft.name":"Cha Seunghyeon · Animation Technical Artist",
 },
 zh:{
 "hero.role":"动画技术美术 · 绑定师",
-"hero.name":"<b>车昇炫</b> &nbsp;·&nbsp; 技术动画师 <span class=\"exp-badge\">从业 4年3个月</span>",
+"hero.name":"<b>车胜炫</b> &nbsp;·&nbsp; 技术动画师 <span class=\"exp-badge\">从业 4年3个月</span>",
 "hero.intro":"拥有4年游戏动画制作经验的技术动画师，深刻理解动画师的工作流程。通过绑定、物理设置与管线自动化提升团队生产力。",
 "hero.m1k":"当前","hero.m1v":"Nexon Games · 第一后裔 · 技术动画团队","hero.scroll":"向下滚动",
-"sum.career":"工作经历","sum.c1n":"Nexon Games","sum.c1r":"技术动画团队 · 正式员工","sum.c2n":"Nimble Neuron","sum.c2r":"动画团队 · 正式员工","sum.c3n":"Nimble Neuron · 外包","sum.c3r":"动画团队 · 绑定 / 动画转换","sum.award":"获奖","sum.a1":"大韩民国游戏大奖 优秀奖","sum.a2":"大韩民国游戏大奖 人气奖","sum.aorg":"文化体育观光部 · 2021 · 永恒轮回","sum.proj":"项目","sum.p1":"Nexon Games · AAA · Unreal Engine 5 · PC/主机","sum.p2":"Nimble Neuron · PC · 开发~上线~运营全程","sum.role":"职责","sum.r1":"角色·道具绑定与物理设置","sum.r2":"内部管线插件开发","sum.r3":"关键帧动画·动作捕捉·重定向","sum.r4":"跨团队技术沟通与文档化",
+"sum.career":"工作经历","sum.c1n":"Nexon Games","sum.c1r":"技术动画团队 · 正式员工","sum.c2n":"Nimble Neuron","sum.c2r":"动画团队 · 正式员工","sum.c3n":"Nimble Neuron · 外包","sum.c3r":"动画团队 · 绑定 / 动画转换","sum.award":"获奖","sum.badge":"获奖","sum.a1":"大韩民国游戏大奖 优秀奖","sum.a2":"大韩民国游戏大奖 人气奖","sum.aorg":"文化体育观光部 · 2021 · 永恒轮回","sum.proj":"项目","sum.p1":"Nexon Games · AAA · Unreal Engine 5 · PC/主机","sum.p2":"Nimble Neuron · PC · 开发~上线~运营全程","sum.role":"职责","sum.r1":"角色·道具绑定与物理设置","sum.r2":"内部管线插件开发","sum.r3":"关键帧动画·动作捕捉·重定向","sum.r4":"跨团队技术沟通与文档化",
 "tab.plugin":"插件","tab.rigging":"绑定","tab.anim":"动画","tab.about":"职业经历","nav.home":"首页",
 "ph.banner":"[ 替换 banner-img src ] 横幅图片",
 "pl.btitle":"内部管线工具","pl.bsub":"用系统替代重复工作、提升整个团队生产力的自动化工具",
 "p1.title":"重定向批处理系统","p1.lead":"将数十个文件中手动重复重定向的低效，转换为基于列表的批处理。",
-"p1.s":"永恒轮回有20个角色、70个皮肤，每个皮肤都需重复相同的重定向。","p1.p":"逐个打开文件手动处理，造成时间浪费和作业者之间的结果差异。","p1.so":"开发了将多个Max文件列表化、批量提取·移植·保存动画数据的工具。",
+"p1.s":"永恒轮回有70个角色皮肤，每个皮肤按LOD分两档制作，均需重复相同的重定向。逐个打开文件手动处理，造成时间浪费和作业者之间的结果差异。","p1.so":"开发了将多个Max文件列表化、批量提取·移植·保存动画数据的工具。","p1.i":"将重定向工作周期从4天缩短至2天，并消除了作业者之间的结果差异与人为错误。",
 "p1.r1b":"4天 → 2天","p1.r1c":"重定向工作周期缩短","p1.r2b":"消除差异","p1.r2c":"结果统一 · 减少人为错误",
 "p1.g1":"批量提取 GIF","p1.c1":"批量提取指定文件的动画数据","p1.g2":"批量移植 GIF","p1.c2":"将动画批量移植到绑定文件",
 "p2.title":"基于Selection Sets的批量导出","p2.lead":"自动筛选所需骨骼批量导出FBX，并优化引擎容量。",
-"p2.s":"数十个动画文件每次都需手动指定导出对象。","p2.p":"误将不必要的辅助体·骨骼一同导出，常浪费引擎容量。","p2.so":"实现仅自动选择Selection Sets中的骨骼·网格，对指定文件批量导出。",
+"p2.s":"数十个动画文件每次都需手动指定导出对象，且常误将不必要的辅助体·骨骼一同导出，浪费引擎容量。","p2.so":"实现仅自动选择Selection Sets中的骨骼·网格，对指定文件批量导出。","p2.i":"建立了在全公司优化需求时无需额外工时即可立即应对的体系。",
 "p2.r1b":"前瞻应对","p2.r1c":"全公司优化需求时无需额外工时即可立即应对","p2.g1":"基于Selection Sets批量导出 GIF","p2.c1":"自动选择包含的骨骼进行批量导出",
 "p3.title":"Biped自动设置 & FX骨骼生成","p3.lead":"以基于规则的自动生成，解决了Merge方式的位置偏移问题。",
-"p3.s":"初期FX·扭曲骨骼通过从外部文件Merge的方式制作。","p3.p":"Merge时产生细微位置偏移，导致引擎中投射物从错误坐标发射。","p3.so":"管理figure mode文件实现一键加载姿势，按规则自动生成·附加扭曲与关节骨骼。",
+"p3.s":"初期FX·扭曲骨骼通过从外部文件Merge制作，但Merge时产生细微位置偏移，导致引擎中投射物从错误坐标发射。","p3.so":"管理figure mode文件实现一键加载姿势，按规则自动生成·附加扭曲与关节骨骼。","p3.i":"零偏移——解决了引擎投射物坐标问题。",
 "p3.r1b":"零偏移","p3.r1c":"解决引擎投射物坐标问题","p3.r2b":"质量统一","p3.r2c":"通用规则骨骼无遗漏自动生成",
 "p3.g1":"一键姿势加载 GIF","p3.c1":"按角色一键调用figure mode","p3.g2":"骨骼自动生成 GIF","p3.c2":"自动生成/附加扭曲·关节辅助骨骼",
 "p4.title":"基于图层的非破坏性蒙皮管线","p4.lead":"在3ds Max中实现Maya的ngSkinTools图层蒙皮，将绑定到蒙皮整合为一体。",
-"p4.s":"在单一界面中线性处理绑定·验证·蒙皮工作流。","p4.p":"基于图层的非破坏性蒙皮让作业者可自由尝试权重绘制。","p4.so":"Python 3.11 · pymxs · 3ds Max 2025+ · 支持英/韩/中/日四种语言。",
+"p4.s":"绑定·验证·蒙皮分散在多个窗口和手动步骤中，工作流被打断且容易出错。","p4.p":"基于图层的非破坏性蒙皮让作业者可自由尝试权重绘制。","p4.so":"在单一界面中线性处理绑定·验证·蒙皮工作流，并以基于图层的非破坏性蒙皮自由尝试权重绘制。","p4.i":"将从绑定到蒙皮标准化为单一流程，提升了角色设置效率。",
 "p4.g1":"基于图层的蒙皮系统 GIF","p4.c1":"非破坏性图层蒙皮工作流",
 "p5.title":"面部Morph预设 & 一键移植","p5.lead":"将面部动画预设化，并实现拥有相同morph target的角色间一键复制。",
 "p5.s":"需与AD·组长交换多个面部草案，面部动作的复用也很频繁。","p5.p":"将morph动画预设化以快速制作草案，对相同morph target的角色一键复制。","p5.so":"快速制作配音后期录音用的口型草案，加速了录音与最终修改流程。",
@@ -853,7 +865,7 @@ zh:{
 "a2.title":"角色皮肤动作 — 艾萨克","a2.lead":"以重定向为基础，进行了次级动作的追加与整体动画的修改。","a2.g1":"傲慢的军团长艾萨克皮肤视频",
 "a3.title":"游戏内动作 — 阿隆索","a3.g1":"阿隆索游戏内动画视频",
 "a4.title":"外部游戏动作","a4.cap":"ER 外部游戏动作 — ⓒ Nimble Neuron","a5.title":"演示集",
-"ft.name":"车昇炫 · 动画技术美术"
+"ft.name":"车胜炫 · 动画技术美术",
 }
 };
 
@@ -1005,6 +1017,42 @@ buildSidenav('about');
   next.addEventListener('click',()=>track.scrollBy({left:step(),behavior:'smooth'}));
 })();
 
+// 유튜브 facade — 클릭 시 iframe 주입
+document.querySelectorAll('.yt-facade').forEach(el=>{
+  const play=()=>{
+    if(el.querySelector('iframe')) return;
+    const f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+el.dataset.id+'?rel=0&autoplay=1';
+    f.allow='autoplay; encrypted-media; picture-in-picture';
+    f.allowFullscreen=true;
+    el.appendChild(f);
+  };
+  el.addEventListener('click',play);
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});
+});
+
+// 라이트박스
+(()=>{
+  const lb=document.getElementById('lightbox');
+  if(!lb) return;
+  const lbImg=lb.querySelector('.lightbox-img');
+  document.querySelectorAll('.media img,.step-media img,.rig-media img').forEach(img=>{
+    img.style.cursor='zoom-in';
+    img.addEventListener('click',()=>{
+      lbImg.src=img.dataset.full||img.src;
+      lbImg.alt=img.alt;
+      lb.hidden=false;
+      document.body.style.overflow='hidden';
+    });
+  });
+  const close=()=>{lb.hidden=true;lbImg.src='';document.body.style.overflow='';};
+  lb.addEventListener('click',e=>{if(e.target!==lbImg)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close();});
+})();
 </script>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
+  <button class="lightbox-close" aria-label="닫기"><svg class="svgi" width="20" height="20"><use href="#i-close"/></svg></button>
+  <img class="lightbox-img" alt="">
+</div>
 </body>
 </html>

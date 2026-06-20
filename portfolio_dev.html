@@ -281,56 +281,6 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 .footer-fineprint{color:var(--text-faint);font-size:12px;font-weight:300}
 .footer-fineprint a{color:var(--text-dim);text-decoration:none}
 .footer-fineprint a:hover{color:var(--accent)}
-
-/* ===== 카드 그리드 (프로젝트 탭) ===== */
-.works-filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 28px}
-.wfilter{padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--bg-card);color:var(--text-dim);font-size:13px;cursor:pointer;transition:all .2s}
-.wfilter:hover{border-color:var(--line-strong);color:var(--text)}
-.wfilter.active{background:var(--accent);border-color:var(--accent);color:#0d1117;font-weight:600}
-.works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
-.wcard{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .25s,transform .25s;display:flex;flex-direction:column}
-.wcard:hover{border-color:var(--accent-dim);transform:translateY(-3px)}
-.wcard-thumb{aspect-ratio:16/10;background:var(--bg-media);position:relative;overflow:hidden}
-.wcard-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.wcard-thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:12px;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 10px,var(--bg-card) 10px,var(--bg-card) 20px)}
-.wcard-cat{position:absolute;top:10px;left:10px;font-size:10px;letter-spacing:.1em;font-weight:700;padding:4px 9px;border-radius:5px;background:rgba(13,17,23,.78);color:var(--accent);backdrop-filter:blur(4px)}
-.wcard-play{position:absolute;inset:0;margin:auto;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(13,17,23,.7);color:var(--text);border:1px solid var(--line-strong)}
-.wcard:hover .wcard-play{background:var(--accent);color:#0d1117}
-.wcard-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
-.wcard-num{font-size:11px;letter-spacing:1.5px;color:var(--accent);font-weight:700;margin-bottom:6px}
-.wcard-title{font-size:16px;font-weight:500;margin-bottom:8px;line-height:1.35}
-.wcard-desc{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.55;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.wcard-foot{margin-top:14px;color:var(--text-faint);font-size:12px}
-.wcard:hover .wcard-foot{color:var(--accent)}
-/* 모달 */
-.wmodal-overlay{position:fixed;inset:0;z-index:1100;background:rgba(8,11,15,.82);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:5vmin;opacity:0;pointer-events:none;transition:opacity .25s}
-.wmodal-overlay.open{opacity:1;pointer-events:auto}
-.wmodal{background:var(--bg-card);border:1px solid var(--line-strong);border-radius:18px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;transform:translateY(16px) scale(.98);transition:transform .3s,max-width .35s ease}
-.wmodal-overlay.open .wmodal{transform:none}
-.wmodal.expanded{max-width:920px}
-.wmodal-media{aspect-ratio:16/9;background:var(--bg-media);border-radius:18px 18px 0 0;overflow:hidden;position:relative}
-.wmodal-media img{width:100%;height:100%;object-fit:cover}
-.wmodal-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.wmodal-media .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:13px;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 12px,var(--bg-card) 12px,var(--bg-card) 24px)}
-.wmodal-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(13,17,23,.7);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
-.wmodal-close:hover{background:var(--accent);color:#0d1117}
-.wmodal-body{padding:26px 30px 30px}
-.wmodal-cat{font-size:11px;letter-spacing:.12em;font-weight:700;color:var(--accent);margin-bottom:10px}
-.wmodal-title{font-size:23px;font-weight:700;margin-bottom:14px;letter-spacing:-.3px}
-.wmodal-lead{color:var(--text-dim);font-weight:300;margin-bottom:22px;line-height:1.7}
-.wmodal-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
-.wchip{font-size:12px;padding:5px 11px;border-radius:20px;background:var(--bg-raised);border:1px solid var(--line);color:var(--text-dim)}
-.wdetail{display:none;border-top:1px solid var(--line);margin-top:8px;padding-top:24px}
-.wmodal.expanded .wdetail{display:block}
-.wpsi{display:grid;gap:18px;margin-bottom:8px}
-@media(min-width:680px){.wpsi{grid-template-columns:repeat(3,1fr)}}
-.wpsi-cell .st{font-size:11px;letter-spacing:.1em;font-weight:700;color:var(--accent);margin-bottom:7px}
-.wpsi-cell p{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.6}
-.wmodal-cta{display:flex;gap:10px;flex-wrap:wrap}
-.wbtn{padding:11px 22px;border-radius:9px;font-size:14px;cursor:pointer;border:1px solid var(--line-strong);background:transparent;color:var(--text);font-weight:500;transition:all .2s}
-.wbtn:hover{border-color:var(--accent)}
-.wbtn-primary{background:var(--accent);border-color:var(--accent);color:#0d1117;font-weight:600}
-.wmodal.expanded .wbtn-detail{display:none}
 </style>
 </head>
 <body>
@@ -384,17 +334,347 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
   <div class="wrap">
     <div class="tabbar">
       <button class="tabbtn active" data-tab="about"><span data-i18n="tab.about"></span><span class="en">CAREER &amp; INFO</span></button>
-      <button class="tabbtn" data-tab="works"><span data-i18n="tab.works"></span><span class="en">PROJECTS</span></button>
+      <button class="tabbtn" data-tab="plugin"><span data-i18n="tab.plugin"></span><span class="en">PIPELINE &amp; TOOLS</span></button>
+      <button class="tabbtn" data-tab="rigging"><span data-i18n="tab.rigging"></span><span class="en">RIG &amp; SETUP</span></button>
+      <button class="tabbtn" data-tab="anim"><span data-i18n="tab.anim"></span><span class="en">MOTION WORKS</span></button>
     </div>
 
-    <div class="panel" id="works">
-      <div class="works-filters" id="worksFilters">
-        <button class="wfilter active" data-cat="all">All</button>
-        <button class="wfilter" data-cat="plugin" data-i18n="wf.plugin"></button>
-        <button class="wfilter" data-cat="rigging" data-i18n="wf.rigging"></button>
-        <button class="wfilter" data-cat="animation" data-i18n="wf.anim"></button>
+    <div class="panel" id="plugin">
+      <div class="banner" data-index="01">
+        <div class="banner-content">
+          <div class="ctx">ETERNAL RETURN · NIMBLE NEURON · ANIMATION TEAM</div>
+          <h2 data-i18n="pl.btitle"></h2>
+          <div class="sub" data-i18n="pl.bsub"></div>
+        </div>
       </div>
-      <div class="works-grid" id="worksGrid"></div>
+      <div class="toolrow">
+        <span class="tlabel">TOOLKIT</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/python.png" alt="Python"></span>Python</span>
+        <span class="tool">MaxScript</span>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">01 — BATCH RETARGETING TOOL</div>
+        <h3 data-i18n="p1.title"></h3>
+        <p class="lead" data-i18n="p1.lead"></p>
+        <div class="result-row">
+          <div class="result-card"><div class="big" data-i18n="p1.r1b"></div><div class="cap" data-i18n="p1.r1c"></div></div>
+          <div class="result-card"><div class="big" data-i18n="p1.r2b"></div><div class="cap" data-i18n="p1.r2c"></div></div>
+        </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p1.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p1.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p1.i"></p></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><img src="gif/plugin_retarget1.webp" alt="3ds Max 배치 리타게팅 툴 — 파일 리스트와 일괄 처리 UI"><div class="caption" data-i18n="p1.c1"></div></div>
+          <div class="media"><img src="gif/plugin_retarget2.webp" alt="배치 리타게팅 처리 결과 뷰포트"><div class="caption" data-i18n="p1.c2"></div></div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">02 — BATCH EXPORT TOOL</div>
+        <h3 data-i18n="p2.title"></h3>
+        <p class="lead" data-i18n="p2.lead"></p>
+        <div class="result-row">
+          <div class="result-card"><div class="big" data-i18n="p2.r1b"></div><div class="cap" data-i18n="p2.r1c"></div></div>
+        </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p2.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p2.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p2.i"></p></div>
+        </div>
+        <div class="media"><img src="gif/plugin_export.webp" alt="Selection Sets 기반 일괄 익스포트 툴 실행 화면"><div class="caption" data-i18n="p2.c1"></div></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">03 — CHARACTER SETUP TOOL</div>
+        <h3 data-i18n="p3.title"></h3>
+        <p class="lead" data-i18n="p3.lead"></p>
+        <div class="result-row">
+          <div class="result-card"><div class="big" data-i18n="p3.r1b"></div><div class="cap" data-i18n="p3.r1c"></div></div>
+          <div class="result-card"><div class="big" data-i18n="p3.r2b"></div><div class="cap" data-i18n="p3.r2c"></div></div>
+        </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p3.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p3.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p3.i"></p></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><img src="gif/plugin_setup1.webp" alt="캐릭터 셋업 자동화 툴 — Fig 파일 리스트와 포즈 로드"><div class="caption" data-i18n="p3.c1"></div></div>
+          <div class="media"><img src="gif/plugin_setup2.webp" alt="Twist·관절 본 자동 생성 결과 뷰포트"><div class="caption" data-i18n="p3.c2"></div></div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">04 — RIGGING MANAGER</div>
+        <h3 data-i18n="p4.title"></h3>
+        <p class="lead" data-i18n="p4.lead"></p>
+        <div class="toolrow"><span class="tlabel">SPEC</span><span class="tool">Python 3.11</span><span class="tool">pymxs</span><span class="tool">3ds Max 2025+</span><span class="tool">EN · KO · ZH · JP</span></div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p4.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p4.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p4.i"></p></div>
+        </div>
+        <div class="media"><img src="gif/plugin_rigmgr.webp" alt="Rigging Manager — 리깅·검증·스키닝 통합 인터페이스"><div class="caption" data-i18n="p4.c1"></div></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">05 — MORPH ANIMATION TOOL</div>
+        <h3 data-i18n="p5.title"></h3>
+        <p class="lead" data-i18n="p5.lead"></p>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p5.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p5.p"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p5.so"></p></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><img src="gif/plugin_morph1.webp" alt="모프 프리셋 툴 — 페이셜 시안 제작 UI"><div class="caption" data-i18n="p5.c1"></div></div>
+          <div class="media"><img src="gif/plugin_morph2.webp" alt="모프 애니메이션 원클릭 복사 결과"><div class="caption" data-i18n="p5.c2"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="rigging">
+      <div class="banner" data-index="02">
+        <div class="banner-content">
+          <div class="ctx">RIGGING SHOWCASE · 3DS MAX</div>
+          <h2 data-i18n="rg.btitle"></h2>
+          <div class="sub" data-i18n="rg.bsub"></div>
+        </div>
+      </div>
+      <div class="toolrow">
+        <span class="tlabel">TOOLKIT</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
+        <span class="tool">Expression Controller</span>
+        <span class="tool">Script Controller</span>
+      </div>
+
+      <div class="proj" id="facialProj">
+        <div class="proj-num">01 — CUSTOM FACIAL RIG</div>
+        <h3 data-i18n="r1.title"></h3>
+        <p class="lead" data-i18n="r1.lead"></p>
+
+        <div class="stepper" id="facialStepper">
+          <div class="step-tabs">
+            <button class="step-tab active" data-step="0"><div class="snum">STEP 01</div><div class="stitle" data-i18n="r1.st1"></div></button>
+            <button class="step-tab" data-step="1"><div class="snum">STEP 02</div><div class="stitle" data-i18n="r1.st2"></div></button>
+            <button class="step-tab" data-step="2"><div class="snum">STEP 03</div><div class="stitle" data-i18n="r1.st3"></div></button>
+            <button class="step-tab" data-step="3"><div class="snum">STEP 04</div><div class="stitle" data-i18n="r1.st4"></div></button>
+          </div>
+          <div class="step-stage">
+            <div class="step-media">
+              <img data-step-img="0" src="gif/facial_step1.webp" alt="페이셜 리그 STEP 01 — 서페이스 추적 셋업">
+              <img data-step-img="1" src="gif/facial_step2.webp" alt="페이셜 리그 STEP 02 — 비파괴 오프셋 레이어">
+              <img data-step-img="2" src="gif/facial_step3.webp" alt="페이셜 리그 STEP 03 — 본 케이지 79본 구조">
+              <img data-step-img="3" src="gif/facial_step4.webp" alt="페이셜 리그 STEP 04 — 핸드키 레이어링 최종 결과">
+              <div class="ph"><span class="icon"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span><span data-i18n="r1.phtext"></span></div>
+              <button class="step-nav prev" aria-label="prev"><svg class="svgi" width="20" height="20"><use href="#i-chevron-left"/></svg></button>
+              <button class="step-nav next" aria-label="next"><svg class="svgi" width="20" height="20"><use href="#i-chevron-right"/></svg></button>
+            </div>
+            <div class="step-desc">
+              <div class="d-num" id="facialDnum">STEP 01</div>
+              <div class="d-text" data-step-desc="0" data-i18n="r1.d1"></div>
+              <div class="d-text" data-step-desc="1" data-i18n="r1.d2" style="display:none"></div>
+              <div class="d-text" data-step-desc="2" data-i18n="r1.d3" style="display:none"></div>
+              <div class="d-text" data-step-desc="3" data-i18n="r1.d4" style="display:none"></div>
+            </div>
+          </div>
+
+          <div class="rnd" id="facialRnd">
+            <button class="rnd-toggle"><span class="rl" data-i18n="r1.rndlabel"></span><span class="chev"><svg class="svgi" width="16" height="16"><use href="#i-chevron-down"/></svg></span></button>
+            <div class="rnd-body">
+              <div class="rnd-inner">
+                <div class="rnd-block">
+                  <div class="rb-tag">01 · REFERENCE & GOAL</div>
+                  <div class="rb-title" data-i18n="r1.rb1t"></div>
+                  <div class="rb-text" data-i18n="r1.rb1d"></div>
+                </div>
+                <div class="rnd-block">
+                  <div class="rb-tag">02 · FACIAL DESIGN</div>
+                  <div class="rb-title" data-i18n="r1.rb2t"></div>
+                  <div class="rb-text" data-i18n="r1.rb2d"></div>
+                </div>
+                <div class="rnd-block">
+                  <div class="rb-tag">03 · RIG STRUCTURE</div>
+                  <div class="rb-title" data-i18n="r1.rb3t"></div>
+                  <div class="rb-text" data-i18n="r1.rb3d"></div>
+                </div>
+                <div class="rnd-block">
+                  <div class="rb-tag">04 · RESULT</div>
+                  <div class="rb-title" data-i18n="r1.rb4t"></div>
+                  <div class="rb-text" data-i18n="r1.rb4d"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">02 — CUSTOM BODY RIG</div>
+        <h3 data-i18n="r2.title"></h3>
+        <p class="lead" data-i18n="r2.lead"></p>
+
+        <div class="rig-linear" id="bodyLinear">
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">01</div>
+                <div class="rig-title" data-i18n="r2.st1"></div>
+                <div class="rig-desc" data-i18n="r2.d1"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_torso.webp" alt="바디 리그 — 몸통 Stretch & Squash" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">02</div>
+                <div class="rig-title" data-i18n="r2.st2"></div>
+                <div class="rig-desc" data-i18n="r2.d2"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_arm.webp" alt="바디 리그 — 팔 Twist와 IK/FK 블렌드" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">03</div>
+                <div class="rig-title" data-i18n="r2.st3"></div>
+                <div class="rig-desc" data-i18n="r2.d3"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_clavicle.webp" alt="바디 리그 — Auto Clavicle 자동 어깨 제어" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">04</div>
+                <div class="rig-title" data-i18n="r2.st4"></div>
+                <div class="rig-desc" data-i18n="r2.d4"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_hand.webp" alt="바디 리그 — 손 관절·손가락 컨트롤러" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">05</div>
+                <div class="rig-title" data-i18n="r2.st5"></div>
+                <div class="rig-desc" data-i18n="r2.d5"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_leg.webp" alt="바디 리그 — 다리 Twist와 IK/FK 블렌드" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">06</div>
+                <div class="rig-title" data-i18n="r2.st6"></div>
+                <div class="rig-desc" data-i18n="r2.d6"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_foot.webp" alt="바디 리그 — 3축 Foot Roll" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row feature">
+              <div class="rig-info">
+                <div class="rig-num">07</div>
+                <div class="rig-title" data-i18n="r2.st7"></div>
+                <div class="rig-desc" data-i18n="r2.d7"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_ikfk.webp" alt="바디 리그 — IK/FK Match 포즈 전환" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row feature">
+              <div class="rig-info">
+                <div class="rig-num">08</div>
+                <div class="rig-title" data-i18n="r2.st8"></div>
+                <div class="rig-desc" data-i18n="r2.d8"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_scale.webp" alt="바디 리그 — 전체 스케일 애니메이션" loading="lazy">
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="panel" id="anim">
+      <div class="banner" data-index="03">
+        <div class="banner-content">
+          <div class="ctx">ETERNAL RETURN · NIMBLE NEURON</div>
+          <h2 data-i18n="an.btitle"></h2>
+          <div class="sub" data-i18n="an.bsub"></div>
+        </div>
+      </div>
+      <div class="toolrow">
+        <span class="tlabel">TOOLKIT</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/unity.png" alt="Unity"></span>Unity Timeline</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/xsense.png" alt="X-sense MoCap"></span>X-sense MoCap</span>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num" style="color:var(--accent)">01 — FIRST DESCENDANT · NEXON GAMES</div>
+        <h3 data-i18n="a0.title"></h3>
+        <p class="lead" data-i18n="a0.lead"></p>
+        <div class="toolrow" style="margin:6px 0 16px">
+          <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
+          <span class="tool"><span class="ico ico-logo"><img src="gif/unreal_White.png" alt="Unreal Engine"></span>Unreal Engine</span>
+        </div>
+        <div class="media"><div class="yt-facade" data-id="B619JNrayFo" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/B619JNrayFo/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a0.cap"></div></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">02 — IP COLLABORATION SKINS</div>
+        <h3 data-i18n="a1.title"></h3>
+        <p class="lead" data-i18n="a1.lead"></p>
+        <div class="ip-row">
+          <div class="ip-badge"><span class="x">ER ×</span><span class="ip">PERSONA 5 The Royal</span><span class="ch" data-i18n="a1.ch1"></span></div>
+          <div class="ip-badge"><span class="x">ER ×</span><span class="ip">GUILTY GEAR</span><span class="ch" data-i18n="a1.ch2"></span></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><div class="yt-facade" data-id="AjOONh3eT_M" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/AjOONh3eT_M/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Persona 5 The Royal — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="yt-facade" data-id="QEb9GMPu3gk" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/QEb9GMPu3gk/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Guilty Gear — ⓒ Nimble Neuron</div></div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">03 — CHARACTER SKIN RETARGETING</div>
+        <h3 data-i18n="a2.title"></h3>
+        <p class="lead" data-i18n="a2.lead"></p>
+        <div class="vid-carousel">
+          <button class="vid-arrow va-prev" aria-label="prev"><svg class="svgi" width="18" height="18"><use href="#i-chevron-left"/></svg></button>
+          <div class="vid-track" id="skinTrack">
+            <div class="vid-card"><div class="yt-facade" data-id="4QCUIjr-wP4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/4QCUIjr-wP4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Isaac — ⓒ Nimble Neuron</div></div>
+            <!-- 추가 영상: 아래 형식으로 vid-card 복사해서 ID만 교체
+            <div class="vid-card"><div class="yt-facade" data-id="VIDEO_ID" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/VIDEO_ID/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">캐릭터명 — ⓒ Nimble Neuron</div></div>
+            -->
+          </div>
+          <button class="vid-arrow va-next" aria-label="next"><svg class="svgi" width="18" height="18"><use href="#i-chevron-right"/></svg></button>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">04 — IN-GAME MOTION</div>
+        <h3 data-i18n="a3.title"></h3>
+        <div class="media"><div class="yt-facade" data-id="FYZve9TWifA" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/FYZve9TWifA/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Alonso — ⓒ Nimble Neuron</div></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">05 — OUT-GAME MOTION</div>
+        <h3 data-i18n="a4.title"></h3>
+        <div class="media"><div class="yt-facade" data-id="3GsJIqkVyw4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/3GsJIqkVyw4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a4.cap"></div></div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-num">06 — DEMO REEL</div>
+        <h3 data-i18n="a5.title"></h3>
+        <div class="media"><div class="yt-facade" data-id="RukpP-9s5FU" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/RukpP-9s5FU/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">Game Animation Reel 2020 / 2023</div></div>
+      </div>
     </div>
 
     <div class="panel active" id="about">
@@ -456,6 +736,30 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 </footer>
 
 <script>
+// === 경력 기간 설정 — 이직·휴직 시 이 배열만 수정 ===
+const CAREER_PERIODS = [
+  { start: [2020, 12], end: [2024,  3] }, // 님블뉴런 정규직
+  { start: [2025,  6], end: [2026,  2] }, // 님블뉴런 외주
+  { start: [2026,  3], end: null       }  // 넥슨게임즈 (null = 오늘)
+];
+function calcCareerMonths() {
+  const today = new Date();
+  return CAREER_PERIODS.reduce((sum, { start, end }) => {
+    const s = new Date(start[0], start[1] - 1);
+    const e = end ? new Date(end[0], end[1] - 1) : today;
+    return sum + (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
+  }, 0);
+}
+function updateCareerBadge() {
+  const total = calcCareerMonths();
+  const y = Math.floor(total / 12), mo = total % 12;
+  const badge = document.querySelector('.ko-name .exp-badge');
+  if (!badge) return;
+  const lang = document.documentElement.lang || 'ko';
+  const labels = { ko: `총 경력 ${y}년 ${mo}개월`, en: `${y} yrs ${mo} mos`, zh: `从业 ${y}年${mo}个月` };
+  badge.textContent = labels[lang] || labels.ko;
+}
+
 const I18N={
 ko:{
 "hero.role":"ANIMATION TECHNICAL ARTIST · RIGGER",
@@ -463,7 +767,7 @@ ko:{
 "hero.intro":"4년간의 게임 애니메이션 제작 경험을 바탕으로, 애니메이터의 작업 흐름을 깊이 이해하는 테크니컬 애니메이터입니다. 리깅·물리 셋업과 파이프라인 자동화로 팀의 생산성을 끌어올립니다.",
 "hero.m1k":"CURRENT","hero.m1v":"넥슨게임즈 · 퍼스트 디센던트 · 테크니컬 애니메이션팀","hero.scroll":"SCROLL DOWN",
 "sum.career":"CAREER","sum.c1n":"넥슨게임즈 (주)","sum.c1r":"테크니컬 애니메이션팀 · 정규직","sum.c2n":"님블뉴런 (주)","sum.c2r":"애니메이션팀 · 정규직","sum.c3n":"님블뉴런 (주) · 외주","sum.c3r":"애니메이션팀 · 리깅 / 애니메이션 컨버팅","sum.award":"AWARDS","sum.badge":"수상","sum.a1":"대한민국 게임대상 우수상","sum.a2":"대한민국 게임대상 인기상","sum.aorg":"문화체육관광부 · 2021 · 이터널 리턴","sum.proj":"PROJECTS","sum.p1":"넥슨게임즈 · AAA · Unreal Engine 5 · PC/Console","sum.p2":"님블뉴런 · PC · 개발~출시~라이브 전 과정","sum.role":"ROLE","sum.r1":"캐릭터 · 프랍 리깅 및 물리 셋업","sum.r2":"인하우스 파이프라인 플러그인 개발","sum.r3":"키 애니메이션 · 모션캡처 · 리타게팅","sum.r4":"팀 간 기술 소통 및 문서화",
-"tab.plugin":"플러그인","tab.rigging":"리깅","tab.anim":"애니메이션","tab.works":"프로젝트","wf.plugin":"플러그인/툴","wf.rigging":"리깅","wf.anim":"애니메이션","tab.about":"커리어","nav.home":"HOME",
+"tab.plugin":"플러그인","tab.rigging":"리깅","tab.anim":"애니메이션","tab.about":"커리어","nav.home":"HOME",
 "ph.banner":"[ banner-img src 경로 교체 ] 배너 이미지",
 "pl.btitle":"In-House Pipeline Tools","pl.bsub":"반복 작업을 시스템으로 대체해 팀 전체의 생산성을 끌어올린 자동화 툴",
 "p1.title":"리타게팅 일괄 처리 시스템","p1.lead":"수십 개 파일에 같은 리타게팅을 수동 반복하던 비효율을, 리스트 기반 일괄 처리로 전환했습니다.",
@@ -482,7 +786,7 @@ ko:{
 "p4.g1":"레이어 기반 스키닝 시스템 GIF","p4.c1":"비파괴 레이어 스키닝 워크플로우",
 "p5.title":"페이셜 모프 프리셋 & 원클릭 이식","p5.lead":"페이셜 애니메이션을 프리셋화하고, 같은 모프타겟을 가진 캐릭터 간 원클릭 복사를 구현했습니다.",
 "p5.s":"AD·팀장과 페이셜 시안을 여러 개 교환할 필요가 있었고, 페이셜 모션 재활용도 잦았습니다.","p5.p":"모프 애니메이션을 프리셋화해 시안을 빠르게 제작, 동일 모프타겟 캐릭터에 원클릭 복사하도록 했습니다.","p5.so":"성우 후시녹음용 립모션 시안을 신속히 제작해 녹음·최종 수정 프로세스를 가속했습니다.",
-"p5.g1":"모프 프리셋 GIF","p5.c1":"페이셜 모프 애니메이션 프리셋","p5.g2":"애니 복사·이식 GIF","p5.c2":"페이셜 애니메이션 원클릭 복사·이식","p6.title":"FBX Inspector — 드래그앤드롭 FBX 뷰어/검사기","p6.lead":"FBX SDK 없이 바이너리 FBX(7.x)를 직접 파싱해 스켈레톤·메시·스킨·애니메이션을 3D로 렌더링하는 검사 도구입니다.","p6.s":"FBX 검수에 매번 DCC를 열어야 했고, FBX SDK는 라이선스·환경 제약이 있어 가볍게 본 구조나 데이터량을 확인하기 어려웠습니다.","p6.so":"바이너리 FBX 노드 트리를 직접 파싱하고 ModernGL로 3D 뷰포트를 구현했습니다. 스켈레톤 트리/다이어그램 2종, 참조 본 비교(누락 본 빨강 표시), 풀 스키닝 애니메이션 재생(외부 애니 FBX 매칭 포함), 카테고리별 디스크 바이트 분석을 지원합니다.","p6.i":"DCC·SDK 없이 드래그앤드롭만으로 FBX 구조를 즉시 검수 — 본 누락·데이터량 이슈를 파이프라인 단계에서 빠르게 잡습니다.","p6.ph":"실행 화면 (추후 추가)","p6.c1":"3D 뷰포트 — 메시·본 오버레이, 스키닝 애니메이션","p6.c2":"스켈레톤 트리/다이어그램 + 참조 본 비교",
+"p5.g1":"모프 프리셋 GIF","p5.c1":"페이셜 모프 애니메이션 프리셋","p5.g2":"애니 복사·이식 GIF","p5.c2":"페이셜 애니메이션 원클릭 복사·이식",
 "rg.btitle":"Custom Rig Systems","rg.bsub":"Expression & Script Controller 기반 커스텀 리깅 R&D",
 "r1.title":"FaceCap × 핸드키 하이브리드 페이셜","r1.lead":"FaceCap 퍼포먼스 캡처와 핸드키 애니메이션을 결합해, 고품질 표정과 직관적 컨트롤을 동시에 확보한 커스텀 페이셜 리깅 R&D입니다.",
 "r1.phtext":"gif/facial_step1~4.gif 넣기",
@@ -525,7 +829,7 @@ en:{
 "p4.g1":"Layer-based skinning system GIF","p4.c1":"Non-destructive layer skinning workflow",
 "p5.title":"Facial Morph Presets & One-Click Transfer","p5.lead":"Turned facial animation into presets and enabled one-click copy between characters sharing morph targets.",
 "p5.s":"Needed to exchange multiple facial drafts with AD/lead, and facial motion reuse was frequent.","p5.p":"Made morph animation into presets for fast drafts, with one-click copy to characters sharing morph targets.","p5.so":"Quickly produced lip-sync drafts for voice-actor recording, accelerating the recording and final-edit process.",
-"p5.g1":"Morph preset GIF","p5.c1":"Facial morph animation preset","p5.g2":"Animation copy/transfer GIF","p5.c2":"One-click facial animation copy/transfer","p6.title":"FBX Inspector — Drag-and-Drop FBX Viewer/Analyzer","p6.lead":"A standalone inspector that parses binary FBX (7.x) directly — no FBX SDK — and renders skeleton, mesh, skin, and animation in 3D.","p6.s":"Inspecting an FBX meant opening a DCC every time, and the FBX SDK carries licensing and environment constraints, making quick checks of bone structure or data size hard.","p6.so":"Built a binary FBX node-tree parser and a ModernGL 3D viewport. Supports skeleton tree/diagram views, reference-bone comparison (missing bones flagged red), full skinned animation playback (incl. external anim-FBX matching), and per-category disk-byte analysis.","p6.i":"Inspect any FBX instantly by drag-and-drop — no DCC, no SDK — catching missing bones and data-size issues early in the pipeline.","p6.ph":"Screenshot (coming soon)","p6.c1":"3D viewport — mesh/bone overlay, skinned animation","p6.c2":"Skeleton tree/diagram + reference-bone compare",
+"p5.g1":"Morph preset GIF","p5.c1":"Facial morph animation preset","p5.g2":"Animation copy/transfer GIF","p5.c2":"One-click facial animation copy/transfer",
 "rg.btitle":"Custom Rig Systems","rg.bsub":"Custom rigging R&D based on Expression & Script Controllers",
 "r1.title":"FaceCap × Hand-Key Hybrid Facial","r1.lead":"A custom facial rigging R&D combining FaceCap performance capture with hand-key animation for both high-fidelity expressions and intuitive control.",
 "r1.phtext":"place gif/facial_step1~4.gif",
@@ -549,7 +853,7 @@ zh:{
 "hero.intro":"拥有4年游戏动画制作经验的技术动画师，深刻理解动画师的工作流程。通过绑定、物理设置与管线自动化提升团队生产力。",
 "hero.m1k":"当前","hero.m1v":"Nexon Games · 第一后裔 · 技术动画团队","hero.scroll":"向下滚动",
 "sum.career":"工作经历","sum.c1n":"Nexon Games","sum.c1r":"技术动画团队 · 正式员工","sum.c2n":"Nimble Neuron","sum.c2r":"动画团队 · 正式员工","sum.c3n":"Nimble Neuron · 外包","sum.c3r":"动画团队 · 绑定 / 动画转换","sum.award":"获奖","sum.badge":"获奖","sum.a1":"大韩民国游戏大奖 优秀奖","sum.a2":"大韩民国游戏大奖 人气奖","sum.aorg":"文化体育观光部 · 2021 · 永恒轮回","sum.proj":"项目","sum.p1":"Nexon Games · AAA · Unreal Engine 5 · PC/主机","sum.p2":"Nimble Neuron · PC · 开发~上线~运营全程","sum.role":"职责","sum.r1":"角色·道具绑定与物理设置","sum.r2":"内部管线插件开发","sum.r3":"关键帧动画·动作捕捉·重定向","sum.r4":"跨团队技术沟通与文档化",
-"tab.plugin":"插件","tab.rigging":"绑定","tab.anim":"动画","tab.works":"项目","wf.plugin":"插件/工具","wf.rigging":"绑定","wf.anim":"动画","tab.about":"职业经历","nav.home":"首页",
+"tab.plugin":"插件","tab.rigging":"绑定","tab.anim":"动画","tab.about":"职业经历","nav.home":"首页",
 "ph.banner":"[ 替换 banner-img src ] 横幅图片",
 "pl.btitle":"内部管线工具","pl.bsub":"用系统替代重复工作、提升整个团队生产力的自动化工具",
 "p1.title":"重定向批处理系统","p1.lead":"将数十个文件中手动重复重定向的低效，转换为基于列表的批处理。",
@@ -568,7 +872,7 @@ zh:{
 "p4.g1":"基于图层的蒙皮系统 GIF","p4.c1":"非破坏性图层蒙皮工作流",
 "p5.title":"面部Morph预设 & 一键移植","p5.lead":"将面部动画预设化，并实现拥有相同morph target的角色间一键复制。",
 "p5.s":"需与AD·组长交换多个面部草案，面部动作的复用也很频繁。","p5.p":"将morph动画预设化以快速制作草案，对相同morph target的角色一键复制。","p5.so":"快速制作配音后期录音用的口型草案，加速了录音与最终修改流程。",
-"p5.g1":"Morph预设 GIF","p5.c1":"面部morph动画预设","p5.g2":"动画复制·移植 GIF","p5.c2":"面部动画一键复制·移植","p6.title":"FBX Inspector — 拖放式 FBX 查看/检查器","p6.lead":"无需 FBX SDK，直接解析二进制 FBX(7.x)，以 3D 渲染骨骼·网格·蒙皮·动画的检查工具。","p6.s":"检查 FBX 每次都要打开 DCC，而 FBX SDK 存在授权与环境限制，难以轻量地确认骨骼结构或数据量。","p6.so":"自行解析二进制 FBX 节点树，用 ModernGL 实现 3D 视口。支持骨骼树/图示两种视图、参考骨骼比对(缺失骨骼标红)、完整蒙皮动画播放(含外部动画 FBX 匹配)、按类别的磁盘字节分析。","p6.i":"无需 DCC 与 SDK，拖放即可即时检查 FBX——在管线早期发现骨骼缺失与数据量问题。","p6.ph":"运行画面（稍后补充）","p6.c1":"3D 视口——网格/骨骼叠加、蒙皮动画","p6.c2":"骨骼树/图示 + 参考骨骼比对",
+"p5.g1":"Morph预设 GIF","p5.c1":"面部morph动画预设","p5.g2":"动画复制·移植 GIF","p5.c2":"面部动画一键复制·移植",
 "rg.btitle":"自定义绑定系统","rg.bsub":"基于Expression & Script Controller的自定义绑定研发",
 "r1.title":"FaceCap × 手K混合面部","r1.lead":"结合FaceCap表演捕捉与手K动画、同时确保高质量表情与直观控制的自定义面部绑定研发。",
 "r1.phtext":"放入 gif/facial_step1~4.gif",
@@ -591,7 +895,6 @@ zh:{
 
 function setLang(lang){
   document.documentElement.lang=lang;
-  if(window.__worksRender) window.__worksRender();
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.getAttribute('data-i18n');
     if(I18N[lang][k]!==undefined) el.textContent=I18N[lang][k];
@@ -606,6 +909,7 @@ function setLang(lang){
   // 열려있는 R&D 아코디언 높이 재계산
   const openRnd=document.querySelector('.rnd.open .rnd-body');
   if(openRnd) openRnd.style.maxHeight=openRnd.scrollHeight+'px';
+  updateCareerBadge();
 }
 document.querySelectorAll('.langsw button').forEach(btn=>{
   btn.addEventListener('click',()=>setLang(btn.dataset.lang));
@@ -627,7 +931,6 @@ function buildSidenav(tab){
   const nav=document.getElementById('sidenav');
   nav.innerHTML='';
   if(!panel) return;
-  if(tab==='works'){ return; }
   // about 탭은 sum-card, 나머지는 proj
   const items=tab==='about'?panel.querySelectorAll('.sum-card'):panel.querySelectorAll('.proj');
   const home=document.createElement('div');
@@ -771,93 +1074,7 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
   lb.addEventListener('click',e=>{if(e.target!==lbImg)close();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close();});
 })();
-
-// ===== 프로젝트 카드 그리드 =====
-(function(){
-  const CARDS=[{"id": "p1", "cat": "plugin", "num": "01", "tools": ["MaxScript", "Python", "PySide6"], "media": ["gif/plugin_retarget1.webp", "gif/plugin_retarget2.webp"], "title": {"ko": "리타게팅 일괄 처리 시스템", "en": "Batch Retargeting System", "zh": "重定向批处理系统"}, "lead": {"ko": "수십 개 파일에 같은 리타게팅을 수동 반복하던 비효율을, 리스트 기반 일괄 처리로 전환했습니다.", "en": "Converted the inefficiency of manually repeating retargeting across dozens of files into list-based batch processing.", "zh": "将数十个文件中手动重复重定向的低效，转换为基于列表的批处理。"}, "problem": {"ko": "이터널 리턴에서 캐릭터 스킨 70종을 LOD 단계별로 각각 두 개씩 작업했는데, 스킨마다 동일한 리타게팅을 반복해야 했습니다. 파일을 하나씩 열어 수동 처리하는 과정에서 시간 소모와 작업자 간 결과 편차가 발생했습니다.", "en": "Eternal Return had 70 character skins, each worked at two LOD levels — every skin required the same retargeting. Opening and processing files one by one caused time loss and inconsistency between artists.", "zh": "永恒轮回有70个角色皮肤，每个皮肤按LOD分两档制作，均需重复相同的重定向。逐个打开文件手动处理，造成时间浪费和作业者之间的结果差异。"}, "solution": {"ko": "복수 Max 파일을 리스트화해 애니메이션 데이터를 일괄 추출·이식·저장하는 툴을 개발했습니다.", "en": "Developed a tool that lists multiple Max files and batch-extracts, transfers, and saves animation data.", "zh": "开发了将多个Max文件列表化、批量提取·移植·保存动画数据的工具。"}, "impact": {"ko": "리타게팅 작업 기간을 4일에서 2일로 단축하고, 작업자 간 결과 편차와 휴먼 에러를 제거했습니다.", "en": "Cut retargeting time from 4 days to 2 and removed variance and human error between artists.", "zh": "将重定向工作周期从4天缩短至2天，并消除了作业者之间的结果差异与人为错误。"}}, {"id": "p2", "cat": "plugin", "num": "02", "tools": ["MaxScript", "Python"], "media": ["gif/plugin_export.webp"], "title": {"ko": "Selection Sets 기반 일괄 익스포트", "en": "Selection Sets Batch Export", "zh": "基于Selection Sets的批量导出"}, "lead": {"ko": "필요한 본만 자동 선별해 일괄 FBX 익스포트, 엔진 용량까지 최적화했습니다.", "en": "Auto-selects only required bones for batch FBX export, optimizing engine file size.", "zh": "自动筛选所需骨骼批量导出FBX，并优化引擎容量。"}, "problem": {"ko": "수십 개 애니메이션 파일을 매번 수동으로 익스포트 대상을 지정해야 했고, 실수로 불필요한 더미·본이 함께 익스포트되어 엔진 용량을 낭비하는 일이 잦았습니다.", "en": "Dozens of animation files required manually setting export targets each time, and unnecessary dummies/bones were often exported by mistake, wasting engine memory.", "zh": "数十个动画文件每次都需手动指定导出对象，且常误将不必要的辅助体·骨骼一同导出，浪费引擎容量。"}, "solution": {"ko": "Selection Sets에 포함된 본·메쉬만 자동 선택해 지정 파일을 일괄 익스포트하도록 구현했습니다.", "en": "Implemented batch export selecting only bones/meshes in the Selection Sets across listed files.", "zh": "实现仅自动选择Selection Sets中的骨骼·网格，对指定文件批量导出。"}, "impact": {"ko": "전사 최적화 요청 시 추가 공수 없이 즉시 대응할 수 있는 체계를 갖췄습니다.", "en": "Enabled instant response to company-wide optimization requests without extra effort.", "zh": "建立了在全公司优化需求时无需额外工时即可立即应对的体系。"}}, {"id": "p3", "cat": "plugin", "num": "03", "tools": ["MaxScript", "Python"], "media": ["gif/plugin_setup1.webp", "gif/plugin_setup2.webp"], "title": {"ko": "바이패드 자동 셋업 & FX 본 생성", "en": "Auto Biped Setup & FX Bone Generation", "zh": "Biped自动设置 & FX骨骼生成"}, "lead": {"ko": "Merge 방식의 위치 틀어짐 문제를, 규칙 기반 자동 생성으로 해결했습니다.", "en": "Solved Merge-based offset issues with rule-based automatic generation.", "zh": "以基于规则的自动生成，解决了Merge方式的位置偏移问题。"}, "problem": {"ko": "초기에는 FX·트위스트 본을 외부 파일에서 Merge하는 방식으로 제작했는데, Merge 시 미세한 위치 틀어짐이 생겨 엔진에서 투사체가 엉뚱한 곳에서 발사되는 이슈가 있었습니다.", "en": "FX and twist bones were initially merged from external files, but merging caused subtle offsets — projectiles fired from wrong coordinates in-engine.", "zh": "初期FX·扭曲骨骼通过从外部文件Merge制作，但Merge时产生细微位置偏移，导致引擎中投射物从错误坐标发射。"}, "solution": {"ko": "바이패드 Fig 파일을 리스트업한 후 관리해 원클릭 포즈 로드, Twist·관절 본을 규칙대로 자동 생성·부착했습니다.", "en": "Managed figure mode files for one-click pose loading and auto-generated/attached twist and joint bones by rule.", "zh": "管理figure mode文件实现一键加载姿势，按规则自动生成·附加扭曲与关节骨骼。"}, "impact": {"ko": "위치 오차 0 — 엔진 투사체 좌표 이슈를 해결했습니다.", "en": "Zero offset — resolved the engine projectile coordinate issues.", "zh": "零偏移——解决了引擎投射物坐标问题。"}}, {"id": "p4", "cat": "plugin", "num": "04", "tools": ["Python", "PySide6", "MaxScript"], "media": ["gif/plugin_rigmgr.webp"], "title": {"ko": "레이어 기반 비파괴 스키닝 파이프라인", "en": "Layer-Based Non-Destructive Skinning Pipeline", "zh": "基于图层的非破坏性蒙皮管线"}, "lead": {"ko": "Maya의 ngSkinTools 레이어 스키닝을 3ds Max에서 구현, 리깅부터 스키닝까지 하나로 통합했습니다.", "en": "Implemented Maya's ngSkinTools layer skinning in 3ds Max, unifying rigging to skinning in one tool.", "zh": "在3ds Max中实现Maya的ngSkinTools图层蒙皮，将绑定到蒙皮整合为一体。"}, "problem": {"ko": "리깅·검증·스키닝이 여러 창과 수작업 단계로 흩어져 있어 작업 흐름이 끊기고 실수 여지가 많았습니다.", "en": "Rigging, validation, and skinning were scattered across separate windows and manual steps, breaking flow and inviting mistakes.", "zh": "绑定·验证·蒙皮分散在多个窗口和手动步骤中，工作流被打断且容易出错。"}, "solution": {"ko": "리깅·검증·스키닝 워크플로우를 단일 인터페이스에서 선형적으로 처리하고, 레이어 기반 비파괴 스키닝으로 웨이트 페인팅을 자유롭게 시도할 수 있게 했습니다.", "en": "Handles the rigging–validation–skinning workflow linearly in one interface, with layer-based non-destructive skinning for free weight-painting iteration.", "zh": "在单一界面中线性处理绑定·验证·蒙皮工作流，并以基于图层的非破坏性蒙皮自由尝试权重绘制。"}, "impact": {"ko": "리깅부터 스키닝까지 한 흐름으로 표준화해 캐릭터 셋업 효율을 끌어올렸습니다.", "en": "Standardized character setup from rigging to skinning in a single flow, raising efficiency.", "zh": "将从绑定到蒙皮标准化为单一流程，提升了角色设置效率。"}}, {"id": "p5", "cat": "plugin", "num": "05", "tools": ["MaxScript", "Morpher"], "media": ["gif/plugin_morph1.webp", "gif/plugin_morph2.webp"], "title": {"ko": "페이셜 모프 프리셋 & 원클릭 이식", "en": "Facial Morph Presets & One-Click Transfer", "zh": "面部Morph预设 & 一键移植"}, "lead": {"ko": "페이셜 애니메이션을 프리셋화하고, 같은 모프타겟을 가진 캐릭터 간 원클릭 복사를 구현했습니다.", "en": "Turned facial animation into presets and enabled one-click copy between characters sharing morph targets.", "zh": "将面部动画预设化，并实现拥有相同morph target的角色间一键复制。"}, "problem": {"ko": "AD·팀장과 페이셜 시안을 여러 개 교환할 필요가 있었고, 페이셜 모션 재활용도 잦았습니다.", "en": "Needed to exchange multiple facial drafts with AD/lead, and facial motion reuse was frequent.", "zh": "需与AD·组长交换多个面部草案，面部动作的复用也很频繁。"}, "solution": {"ko": "모프 애니메이션을 프리셋화해 시안을 빠르게 제작, 동일 모프타겟 캐릭터에 원클릭 복사하도록 했습니다.", "en": "Made morph animation into presets for fast drafts, with one-click copy to characters sharing morph targets.", "zh": "将morph动画预设化以快速制作草案，对相同morph target的角色一键复制。"}, "impact": {"ko": "성우 후시녹음용 립모션 시안을 신속히 제작해 녹음·최종 수정 프로세스를 가속했습니다.", "en": "Quickly produced lip-sync drafts for voice-actor recording, accelerating the recording and final-edit process.", "zh": "快速制作配音后期录音用的口型草案，加速了录音与最终修改流程。"}}, {"id": "p6", "cat": "plugin", "num": "06", "tools": ["Python", "PySide6", "ModernGL"], "media": ["gif/plugin_morph1.webp"], "ph": true, "title": {"ko": "FBX Inspector — 드래그앤드롭 FBX 뷰어/검사기", "en": "FBX Inspector — Drag-and-Drop FBX Viewer/Analyzer", "zh": "FBX Inspector — 拖放式 FBX 查看/检查器"}, "lead": {"ko": "FBX SDK 없이 바이너리 FBX(7.x)를 직접 파싱해 스켈레톤·메시·스킨·애니메이션을 3D로 렌더링하는 검사 도구입니다.", "en": "A standalone inspector that parses binary FBX (7.x) directly — no FBX SDK — and renders skeleton, mesh, skin, and animation in 3D.", "zh": "无需 FBX SDK，直接解析二进制 FBX(7.x)，以 3D 渲染骨骼·网格·蒙皮·动画的检查工具。"}, "problem": {"ko": "FBX 검수에 매번 DCC를 열어야 했고, FBX SDK는 라이선스·환경 제약이 있어 가볍게 본 구조나 데이터량을 확인하기 어려웠습니다.", "en": "Inspecting an FBX meant opening a DCC every time, and the FBX SDK carries licensing and environment constraints, making quick checks of bone structure or data size hard.", "zh": "检查 FBX 每次都要打开 DCC，而 FBX SDK 存在授权与环境限制，难以轻量地确认骨骼结构或数据量。"}, "solution": {"ko": "바이너리 FBX 노드 트리를 직접 파싱하고 ModernGL로 3D 뷰포트를 구현했습니다. 스켈레톤 트리/다이어그램 2종, 참조 본 비교(누락 본 빨강 표시), 풀 스키닝 애니메이션 재생(외부 애니 FBX 매칭 포함), 카테고리별 디스크 바이트 분석을 지원합니다.", "en": "Built a binary FBX node-tree parser and a ModernGL 3D viewport. Supports skeleton tree/diagram views, reference-bone comparison (missing bones flagged red), full skinned animation playback (incl. external anim-FBX matching), and per-category disk-byte analysis.", "zh": "自行解析二进制 FBX 节点树，用 ModernGL 实现 3D 视口。支持骨骼树/图示两种视图、参考骨骼比对(缺失骨骼标红)、完整蒙皮动画播放(含外部动画 FBX 匹配)、按类别的磁盘字节分析。"}, "impact": {"ko": "DCC·SDK 없이 드래그앤드롭만으로 FBX 구조를 즉시 검수 — 본 누락·데이터량 이슈를 파이프라인 단계에서 빠르게 잡습니다.", "en": "Inspect any FBX instantly by drag-and-drop — no DCC, no SDK — catching missing bones and data-size issues early in the pipeline.", "zh": "无需 DCC 与 SDK，拖放即可即时检查 FBX——在管线早期发现骨骼缺失与数据量问题。"}}, {"id": "r1", "cat": "rigging", "num": "01", "tools": ["3ds Max", "Surface Constraint", "Morpher"], "media": ["gif/facial_step4.webp", "gif/facial_step1.webp"], "title": {"ko": "FaceCap × 핸드키 하이브리드 페이셜", "en": "FaceCap × Hand-Key Hybrid Facial", "zh": "FaceCap × 手K混合面部"}, "lead": {"ko": "FaceCap 퍼포먼스 캡처와 핸드키 애니메이션을 결합해, 고품질 표정과 직관적 컨트롤을 동시에 확보한 커스텀 페이셜 리깅 R&D입니다.", "en": "A custom facial rigging R&D combining FaceCap performance capture with hand-key animation for both high-fidelity expressions and intuitive control.", "zh": "结合FaceCap表演捕捉与手K动画、同时确保高质量表情与直观控制的自定义面部绑定研发。"}}, {"id": "r2", "cat": "rigging", "num": "02", "tools": ["3ds Max", "Expression"], "media": ["gif/body_ikfk.webp", "gif/body_scale.webp"], "title": {"ko": "커스텀 바디 리그", "en": "Custom Body Rig", "zh": "自定义身体绑定"}, "lead": {"ko": "Scale Expression 기반 신축 시스템과 IK/FK, Auto Clavicle, Foot Roll을 갖춘 풀바디 리그입니다. 부위별 셋업을 위에서 아래로 정리했습니다.", "en": "A full-body rig with Scale Expression stretch, IK/FK, Auto Clavicle, and Foot Roll. Each setup is organized top to bottom.", "zh": "具备Scale Expression伸缩系统、IK/FK、Auto Clavicle、Foot Roll的全身绑定。各部位设置自上而下整理。"}}, {"id": "a0", "cat": "animation", "num": "01", "tools": ["Unreal Engine 5", "3ds Max"], "yt": "B619JNrayFo", "title": {"ko": "언리얼 피직스 세컨더리 애니메이션", "en": "Unreal Physics Secondary Animation", "zh": "虚幻引擎物理次级动画"}, "lead": {"ko": "퍼스트 디센던트 캐릭터 리깅 및 언리얼 피직스 셋업 작업. Kawaii Physics 기반 물리와 Chaos Physics 기반 클로스 물리를 섞어 세컨더리 애니메이션을 구현했습니다.", "en": "First Descendant character rigging and Unreal physics setup. Combined Kawaii Physics-based dynamics with Chaos Physics-based cloth simulation to drive secondary animation.", "zh": "First Descendant 角色绑定及虚幻引擎物理设置。混合使用基于Kawaii Physics的物理与基于Chaos Physics的布料模拟，实现次级动画。"}}, {"id": "a1", "cat": "animation", "num": "02", "tools": ["3ds Max"], "yt": "AjOONh3eT_M", "title": {"ko": "IP 콜라보 스킨 — Persona 5 · Guilty Gear", "en": "IP Collaboration Skins — Persona 5 · Guilty Gear", "zh": "IP联动皮肤 — Persona 5 · Guilty Gear"}, "lead": {"ko": "리타게팅을 기반으로 세컨더리 추가와 전체 애니메이션 수정 작업을 진행했습니다.", "en": "Built on retargeting, added secondary motion and reworked the full animation.", "zh": "以重定向为基础，进行了次级动作的追加与整体动画的修改。"}}, {"id": "a2", "cat": "animation", "num": "03", "tools": ["3ds Max"], "yt": "4QCUIjr-wP4", "title": {"ko": "캐릭터 스킨 리타게팅", "en": "Character Skin Retargeting", "zh": "角色皮肤动作 — 艾萨克"}, "lead": {"ko": "기존 모션을 신규 스킨에 리타게팅하고, 세컨더리 추가와 전체 애니메이션 수정 작업을 진행했습니다. 다수의 스킨 작업물을 가로로 넘겨볼 수 있습니다.", "en": "Retargeted existing motion onto new skins, added secondary motion, and reworked the full animation. Swipe horizontally through multiple skin works.", "zh": "以重定向为基础，进行了次级动作的追加与整体动画的修改。"}}, {"id": "a3", "cat": "animation", "num": "04", "tools": ["3ds Max"], "yt": "FYZve9TWifA", "title": {"ko": "인게임 모션 — 알론소", "en": "In-Game Motion — Alonso", "zh": "游戏内动作 — 阿隆索"}, "lead": {"ko": null, "en": null, "zh": null}}, {"id": "a4", "cat": "animation", "num": "05", "tools": ["3ds Max"], "yt": "3GsJIqkVyw4", "title": {"ko": "아웃게임 모션", "en": "Out-Game Motion", "zh": "外部游戏动作"}, "lead": {"ko": null, "en": null, "zh": null}}, {"id": "a5", "cat": "animation", "num": "06", "tools": ["3ds Max"], "yt": "RukpP-9s5FU", "title": {"ko": "데모릴", "en": "Demo Reel", "zh": "演示集"}, "lead": {"ko": null, "en": null, "zh": null}}];
-  const grid=document.getElementById('worksGrid');
-  if(!grid) return;
-  const lang=()=>document.documentElement.lang||'ko';
-  const L=(o)=> o ? (o[lang()]||o.ko||'') : '';
-  const catLabel={plugin:'PLUGIN',rigging:'RIGGING',animation:'ANIMATION'};
-  const detailTxt={ko:'상세 보기 →',en:'View detail →',zh:'查看详情 →'};
-
-  function thumbHTML(c){
-    const cat='<span class="wcard-cat">'+catLabel[c.cat]+'</span>';
-    if(c.yt) return '<div class="wcard-thumb"><img src="https://i.ytimg.com/vi/'+c.yt+'/hqdefault.jpg" alt=""><span class="wcard-play"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span>'+cat+'</div>';
-    if(c.ph||!c.media) return '<div class="wcard-thumb"><div class="ph">미디어 준비중</div>'+cat+'</div>';
-    return '<div class="wcard-thumb"><img src="'+c.media[0]+'" alt="" loading="lazy">'+cat+'</div>';
-  }
-  function render(cat){
-    grid.innerHTML='';
-    CARDS.filter(c=>cat==='all'||c.cat===cat).forEach(c=>{
-      const el=document.createElement('div');
-      el.className='wcard';
-      el.innerHTML=thumbHTML(c)+'<div class="wcard-body"><div class="wcard-num">'+c.num+'</div><div class="wcard-title">'+L(c.title)+'</div><div class="wcard-desc">'+L(c.lead)+'</div><div class="wcard-foot">'+detailTxt[lang()]+'</div></div>';
-      el.addEventListener('click',()=>openModal(c));
-      grid.appendChild(el);
-    });
-  }
-  const overlay=document.getElementById('wmodalOverlay');
-  const modal=document.getElementById('wmodal');
-  function mediaHTML(c){
-    if(c.yt) return '<iframe src="https://www.youtube-nocookie.com/embed/'+c.yt+'?rel=0" title="video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>';
-    if(c.ph||!c.media) return '<div class="ph">미디어 준비중</div>';
-    return '<img src="'+c.media[0]+'" alt="">';
-  }
-  function openModal(c){
-    modal.classList.remove('expanded');
-    document.getElementById('wmodalMedia').innerHTML=mediaHTML(c);
-    document.getElementById('wmodalCat').textContent=catLabel[c.cat]+' · '+c.num;
-    document.getElementById('wmodalTitle').textContent=L(c.title);
-    document.getElementById('wmodalLead').textContent=L(c.lead);
-    document.getElementById('wmodalTools').innerHTML=(c.tools||[]).map(t=>'<span class="wchip">'+t+'</span>').join('');
-    const detailBtn=document.getElementById('wmodalDetailBtn');
-    const psi=document.getElementById('wmodalPsi');
-    if(c.problem){
-      psi.innerHTML='<div class="wpsi-cell"><div class="st">PROBLEM</div><p>'+L(c.problem)+'</p></div>'+
-                    '<div class="wpsi-cell"><div class="st">SOLUTION</div><p>'+L(c.solution)+'</p></div>'+
-                    '<div class="wpsi-cell"><div class="st">IMPACT</div><p>'+L(c.impact)+'</p></div>';
-      detailBtn.textContent=detailTxt[lang()];
-      detailBtn.style.display='';
-    } else {
-      psi.innerHTML='';
-      detailBtn.style.display='none';
-    }
-    overlay.classList.add('open');
-    document.body.style.overflow='hidden';
-  }
-  function close(){overlay.classList.remove('open');document.body.style.overflow='';document.getElementById('wmodalMedia').innerHTML='';}
-  document.getElementById('wmodalDetailBtn').addEventListener('click',()=>modal.classList.add('expanded'));
-  document.getElementById('wmodalClose').addEventListener('click',close);
-  overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))close();});
-
-  const filters=document.getElementById('worksFilters');
-  filters.addEventListener('click',e=>{
-    const b=e.target.closest('.wfilter'); if(!b)return;
-    filters.querySelectorAll('.wfilter').forEach(f=>f.classList.remove('active'));
-    b.classList.add('active');
-    render(b.dataset.cat);
-  });
-  window.__worksRender=()=>render(document.querySelector('.wfilter.active')?.dataset.cat||'all');
-  render('all');
-})();
 </script>
-<div class="wmodal-overlay" id="wmodalOverlay">
-  <div class="wmodal" id="wmodal">
-    <div class="wmodal-media" id="wmodalMedia"></div>
-    <button class="wmodal-close" id="wmodalClose" aria-label="닫기"><svg class="svgi" width="20" height="20"><use href="#i-close"/></svg></button>
-    <div class="wmodal-body">
-      <div class="wmodal-cat" id="wmodalCat"></div>
-      <div class="wmodal-title" id="wmodalTitle"></div>
-      <div class="wmodal-lead" id="wmodalLead"></div>
-      <div class="wmodal-tools" id="wmodalTools"></div>
-      <div class="wmodal-cta"><button class="wbtn wbtn-primary wbtn-detail" id="wmodalDetailBtn"></button></div>
-      <div class="wdetail"><div class="wpsi" id="wmodalPsi"></div></div>
-    </div>
-  </div>
-</div>
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
   <button class="lightbox-close" aria-label="닫기"><svg class="svgi" width="20" height="20"><use href="#i-close"/></svg></button>
   <img class="lightbox-img" alt="">

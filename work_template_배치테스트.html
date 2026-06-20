@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Work Item Editor — 배치 테스트</title>
+<style>
+@font-face{font-family:'NexonLv2';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic Light.woff') format('woff');font-weight:300;font-display:swap}
+@font-face{font-family:'NexonLv2';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff') format('woff');font-weight:400;font-display:swap}
+@font-face{font-family:'NexonLv2';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic Bold.woff') format('woff');font-weight:700;font-display:swap}
+
+:root{
+  --bg:#0d1117;--bg-soft:#11161d;--bg-card:#151b23;--bg-raised:#1c242e;
+  --line:rgba(255,255,255,0.07);--line-strong:rgba(255,255,255,0.13);
+  --text:#e8edf2;--text-dim:#9aa7b4;--text-faint:#5f6b78;
+  --accent:#6fd3c7;--accent-dim:rgba(111,211,199,0.35);--accent-glow:rgba(111,211,199,0.10);
+  --radius-card:12px;--radius-media:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'NexonLv2',sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+
+/* ── TOP BAR ── */
+.topbar{
+  position:sticky;top:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 20px;background:#151b23;
+  border-bottom:2px solid rgba(111,211,199,0.25);
+}
+.topbar-logo{font-size:13px;font-weight:700;letter-spacing:.5px}
+.topbar-logo span{color:var(--accent)}
+.topbar-actions{display:flex;gap:8px;align-items:center}
+.badge-tab{font-size:10px;letter-spacing:2px;color:var(--accent);background:var(--accent-glow);border:1px solid var(--accent-dim);border-radius:5px;padding:3px 9px;font-weight:700}
+
+.btn{padding:6px 13px;border:none;border-radius:7px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:all .2s}
+.btn-ghost{background:transparent;border:1px solid var(--line-strong);color:var(--text-dim)}
+.btn-ghost:hover{border-color:var(--accent-dim);color:var(--accent)}
+.btn-primary{background:var(--accent);color:#0d1117}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-danger{background:transparent;border:1px solid rgba(255,80,80,0.2);color:rgba(255,100,100,0.7)}
+.btn-danger:hover{border-color:rgba(255,80,80,0.5);color:#ff6464}
+
+/* ── MAIN LAYOUT ── */
+.editor{display:grid;grid-template-columns:360px 1fr;height:calc(100vh - 48px)}
+
+/* ── FORM PANEL ── */
+.form-panel{
+  background:var(--bg-soft);border-right:1px solid var(--line);
+  overflow-y:auto;height:100%;
+}
+.fs{padding:16px 18px;border-bottom:1px solid var(--line)}
+.fs:last-child{border-bottom:none}
+.fs-label{
+  font-size:10px;letter-spacing:3px;color:var(--accent);font-weight:700;
+  margin-bottom:13px;display:flex;align-items:center;gap:8px;
+}
+.fs-label::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* tab buttons */
+.tbg{display:flex;gap:4px;flex-wrap:wrap}
+.tbtn{
+  padding:5px 11px;border:1px solid var(--line-strong);background:transparent;
+  color:var(--text-faint);font-family:inherit;font-size:11px;font-weight:700;
+  letter-spacing:.5px;border-radius:7px;cursor:pointer;transition:all .2s;
+}
+.tbtn:hover{color:var(--text-dim);border-color:var(--line-strong)}
+.tbtn.on{background:var(--accent-glow);color:var(--accent);border-color:var(--accent-dim)}
+
+/* fields */
+.f{margin-bottom:10px}
+.f:last-child{margin-bottom:0}
+.f label{display:block;font-size:11px;color:var(--text-faint);margin-bottom:5px;letter-spacing:.3px}
+.f label em{color:var(--accent);font-style:normal;font-weight:700}
+.f input,.f textarea,.f select{
+  width:100%;background:#0d1117;border:1px solid var(--line-strong);
+  color:var(--text);font-family:inherit;font-size:12px;
+  border-radius:8px;padding:7px 10px;outline:none;resize:vertical;
+  transition:border-color .2s;line-height:1.5;
+}
+.f input:focus,.f textarea:focus,.f select:focus{border-color:var(--accent-dim)}
+.f textarea{min-height:58px}
+.f select option{background:var(--bg-card)}
+
+/* lang switcher in form */
+.flang{display:flex;gap:3px;margin-bottom:10px}
+.flang-btn{
+  padding:3px 9px;border:1px solid var(--line-strong);background:transparent;
+  color:var(--text-faint);font-family:inherit;font-size:10px;font-weight:700;
+  letter-spacing:1px;border-radius:5px;cursor:pointer;transition:all .2s;
+}
+.flang-btn.on{background:var(--accent-glow);color:var(--accent);border-color:var(--accent-dim)}
+.lp{display:none}.lp.on{display:block}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.chip{
+  display:flex;align-items:center;gap:4px;
+  background:var(--accent-glow);border:1px solid var(--accent-dim);
+  color:var(--accent);font-size:11px;padding:3px 8px;border-radius:20px;
+}
+.chip-x{cursor:pointer;opacity:.6;font-size:14px;line-height:1}
+.chip-x:hover{opacity:1}
+.chip-row{display:flex;gap:6px}
+.chip-row input{flex:1}
+
+/* cards in form */
+.fcard{background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;padding:10px;margin-bottom:8px}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.fcard-head span{font-size:10px;color:var(--text-faint);letter-spacing:1.5px;font-weight:700}
+.add-btn{
+  width:100%;padding:7px;border:1px dashed var(--line-strong);
+  background:transparent;color:var(--text-faint);font-family:inherit;
+  font-size:11px;letter-spacing:.5px;border-radius:8px;cursor:pointer;transition:all .2s;
+}
+.add-btn:hover{border-color:var(--accent-dim);color:var(--accent)}
+
+/* ── PREVIEW PANEL ── */
+.preview-panel{background:var(--bg);overflow-y:auto;height:100%;display:flex;flex-direction:column}
+.pv-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 32px;background:var(--bg-soft);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:10;flex-shrink:0;
+}
+.pv-bar .pv-title{font-size:10px;letter-spacing:2.5px;color:var(--text-faint);font-weight:700}
+.pv-lang{display:flex;gap:3px;background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:3px}
+.pv-lang button{
+  padding:4px 10px;border:none;background:transparent;color:var(--text-faint);
+  font-family:inherit;font-size:10px;font-weight:700;letter-spacing:1px;
+  border-radius:5px;cursor:pointer;transition:all .2s;
+}
+.pv-lang button.on{background:var(--accent-dim);color:#fff}
+.pv-body{padding:28px 40px;flex:1}
+
+/* ── PORTFOLIO PREVIEW COMPONENTS (mirrors portfolio_dev.html) ── */
+.pv-body .proj{margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--line)}
+.pv-body .proj:last-child{border-bottom:none;margin-bottom:0}
+.pv-body .proj-num{font-size:12px;letter-spacing:3px;color:var(--accent-dim);font-weight:700;margin-bottom:8px}
+.pv-body .proj h3{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-.5px;margin-bottom:10px}
+.pv-body .proj .lead{font-size:14px;color:var(--text-dim);font-weight:300;max-width:680px;margin-bottom:24px;line-height:1.7}
+.pv-body .toolrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px;padding:14px 18px;background:var(--bg-card);border:1px solid var(--line);border-radius:12px}
+.pv-body .toolrow .tlabel{font-size:11px;letter-spacing:2px;color:var(--text-faint)}
+.pv-body .tool{font-size:13px;color:var(--text)}
+.pv-body .result-row{display:flex;gap:40px;flex-wrap:wrap;padding:18px 0;margin:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pv-body .result-card .big{font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--accent);letter-spacing:-.5px;line-height:1.1}
+.pv-body .result-card .cap{font-size:13px;color:var(--text-dim);font-weight:300;margin-top:5px}
+.pv-body .story{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:24px}
+.pv-body .story-cell{background:var(--bg-card);padding:18px}
+.pv-body .story-cell .st{font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:8px}
+.pv-body .story-cell p{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.65}
+.pv-body .media{margin:12px 0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg-soft)}
+.pv-body .media img{width:100%;display:block}
+.pv-body .media .caption{padding:11px 15px;font-size:13px;color:var(--text-dim);font-weight:300;border-top:1px solid var(--line);background:var(--bg-raised);line-height:1.5}
+.pv-body .media-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pv-body .yt-facade{position:relative;width:100%;aspect-ratio:16/9;background:#000;cursor:pointer;overflow:hidden}
+.pv-body .yt-facade img{width:100%;height:100%;object-fit:cover;display:block}
+.pv-body .yt-play{position:absolute;inset:0;margin:auto;width:56px;height:56px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(13,17,23,.8);border:1px solid var(--line-strong);color:var(--text)}
+.pv-body .media-ph{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-faint);font-size:12px;gap:8px;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 10px,var(--bg-card) 10px,var(--bg-card) 20px)}
+.pv-body .rnd{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg-card)}
+.pv-body .rnd-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:transparent;border:none;color:var(--text);font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.pv-body .rnd-label::before{content:'R&D';font-size:10px;letter-spacing:1px;color:var(--accent);background:var(--accent-glow);border:1px solid var(--accent-dim);border-radius:5px;padding:2px 7px;margin-right:10px}
+.pv-body .rnd-inner{padding:4px 18px 18px}
+.pv-body .rnd-block{padding:14px 0;border-top:1px solid var(--line)}
+.pv-body .rnd-block .rb-tag{font-size:10px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:6px}
+.pv-body .rnd-block .rb-title{font-size:14px;color:var(--text);margin-bottom:6px}
+.pv-body .rnd-block .rb-text{font-size:12px;color:var(--text-dim);font-weight:300;line-height:1.7}
+.pv-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:360px;color:var(--text-faint);gap:12px;opacity:.5}
+.pv-empty .ico{font-size:36px}
+
+/* ── CODE SECTION ── */
+.code-section{border-top:1px solid var(--line-strong);background:var(--bg-soft);padding:28px 36px}
+.code-nav{display:flex;gap:4px;margin-bottom:14px}
+.cnav-btn{padding:5px 13px;border:1px solid var(--line-strong);background:transparent;color:var(--text-faint);font-family:inherit;font-size:11px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .2s}
+.cnav-btn.on{background:var(--accent-glow);color:var(--accent);border-color:var(--accent-dim)}
+.cpane{display:none}.cpane.on{display:block}
+.code-block{position:relative}
+.code-block pre{background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;padding:16px 18px;font-family:'Fira Code','Consolas',monospace;font-size:11.5px;color:#c5cdd6;overflow:auto;max-height:320px;line-height:1.65;white-space:pre}
+.copy-btn{position:absolute;top:10px;right:10px;padding:4px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--line-strong);color:var(--text-faint);font-size:10px;font-family:inherit;border-radius:6px;cursor:pointer;transition:all .2s}
+.copy-btn:hover{background:var(--accent-glow);color:var(--accent);border-color:var(--accent-dim)}
+.code-hint{font-size:11px;color:var(--text-faint);margin-bottom:8px;letter-spacing:.3px}
+.code-hint em{color:var(--accent);font-style:normal}
+
+/* ── PLACEMENT TEST ── */
+.placement-section{border-top:2px solid rgba(111,211,199,0.2);background:var(--bg);padding:36px 40px}
+.placement-head{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.placement-head h2{font-size:15px;font-weight:700;letter-spacing:1px}
+.placement-head .ph-badge{font-size:10px;letter-spacing:2px;color:var(--accent);background:var(--accent-glow);border:1px solid var(--accent-dim);border-radius:5px;padding:3px 8px}
+.placement-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;max-width:900px}
+.pi{padding:14px 16px;border-radius:10px;border:1px solid var(--line);transition:all .3s}
+.pi.ghost{background:var(--bg-soft);opacity:.45}
+.pi.new-item{background:rgba(111,211,199,0.05);border-color:rgba(111,211,199,0.4);box-shadow:0 0 0 1px rgba(111,211,199,0.15),0 4px 20px rgba(111,211,199,0.08)}
+.pi .pi-num{font-size:10px;letter-spacing:2px;color:var(--text-faint);margin-bottom:5px}
+.pi.new-item .pi-num{color:var(--accent)}
+.pi .pi-name{font-size:13px;color:var(--text);font-weight:400}
+.pi.new-item .pi-name{color:#fff}
+.pi .pi-star{font-size:9px;letter-spacing:1.5px;color:var(--accent);margin-top:4px}
+.pl-arrow{display:flex;align-items:center;justify-content:center;color:var(--text-faint);opacity:.3;font-size:18px;padding:2px 0;grid-column:1/-1;display:none}
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ── -->
+<div class="topbar">
+  <div class="topbar-logo">Portfolio <span>Work Editor</span> &nbsp;/&nbsp; 배치 테스트</div>
+  <div class="topbar-actions">
+    <span class="badge-tab" id="curTabBadge">PLUGIN</span>
+    <button class="btn btn-ghost" onclick="resetForm()">초기화</button>
+    <button class="btn btn-primary" onclick="copyAll()">전체 코드 복사</button>
+  </div>
+</div>
+
+<div class="editor">
+
+  <!-- ════ FORM PANEL ════ -->
+  <aside class="form-panel">
+
+    <!-- 배치 설정 -->
+    <div class="fs">
+      <div class="fs-label">배치 설정</div>
+
+      <div class="f">
+        <label>탭 선택</label>
+        <div class="tbg" id="tabBtns">
+          <button class="tbtn on" data-tab="plugin"  onclick="setTab('plugin',this)">PLUGIN</button>
+          <button class="tbtn"    data-tab="rigging" onclick="setTab('rigging',this)">RIGGING</button>
+          <button class="tbtn"    data-tab="anim"    onclick="setTab('anim',this)">ANIMATION</button>
+          <button class="tbtn"    data-tab="about"   onclick="setTab('about',this)">CAREER</button>
+        </div>
+      </div>
+
+      <div class="f">
+        <label>프로젝트 번호 &nbsp;<em id="numHint"></em></label>
+        <input id="projNum" type="text" placeholder="자동 계산" oninput="render()">
+      </div>
+
+      <div class="f">
+        <label>삽입 위치</label>
+        <select id="posSel" onchange="render()">
+          <option value="end">맨 끝에 추가</option>
+        </select>
+      </div>
+
+      <div class="f">
+        <label>배너 컨텍스트 <em style="font-weight:300;color:var(--text-faint)">(선택 · 탭 상단 소속 표기)</em></label>
+        <input id="bannerCtx" type="text" placeholder="ETERNAL RETURN · NIMBLE NEURON" oninput="render()">
+      </div>
+    </div>
+
+    <!-- 프로젝트 정보 -->
+    <div class="fs">
+      <div class="fs-label">프로젝트 정보</div>
+      <div class="flang" id="infoLangBtns">
+        <button class="flang-btn on" onclick="setInfoLang('ko',this)">KO</button>
+        <button class="flang-btn"   onclick="setInfoLang('en',this)">EN</button>
+        <button class="flang-btn"   onclick="setInfoLang('zh',this)">ZH</button>
+      </div>
+      <div class="lp on" id="ilp-ko">
+        <div class="f"><label>제목 <em>KO</em></label><input id="ko-title" type="text" placeholder="배치 처리 시스템" oninput="render()"></div>
+        <div class="f"><label>리드 텍스트 <em>KO</em></label><textarea id="ko-lead" placeholder="한 줄 핵심 요약..." oninput="render()"></textarea></div>
+      </div>
+      <div class="lp" id="ilp-en">
+        <div class="f"><label>Title <em>EN</em></label><input id="en-title" type="text" placeholder="Batch Processing System" oninput="render()"></div>
+        <div class="f"><label>Lead text <em>EN</em></label><textarea id="en-lead" placeholder="One-line summary..." oninput="render()"></textarea></div>
+      </div>
+      <div class="lp" id="ilp-zh">
+        <div class="f"><label>标题 <em>ZH</em></label><input id="zh-title" type="text" placeholder="批处理系统" oninput="render()"></div>
+        <div class="f"><label>导语 <em>ZH</em></label><textarea id="zh-lead" placeholder="一行摘要..." oninput="render()"></textarea></div>
+      </div>
+    </div>
+
+    <!-- 툴킷 -->
+    <div class="fs">
+      <div class="fs-label">툴킷 태그</div>
+      <div class="chip-row">
+        <input id="toolInp" type="text" placeholder="3ds Max, Python ..." onkeydown="if(event.key==='Enter'){event.preventDefault();addTool()}">
+        <button class="btn btn-ghost" onclick="addTool()">+</button>
+      </div>
+      <div class="chips" id="toolChips"></div>
+    </div>
+
+    <!-- 결과 수치 -->
+    <div class="fs">
+      <div class="fs-label">결과 수치 (Result Cards)</div>
+      <div id="resultList"></div>
+      <button class="add-btn" onclick="addResult()">+ 결과 카드 추가</button>
+    </div>
+
+    <!-- 스토리 -->
+    <div class="fs">
+      <div class="fs-label">스토리 (PROBLEM / SOLUTION / IMPACT)</div>
+      <div class="flang" id="storyLangBtns">
+        <button class="flang-btn on" onclick="setStoryLang('ko',this)">KO</button>
+        <button class="flang-btn"   onclick="setStoryLang('en',this)">EN</button>
+        <button class="flang-btn"   onclick="setStoryLang('zh',this)">ZH</button>
+      </div>
+      <div class="lp on" id="slp-ko">
+        <div class="f"><label>PROBLEM <em>KO</em></label><textarea id="ko-prob" oninput="render()"></textarea></div>
+        <div class="f"><label>SOLUTION <em>KO</em></label><textarea id="ko-sol"  oninput="render()"></textarea></div>
+        <div class="f"><label>IMPACT <em>KO</em></label><textarea id="ko-imp"   oninput="render()"></textarea></div>
+      </div>
+      <div class="lp" id="slp-en">
+        <div class="f"><label>PROBLEM <em>EN</em></label><textarea id="en-prob" oninput="render()"></textarea></div>
+        <div class="f"><label>SOLUTION <em>EN</em></label><textarea id="en-sol"  oninput="render()"></textarea></div>
+        <div class="f"><label>IMPACT <em>EN</em></label><textarea id="en-imp"   oninput="render()"></textarea></div>
+      </div>
+      <div class="lp" id="slp-zh">
+        <div class="f"><label>PROBLEM <em>ZH</em></label><textarea id="zh-prob" oninput="render()"></textarea></div>
+        <div class="f"><label>SOLUTION <em>ZH</em></label><textarea id="zh-sol"  oninput="render()"></textarea></div>
+        <div class="f"><label>IMPACT <em>ZH</em></label><textarea id="zh-imp"   oninput="render()"></textarea></div>
+      </div>
+    </div>
+
+    <!-- 미디어 -->
+    <div class="fs">
+      <div class="fs-label">미디어</div>
+      <div id="mediaList"></div>
+      <button class="add-btn" onclick="addMedia()">+ 미디어 추가</button>
+    </div>
+
+    <!-- R&D 아코디언 -->
+    <div class="fs">
+      <div class="fs-label">R&D 아코디언 <span style="color:var(--text-faint);font-size:10px;letter-spacing:0;font-weight:300"> — 선택사항</span></div>
+      <div class="f"><label>R&D 버튼 레이블 <em>KO</em></label><input id="rnd-lbl-ko" type="text" placeholder="R&D 과정 자세히 보기" oninput="render()"></div>
+      <div class="f"><label>R&D 버튼 레이블 <em>EN</em></label><input id="rnd-lbl-en" type="text" placeholder="View R&D process" oninput="render()"></div>
+      <div id="rndList"></div>
+      <button class="add-btn" onclick="addRnd()">+ R&D 블록 추가</button>
+    </div>
+
+  </aside>
+
+  <!-- ════ PREVIEW PANEL ════ -->
+  <main class="preview-panel">
+    <div class="pv-bar">
+      <span class="pv-title">실시간 프리뷰</span>
+      <div class="pv-lang">
+        <button class="on" onclick="setPreviewLang('ko',this)">KO</button>
+        <button onclick="setPreviewLang('en',this)">EN</button>
+        <button onclick="setPreviewLang('zh',this)">ZH</button>
+      </div>
+    </div>
+    <div class="pv-body" id="pvBody">
+      <div class="pv-empty"><div class="ico">✦</div><p>왼쪽 폼을 채우면 프리뷰가 표시됩니다</p></div>
+    </div>
+  </main>
+</div>
+
+<!-- ════ CODE OUTPUT ════ -->
+<div class="code-section">
+  <div class="code-nav">
+    <button class="cnav-btn on" onclick="setCodeTab('html',this)">HTML</button>
+    <button class="cnav-btn"   onclick="setCodeTab('i18n-ko',this)">i18n KO</button>
+    <button class="cnav-btn"   onclick="setCodeTab('i18n-en',this)">i18n EN</button>
+    <button class="cnav-btn"   onclick="setCodeTab('i18n-zh',this)">i18n ZH</button>
+  </div>
+
+  <div class="cpane on" id="ctab-html">
+    <div class="code-hint">portfolio_dev.html 의 <em>#<span id="hintTab">plugin</span></em> 패널 안 — 삽입 위치에 붙여넣기</div>
+    <div class="code-block"><pre id="outHtml"></pre><button class="copy-btn" onclick="cp('outHtml')">복사</button></div>
+  </div>
+  <div class="cpane" id="ctab-i18n-ko">
+    <div class="code-hint">I18N.ko 객체 안에 추가</div>
+    <div class="code-block"><pre id="outKo"></pre><button class="copy-btn" onclick="cp('outKo')">복사</button></div>
+  </div>
+  <div class="cpane" id="ctab-i18n-en">
+    <div class="code-hint">I18N.en 객체 안에 추가</div>
+    <div class="code-block"><pre id="outEn"></pre><button class="copy-btn" onclick="cp('outEn')">복사</button></div>
+  </div>
+  <div class="cpane" id="ctab-i18n-zh">
+    <div class="code-hint">I18N.zh 객체 안에 추가</div>
+    <div class="code-block"><pre id="outZh"></pre><button class="copy-btn" onclick="cp('outZh')">복사</button></div>
+  </div>
+</div>
+
+<!-- ════ PLACEMENT TEST ════ -->
+<div class="placement-section">
+  <div class="placement-head">
+    <h2>배치 테스트</h2>
+    <span class="ph-badge" id="plBadge">PLUGIN 탭</span>
+  </div>
+  <div class="placement-grid" id="plGrid"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// 포트폴리오 현재 항목 (portfolio_dev.html 업데이트 시 여기도 맞춰서 수정)
+// ═══════════════════════════════════════════════
+const TABS = {
+  plugin: {
+    label:'PIPELINE & TOOLS',
+    items:[
+      'BATCH RETARGETING TOOL',
+      'BATCH EXPORT TOOL',
+      'CHARACTER SETUP TOOL',
+      'RIGGING MANAGER',
+      'MORPH ANIMATION TOOL',
+    ]
+  },
+  rigging: {
+    label:'RIG & SETUP',
+    items:[
+      'CUSTOM FACIAL RIG',
+      'CUSTOM BODY RIG',
+    ]
+  },
+  anim: {
+    label:'MOTION WORKS',
+    items:[
+      'FIRST DESCENDANT · NEXON GAMES',
+      'IP COLLABORATION SKINS',
+      'CHARACTER SKIN RETARGETING',
+      'IN-GAME MOTION',
+      'OUT-GAME MOTION',
+      'DEMO REEL',
+    ]
+  },
+  about: {
+    label:'CAREER & INFO',
+    items:['CAREER','AWARDS','PROJECTS','ROLE']
+  }
+};
+
+// ─── STATE ───
+let pvLang = 'ko';
+let tools  = [];
+let results= [];  // {big,capKo,capEn,capZh}
+let media  = [];  // {type,path,ytId,capKo,capEn,capZh}
+let rnds   = [];  // {tagKo,titleKo,textKo,titleEn,textEn}
+let curTab = 'plugin';
+
+// ─── TAB ───
+function setTab(tab, el) {
+  curTab = tab;
+  document.querySelectorAll('#tabBtns .tbtn').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  document.getElementById('curTabBadge').textContent = tab.toUpperCase();
+  document.getElementById('plBadge').textContent = tab.toUpperCase() + ' 탭';
+  document.getElementById('hintTab').textContent = tab;
+
+  const info = TABS[tab];
+  const cnt  = info.items.length;
+  document.getElementById('numHint').textContent = `(현재 탭 마지막 번호: ${String(cnt).padStart(2,'0')})`;
+
+  const sel = document.getElementById('posSel');
+  sel.innerHTML = '<option value="end">맨 끝에 추가</option>';
+  info.items.forEach((name, i) => {
+    const o = document.createElement('option');
+    o.value = String(i + 1);
+    o.textContent = `${String(i+1).padStart(2,'0')} — ${name} 뒤`;
+    sel.appendChild(o);
+  });
+  render();
+}
+
+// ─── LANG SWITCHERS ───
+function setInfoLang(lang, el) {
+  document.querySelectorAll('#infoLangBtns .flang-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  ['ko','en','zh'].forEach(l => document.getElementById('ilp-'+l).classList.toggle('on', l===lang));
+}
+function setStoryLang(lang, el) {
+  document.querySelectorAll('#storyLangBtns .flang-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  ['ko','en','zh'].forEach(l => document.getElementById('slp-'+l).classList.toggle('on', l===lang));
+}
+function setPreviewLang(lang, el) {
+  pvLang = lang;
+  document.querySelectorAll('.pv-lang button').forEach(b=>b.classList.toggle('on', b.textContent.toLowerCase()===lang));
+  render();
+}
+
+// ─── TOOLS ───
+function addTool() {
+  const inp = document.getElementById('toolInp');
+  inp.value.split(',').map(s=>s.trim()).filter(Boolean).forEach(t => {
+    if (!tools.includes(t)) tools.push(t);
+  });
+  inp.value = '';
+  syncChips();
+}
+function removeTool(i) { tools.splice(i,1); syncChips(); }
+function syncChips() {
+  document.getElementById('toolChips').innerHTML = tools.map((t,i) =>
+    `<span class="chip">${t}<span class="chip-x" onclick="removeTool(${i});render()">×</span></span>`
+  ).join('');
+  render();
+}
+
+// ─── RESULTS ───
+function addResult() {
+  results.push({big:'',capKo:'',capEn:'',capZh:''});
+  syncResults();
+}
+function removeResult(i) { results.splice(i,1); syncResults(); render(); }
+function syncResults() {
+  document.getElementById('resultList').innerHTML = results.map((r,i) => `
+    <div class="fcard">
+      <div class="fcard-head"><span>RESULT ${i+1}</span><button class="btn btn-danger" onclick="removeResult(${i})">삭제</button></div>
+      <div class="f"><label>수치 값</label><input type="text" value="${esc(r.big)}" placeholder="4일 → 2일" oninput="results[${i}].big=this.value;render()"></div>
+      <div class="f"><label>캡션 <em>KO</em></label><input type="text" value="${esc(r.capKo)}" placeholder="작업 기간 단축" oninput="results[${i}].capKo=this.value;render()"></div>
+      <div class="f"><label>Caption <em>EN</em></label><input type="text" value="${esc(r.capEn)}" placeholder="Work time reduced" oninput="results[${i}].capEn=this.value;render()"></div>
+      <div class="f"><label>说明 <em>ZH</em></label><input type="text" value="${esc(r.capZh)}" placeholder="缩短作业时间" oninput="results[${i}].capZh=this.value;render()"></div>
+    </div>`).join('');
+}
+
+// ─── MEDIA ───
+function addMedia() {
+  media.push({type:'image',path:'',ytId:'',capKo:'',capEn:'',capZh:''});
+  syncMedia();
+}
+function removeMedia(i) { media.splice(i,1); syncMedia(); render(); }
+function syncMedia() {
+  document.getElementById('mediaList').innerHTML = media.map((m,i) => `
+    <div class="fcard">
+      <div class="fcard-head"><span>MEDIA ${i+1}</span><button class="btn btn-danger" onclick="removeMedia(${i})">삭제</button></div>
+      <div class="f"><label>타입</label>
+        <select onchange="media[${i}].type=this.value;syncMedia();render()">
+          <option value="image"       ${m.type==='image'?'selected':''}>이미지 (.webp/.gif)</option>
+          <option value="youtube"     ${m.type==='youtube'?'selected':''}>YouTube</option>
+          <option value="placeholder" ${m.type==='placeholder'?'selected':''}>플레이스홀더 (미정)</option>
+        </select>
+      </div>
+      ${m.type==='image'?`<div class="f"><label>파일 경로</label><input type="text" value="${esc(m.path)}" placeholder="gif/plugin_retarget1.webp" oninput="media[${i}].path=this.value;render()"></div>`:''}
+      ${m.type==='youtube'?`<div class="f"><label>YouTube ID</label><input type="text" value="${esc(m.ytId)}" placeholder="B619JNrayFo" oninput="media[${i}].ytId=this.value;render()"></div>`:''}
+      <div class="f"><label>캡션 <em>KO</em></label><input type="text" value="${esc(m.capKo)}" placeholder="이미지 설명" oninput="media[${i}].capKo=this.value;render()"></div>
+      <div class="f"><label>Caption <em>EN</em></label><input type="text" value="${esc(m.capEn)}" placeholder="Image caption" oninput="media[${i}].capEn=this.value;render()"></div>
+      <div class="f"><label>说明 <em>ZH</em></label><input type="text" value="${esc(m.capZh)}" placeholder="图片说明" oninput="media[${i}].capZh=this.value;render()"></div>
+    </div>`).join('');
+}
+
+// ─── R&D ───
+function addRnd() {
+  rnds.push({tagKo:'',titleKo:'',textKo:'',titleEn:'',textEn:''});
+  syncRnd();
+}
+function removeRnd(i) { rnds.splice(i,1); syncRnd(); render(); }
+function syncRnd() {
+  document.getElementById('rndList').innerHTML = rnds.map((r,i) => `
+    <div class="fcard">
+      <div class="fcard-head"><span>BLOCK ${String(i+1).padStart(2,'0')}</span><button class="btn btn-danger" onclick="removeRnd(${i})">삭제</button></div>
+      <div class="f"><label>태그 레이블 <em>(공통)</em></label><input type="text" value="${esc(r.tagKo)}" placeholder="01 · REFERENCE & GOAL" oninput="rnds[${i}].tagKo=this.value;render()"></div>
+      <div class="f"><label>소제목 <em>KO</em></label><input type="text" value="${esc(r.titleKo)}" oninput="rnds[${i}].titleKo=this.value;render()"></div>
+      <div class="f"><label>내용 <em>KO</em></label><textarea oninput="rnds[${i}].textKo=this.value;render()">${esc(r.textKo)}</textarea></div>
+      <div class="f"><label>Title <em>EN</em></label><input type="text" value="${esc(r.titleEn)}" oninput="rnds[${i}].titleEn=this.value;render()"></div>
+      <div class="f"><label>Text <em>EN</em></label><textarea oninput="rnds[${i}].textEn=this.value;render()">${esc(r.textEn)}</textarea></div>
+    </div>`).join('');
+}
+
+// ─── HELPERS ───
+function esc(s){ return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;') }
+function v(id){ return (document.getElementById(id)||{}).value || '' }
+function pad(n){ return String(n).padStart(2,'0') }
+
+function getNum() {
+  const raw = v('projNum').trim();
+  if (raw) return pad(parseInt(raw)||1);
+  return pad(TABS[curTab].items.length + 1);
+}
+function getPfx(tab, num) {
+  return ({plugin:'p',rigging:'r',anim:'a',about:'ab'}[tab]||'x') + num;
+}
+
+// ─── PREVIEW RENDERER ───
+function buildPreviewHTML(lang) {
+  const num = getNum();
+  const pfx = getPfx(curTab, num);
+  const title  = v(`${lang}-title`)  || v('ko-title');
+  const lead   = v(`${lang}-lead`)   || '';
+  const prob   = v(`${lang}-prob`)   || '';
+  const sol    = v(`${lang}-sol`)    || '';
+  const imp    = v(`${lang}-imp`)    || '';
+  const ctx    = v('bannerCtx');
+
+  const hasContent = title || lead || prob || tools.length || media.length || results.length;
+  if (!hasContent) return `<div class="pv-empty"><div class="ico">✦</div><p>왼쪽 폼을 채우면 프리뷰가 표시됩니다</p></div>`;
+
+  let h = `<div class="proj">`;
+  if (ctx) h += `<div class="proj-num" style="color:var(--accent)">${num} — ${ctx}</div>`;
+  else      h += `<div class="proj-num">${num} — [TYPE]</div>`;
+
+  h += `<h3>${title || '<span style="color:var(--text-faint)">[제목 미입력]</span>'}</h3>`;
+  if (lead) h += `<p class="lead">${lead}</p>`;
+
+  if (tools.length) {
+    h += `<div class="toolrow"><span class="tlabel">TOOLKIT</span>${tools.map(t=>`<span class="tool">${t}</span>`).join('')}</div>`;
+  }
+
+  if (results.length) {
+    const cap = r => lang==='en'?r.capEn:lang==='zh'?r.capZh:r.capKo;
+    h += `<div class="result-row">${results.map(r=>`<div class="result-card"><div class="big">${r.big||'—'}</div><div class="cap">${cap(r)||'—'}</div></div>`).join('')}</div>`;
+  }
+
+  if (prob||sol||imp) {
+    h += `<div class="story">
+      <div class="story-cell"><div class="st">PROBLEM</div><p>${prob||'—'}</p></div>
+      <div class="story-cell"><div class="st">SOLUTION</div><p>${sol||'—'}</p></div>
+      <div class="story-cell"><div class="st">IMPACT</div><p>${imp||'—'}</p></div>
+    </div>`;
+  }
+
+  const cap = m => lang==='en'?m.capEn:lang==='zh'?m.capZh:m.capKo;
+  if (media.length === 2) {
+    h += `<div class="media-grid">${media.map(m=>mediaHtml(m,cap(m))).join('')}</div>`;
+  } else {
+    media.forEach(m => h += mediaHtml(m, cap(m)));
+  }
+
+  if (rnds.length) {
+    const lbl = v('rnd-lbl-ko') || 'R&D 과정 자세히 보기';
+    h += `<div class="rnd">
+      <button class="rnd-toggle"><span class="rnd-label">${lbl}</span></button>
+      <div class="rnd-inner">
+        ${rnds.map(r=>{
+          const t  = lang==='en'?r.titleEn:r.titleKo;
+          const tx = lang==='en'?r.textEn :r.textKo;
+          return `<div class="rnd-block"><div class="rb-tag">${r.tagKo||'TAG'}</div><div class="rb-title">${t||'—'}</div><div class="rb-text">${tx||'—'}</div></div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+
+  h += `</div>`;
+  return h;
+}
+
+function mediaHtml(m, cap) {
+  if (m.type==='youtube') {
+    const thumb = m.ytId ? `https://i.ytimg.com/vi/${m.ytId}/hqdefault.jpg` : '';
+    return `<div class="media">
+      <div class="yt-facade">
+        ${thumb?`<img src="${thumb}" alt="YouTube">`:
+          `<div class="media-ph"><span style="font-size:28px;opacity:.3">▶</span><span>YouTube ID 미입력</span></div>`}
+        <div class="yt-play">▶</div>
+      </div>
+      ${cap?`<div class="caption">${cap}</div>`:''}
+    </div>`;
+  } else if (m.type==='image') {
+    return `<div class="media">
+      ${m.path?`<img src="${m.path}" alt="${cap||''}">`:
+        `<div class="media-ph"><span style="font-size:26px;opacity:.3">🖼</span><span>경로 미입력</span></div>`}
+      ${cap?`<div class="caption">${cap}</div>`:''}
+    </div>`;
+  } else {
+    return `<div class="media"><div class="media-ph"><span style="font-size:26px;opacity:.3">🖼</span><span>플레이스홀더</span></div>${cap?`<div class="caption">${cap}</div>`:''}</div>`;
+  }
+}
+
+// ─── CODE GENERATORS ───
+function genHTML() {
+  const num = getNum();
+  const pfx = getPfx(curTab, num);
+  const ctx = v('bannerCtx');
+  let L = [];
+  L.push(`<div class="proj">`);
+  L.push(`  <div class="proj-num"${ctx?` style="color:var(--accent)"`:''}>${num} — ${ctx||'[TYPE]'}</div>`);
+  L.push(`  <h3 data-i18n="${pfx}.title"></h3>`);
+  if (v('ko-lead')) L.push(`  <p class="lead" data-i18n="${pfx}.lead"></p>`);
+  if (tools.length) {
+    L.push(`  <div class="toolrow"><span class="tlabel">TOOLKIT</span>`);
+    tools.forEach(t => L.push(`    <span class="tool">${t}</span>`));
+    L.push(`  </div>`);
+  }
+  if (results.length) {
+    L.push(`  <div class="result-row">`);
+    results.forEach((_,i) => L.push(`    <div class="result-card"><div class="big" data-i18n="${pfx}.r${i+1}b"></div><div class="cap" data-i18n="${pfx}.r${i+1}c"></div></div>`));
+    L.push(`  </div>`);
+  }
+  if (v('ko-prob')||v('ko-sol')||v('ko-imp')) {
+    L.push(`  <div class="story">`);
+    L.push(`    <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="${pfx}.s"></p></div>`);
+    L.push(`    <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="${pfx}.so"></p></div>`);
+    L.push(`    <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="${pfx}.i"></p></div>`);
+    L.push(`  </div>`);
+  }
+  if (media.length===2) {
+    L.push(`  <div class="media-grid">`);
+    media.forEach((m,i) => genMediaLine(m,pfx,i).forEach(l=>L.push('    '+l)));
+    L.push(`  </div>`);
+  } else {
+    media.forEach((m,i) => genMediaLine(m,pfx,i).forEach(l=>L.push('  '+l)));
+  }
+  if (rnds.length) {
+    L.push(`  <div class="rnd" id="${pfx}Rnd">`);
+    L.push(`    <button class="rnd-toggle"><span class="rl" data-i18n="${pfx}.rndlabel"></span><span class="chev"><svg class="svgi" width="16" height="16"><use href="#i-chevron-down"/></svg></span></button>`);
+    L.push(`    <div class="rnd-body">`);
+    L.push(`      <div class="rnd-inner">`);
+    rnds.forEach((r,i) => {
+      L.push(`        <div class="rnd-block">`);
+      L.push(`          <div class="rb-tag">${r.tagKo||`0${i+1} · TAG`}</div>`);
+      L.push(`          <div class="rb-title" data-i18n="${pfx}.rb${i+1}t"></div>`);
+      L.push(`          <div class="rb-text"  data-i18n="${pfx}.rb${i+1}d"></div>`);
+      L.push(`        </div>`);
+    });
+    L.push(`      </div>`);
+    L.push(`    </div>`);
+    L.push(`  </div>`);
+  }
+  L.push(`</div>`);
+  return L.join('\n');
+}
+
+function genMediaLine(m, pfx, i) {
+  const key = `${pfx}.c${i+1}`;
+  if (m.type==='youtube') {
+    const id = m.ytId||'VIDEO_ID';
+    return [
+      `<div class="media"><div class="yt-facade" data-id="${id}" role="button" tabindex="0" aria-label="Play video">`,
+      `  <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy">`,
+      `  <span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span>`,
+      `</div><div class="caption" data-i18n="${key}"></div></div>`,
+    ];
+  }
+  return [`<div class="media"><img src="${m.path||'gif/IMAGE.webp'}" alt="" loading="lazy"><div class="caption" data-i18n="${key}"></div></div>`];
+}
+
+function genI18n(lang) {
+  const num = getNum();
+  const pfx = getPfx(curTab, num);
+  const q   = s => (s||'').replace(/\\/g,'\\\\').replace(/"/g,'\\"');
+  const lines = [];
+  const add = (key, val) => { if(val) lines.push(`"${pfx}.${key}":"${q(val)}"`); };
+
+  add('title', v(`${lang}-title`));
+  add('lead',  v(`${lang}-lead`));
+  results.forEach((r,i) => {
+    add(`r${i+1}b`, r.big);
+    add(`r${i+1}c`, lang==='en'?r.capEn:lang==='zh'?r.capZh:r.capKo);
+  });
+  add('s',  v(`${lang}-prob`));
+  add('so', v(`${lang}-sol`));
+  add('i',  v(`${lang}-imp`));
+  media.forEach((m,i) => add(`c${i+1}`, lang==='en'?m.capEn:lang==='zh'?m.capZh:m.capKo));
+  if (rnds.length) {
+    add('rndlabel', lang==='en'?(v('rnd-lbl-en')||'View R&D process'):(v('rnd-lbl-ko')||'R&D 과정 자세히 보기'));
+    rnds.forEach((r,i) => {
+      add(`rb${i+1}t`, lang==='en'?r.titleEn:r.titleKo);
+      add(`rb${i+1}d`, lang==='en'?r.textEn:r.textKo);
+    });
+  }
+  return lines.join(',\n') || '// (내용을 입력하면 i18n 키가 생성됩니다)';
+}
+
+// ─── PLACEMENT TEST ───
+function renderPlacement() {
+  const num   = getNum();
+  const title = v('ko-title') || '[새 작업물]';
+  const info  = TABS[curTab];
+  const pos   = document.getElementById('posSel').value;
+  const idx   = pos==='end' ? info.items.length : parseInt(pos);
+
+  const all = [...info.items];
+  all.splice(idx, 0, '__NEW__');
+
+  document.getElementById('plGrid').innerHTML = all.map((name, i) => {
+    if (name==='__NEW__') {
+      return `<div class="pi new-item">
+        <div class="pi-num">★ ${pad(num)}</div>
+        <div class="pi-name">${title}</div>
+        <div class="pi-star">NEW · 삽입 위치</div>
+      </div>`;
+    }
+    const realNum = i < idx ? i+1 : i;
+    return `<div class="pi ghost">
+      <div class="pi-num">${pad(realNum)}</div>
+      <div class="pi-name">${name}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── CODE TABS ───
+function setCodeTab(tab, el) {
+  document.querySelectorAll('.cnav-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.cpane').forEach(p=>p.classList.remove('on'));
+  document.getElementById('ctab-'+tab).classList.add('on');
+}
+
+// ─── COPY ───
+function cp(id) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector(`[onclick="cp('${id}')"]`);
+    if (btn) { const orig=btn.textContent; btn.textContent='복사됨 ✓'; setTimeout(()=>btn.textContent=orig,1500); }
+  });
+}
+function copyAll() {
+  const all = [
+    '/* ── HTML ── */', genHTML(),
+    '\n/* ── i18n KO ── */', genI18n('ko'),
+    '\n/* ── i18n EN ── */', genI18n('en'),
+    '\n/* ── i18n ZH ── */', genI18n('zh'),
+  ].join('\n');
+  navigator.clipboard.writeText(all).then(() => {
+    const btn = document.querySelector('[onclick="copyAll()"]');
+    if(btn){ const o=btn.textContent; btn.textContent='복사됨 ✓'; setTimeout(()=>btn.textContent=o,1500); }
+  });
+}
+
+// ─── RESET ───
+function resetForm() {
+  if (!confirm('폼을 초기화하시겠습니까?')) return;
+  document.querySelectorAll('.form-panel input, .form-panel textarea').forEach(el=>el.value='');
+  tools=[]; results=[]; media=[]; rnds=[];
+  syncChips(); syncResults(); syncMedia(); syncRnd();
+  render();
+}
+
+// ─── MAIN RENDER ───
+function render() {
+  document.getElementById('pvBody').innerHTML     = buildPreviewHTML(pvLang);
+  document.getElementById('outHtml').textContent  = genHTML();
+  document.getElementById('outKo').textContent    = genI18n('ko');
+  document.getElementById('outEn').textContent    = genI18n('en');
+  document.getElementById('outZh').textContent    = genI18n('zh');
+  renderPlacement();
+}
+
+// ─── INIT ───
+setTab('plugin', document.querySelector('#tabBtns .tbtn.on'));
+render();
+</script>
+</body>
+</html>

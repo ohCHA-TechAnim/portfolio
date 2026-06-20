@@ -54,7 +54,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .langsw button:hover{color:var(--text)}
 .langsw button.active{background:var(--accent-dim);color:#fff}
 
-.hero{min-height:auto;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vh,140px) 0 64px;position:relative}
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:center;padding:clamp(70px,12vh,120px) 0 36px;position:relative}
 .hero .role-tag{font-size:12px;letter-spacing:5px;color:var(--accent);font-weight:700;margin-bottom:22px;opacity:0;animation:fadeUp .8s .1s forwards}
 .hero h1{font-size:clamp(40px,9vw,90px);font-weight:700;line-height:1;letter-spacing:-2px;margin-bottom:18px;opacity:0;animation:fadeUp .8s .25s forwards}
 .hero h1 .accent{color:var(--accent)}
@@ -66,7 +66,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .hero .meta-item .label{font-size:11px;letter-spacing:2px;color:var(--text-faint);margin-bottom:5px}
 .hero .meta-item .val{font-size:14px}
 .hero .meta-item .val a{color:var(--accent);text-decoration:none}
-.scroll-hint{position:static;margin:50px auto 0;width:fit-content;font-size:11px;letter-spacing:2px;color:var(--text-faint);display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;animation:fadeUp .8s 1s forwards}
+.scroll-hint{position:static;margin:26px auto 0;width:fit-content;font-size:11px;letter-spacing:2px;color:var(--text-faint);display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;animation:fadeUp .8s 1s forwards}
 .scroll-hint .arrow{margin-top:6px;animation:bounce 1.8s infinite}
 
 .hero .socials{display:flex;gap:10px;opacity:0;animation:fadeUp .8s .85s forwards}
@@ -189,7 +189,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 @keyframes bounce{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
-.tabsec{padding:70px 0 100px}
+.tabsec{padding:40px 0 80px}
 .tabbar{position:sticky;top:54px;z-index:50;display:flex;gap:4px;background:var(--bg-soft);border:1px solid var(--line);border-radius:14px;padding:6px;margin-bottom:50px;backdrop-filter:blur(8px)}
 .tabbtn{flex:1;padding:14px 8px;border:none;background:transparent;color:var(--text-dim);font-family:inherit;font-size:14px;font-weight:700;letter-spacing:1px;border-radius:9px;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;line-height:1.25}
 .tabbtn:hover{color:var(--text)}
@@ -396,6 +396,22 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
       </div>
       <div class="works-grid" id="worksGrid"></div>
     </div>
+
+<div class="wmodal-overlay" id="wmodalOverlay">
+  <div class="wmodal" id="wmodal">
+    <div class="wmodal-media" id="wmodalMedia"></div>
+    <button class="wmodal-close" id="wmodalClose" aria-label="닫기"><svg class="svgi" width="20" height="20"><use href="#i-close"/></svg></button>
+    <div class="wmodal-body">
+      <div class="wmodal-cat" id="wmodalCat"></div>
+      <div class="wmodal-title" id="wmodalTitle"></div>
+      <div class="wmodal-lead" id="wmodalLead"></div>
+      <div class="wmodal-tools" id="wmodalTools"></div>
+      <div class="wmodal-cta"><button class="wbtn wbtn-primary wbtn-detail" id="wmodalDetailBtn"></button></div>
+      <div class="wdetail"><div class="wpsi" id="wmodalPsi"></div></div>
+    </div>
+  </div>
+</div>
+
 
     <div class="panel active" id="about">
       <div class="summary-grid">
@@ -844,20 +860,6 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
   render('all');
 })();
 </script>
-<div class="wmodal-overlay" id="wmodalOverlay">
-  <div class="wmodal" id="wmodal">
-    <div class="wmodal-media" id="wmodalMedia"></div>
-    <button class="wmodal-close" id="wmodalClose" aria-label="닫기"><svg class="svgi" width="20" height="20"><use href="#i-close"/></svg></button>
-    <div class="wmodal-body">
-      <div class="wmodal-cat" id="wmodalCat"></div>
-      <div class="wmodal-title" id="wmodalTitle"></div>
-      <div class="wmodal-lead" id="wmodalLead"></div>
-      <div class="wmodal-tools" id="wmodalTools"></div>
-      <div class="wmodal-cta"><button class="wbtn wbtn-primary wbtn-detail" id="wmodalDetailBtn"></button></div>
-      <div class="wdetail"><div class="wpsi" id="wmodalPsi"></div></div>
-    </div>
-  </div>
-</div>
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
   <button class="lightbox-close" aria-label="닫기"><svg class="svgi" width="20" height="20"><use href="#i-close"/></svg></button>
   <img class="lightbox-img" alt="">

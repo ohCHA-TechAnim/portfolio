@@ -305,9 +305,8 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 /* 모달 */
 .wmodal-overlay{position:fixed;inset:0;z-index:1100;background:rgba(8,11,15,.82);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:5vmin;opacity:0;pointer-events:none;transition:opacity .25s}
 .wmodal-overlay.open{opacity:1;pointer-events:auto}
-.wmodal{background:var(--bg-card);border:1px solid var(--line-strong);border-radius:18px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;transform:translateY(16px) scale(.98);transition:transform .3s,max-width .35s ease}
+.wmodal{background:var(--bg-card);border:1px solid var(--line-strong);border-radius:18px;width:100%;max-width:760px;max-height:90vh;overflow-y:auto;transform:translateY(16px) scale(.98);transition:transform .3s}
 .wmodal-overlay.open .wmodal{transform:none}
-.wmodal.expanded{max-width:920px}
 .wmodal-media{aspect-ratio:16/9;background:var(--bg-media);border-radius:18px 18px 0 0;overflow:hidden;position:relative}
 .wmodal-media img{width:100%;height:100%;object-fit:cover}
 .wmodal-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -321,7 +320,7 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 .wmodal-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
 .wchip{font-size:12px;padding:5px 11px;border-radius:20px;background:var(--bg-raised);border:1px solid var(--line);color:var(--text-dim)}
 .wdetail{display:none;border-top:1px solid var(--line);margin-top:8px;padding-top:24px}
-.wmodal.expanded .wdetail{display:none}
+.wdetail{display:none}
 .wpsi{display:grid;gap:18px;margin-bottom:8px}
 @media(min-width:680px){.wpsi{grid-template-columns:repeat(3,1fr)}}
 .wpsi-cell .st{font-size:11px;letter-spacing:.1em;font-weight:700;color:var(--accent);margin-bottom:7px}
@@ -330,10 +329,19 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 .wbtn{padding:11px 22px;border-radius:9px;font-size:14px;cursor:pointer;border:1px solid var(--line-strong);background:transparent;color:var(--text);font-weight:500;transition:all .2s}
 .wbtn:hover{border-color:var(--accent)}
 .wbtn-primary{background:var(--accent);border-color:var(--accent);color:#0d1117;font-weight:600}
-.wmodal.expanded .wbtn-detail{display:none}
-.wmodal.full{max-width:920px}
-.wfull{display:none;border-top:1px solid var(--line);margin-top:20px;padding-top:24px}
-.wmodal.full .wfull{display:block}
+
+.wfull{border-top:1px solid var(--line);margin-top:20px;padding-top:8px}
+.wfull .proj{margin:0;padding:0;border:none}
+.wfull .proj-num{display:block;font-size:11px;letter-spacing:1.5px;color:var(--accent);font-weight:700;margin-bottom:10px}
+.wfull h3{font-size:19px;margin-bottom:10px}
+.wfull .lead{color:var(--text-dim);font-weight:300;font-size:14px;margin-bottom:18px}
+.wfull .banner{margin-bottom:18px}
+.wfull .media-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:600px){.wfull .media-grid{grid-template-columns:1fr}}
+.wfull .story{margin-bottom:18px}
+.wfull .result-row{margin-bottom:18px}
+
+
 .wfull .proj-num{display:none}
 .wfull h3{font-size:18px;margin-bottom:10px}
 .wfull .lead{color:var(--text-dim);font-weight:300;margin-bottom:18px;font-size:14px}
@@ -628,7 +636,7 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
         <span class="tool">Script Controller</span>
       </div>
 
-      <div class="proj" id="facialProj">
+      <div class="proj" id="detail-r1">
         <div class="proj-num">01 — CUSTOM FACIAL RIG</div>
         <h3 data-i18n="r1.title"></h3>
         <p class="lead" data-i18n="r1.lead"></p>
@@ -1091,24 +1099,23 @@ window.addEventListener('scroll',()=>{
 setLang('ko');
 buildSidenav('about');
 
-// Step Player (페이셜 리깅 과정 뷰어)
-(function(){
-  const stepper=document.getElementById('facialStepper');
-  if(!stepper) return;
+// Step Player (페이셜 리깅 과정 뷰어) — 재사용 함수
+function initStepper(stepper){
+  if(!stepper || stepper.dataset.stepInit) return;
+  stepper.dataset.stepInit='1';
   const tabs=[...stepper.querySelectorAll('.step-tab')];
   const imgs=[...stepper.querySelectorAll('[data-step-img]')];
   const descs=[...stepper.querySelectorAll('[data-step-desc]')];
-  const dnum=document.getElementById('facialDnum');
+  const dnum=stepper.querySelector('[id^="facialDnum"]')||document.getElementById('facialDnum');
   const total=tabs.length;
+  if(!total) return;
   let cur=0;
-
   function show(i){
     cur=(i+total)%total;
     tabs.forEach((t,idx)=>t.classList.toggle('active',idx===cur));
     imgs.forEach((m,idx)=>m.classList.toggle('show',idx===cur));
     descs.forEach((d,idx)=>d.style.display=idx===cur?'block':'none');
     if(dnum) dnum.textContent='STEP 0'+(cur+1);
-    // 활성 이미지가 정상 로드되었으면 placeholder 숨김
     const ph=stepper.querySelector('.step-media .ph');
     if(ph){
       const active=imgs[cur];
@@ -1117,24 +1124,24 @@ buildSidenav('about');
     }
   }
   tabs.forEach((t,idx)=>t.addEventListener('click',()=>show(idx)));
-  imgs.forEach((m,idx)=>{
-    m.addEventListener('load',()=>{ if(idx===cur) show(cur); });
-  });
-  stepper.querySelector('.step-nav.prev').addEventListener('click',()=>show(cur-1));
-  stepper.querySelector('.step-nav.next').addEventListener('click',()=>show(cur+1));
+  imgs.forEach((m,idx)=>m.addEventListener('load',()=>{ if(idx===cur) show(cur); }));
+  const prev=stepper.querySelector('.step-nav.prev'), next=stepper.querySelector('.step-nav.next');
+  if(prev) prev.addEventListener('click',()=>show(cur-1));
+  if(next) next.addEventListener('click',()=>show(cur+1));
   show(3);
-
-  // R&D 아코디언
-  const rnd=document.getElementById('facialRnd');
-  if(rnd){
-    const toggle=rnd.querySelector('.rnd-toggle');
-    const body=rnd.querySelector('.rnd-body');
-    toggle.addEventListener('click',()=>{
-      const open=rnd.classList.toggle('open');
-      body.style.maxHeight=open?body.scrollHeight+'px':'0';
-    });
-  }
-})();
+}
+function initRnd(rnd){
+  if(!rnd || rnd.dataset.rndInit) return;
+  rnd.dataset.rndInit='1';
+  const toggle=rnd.querySelector('.rnd-toggle');
+  const body=rnd.querySelector('.rnd-body');
+  if(toggle&&body) toggle.addEventListener('click',()=>{
+    const open=rnd.classList.toggle('open');
+    body.style.maxHeight=open?body.scrollHeight+'px':'0';
+  });
+}
+initStepper(document.getElementById('facialStepper'));
+initRnd(document.getElementById('facialRnd'));
 
 // 영상 캐러셀 (좌우 화살표)
 (function(){
@@ -1218,7 +1225,6 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
   }
   function openModal(c){
     _curCard=c;
-    modal.classList.remove('expanded');
     document.getElementById('wmodalMedia').innerHTML=mediaHTML(c);
     document.getElementById('wmodalCat').textContent=catLabel[c.cat]+' · '+c.num;
     document.getElementById('wmodalTitle').textContent=L(c.title);
@@ -1237,10 +1243,10 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
     overlay.classList.add('open');
     document.body.style.overflow='hidden';
   }
-  function close(){overlay.classList.remove('open');document.body.style.overflow='';document.getElementById('wmodalMedia').innerHTML='';modal.classList.remove('full','expanded');document.getElementById('wmodalFull').innerHTML='';}
+  function close(){overlay.classList.remove('open');document.body.style.overflow='';document.getElementById('wmodalMedia').innerHTML='';document.getElementById('wmodalFull').innerHTML='';document.getElementById('wmodalDetailBtn').style.display='';}
   document.getElementById('wmodalDetailBtn').addEventListener('click',()=>{
-    modal.classList.add('expanded');
     if(!_curCard) return;
+    const btn=document.getElementById('wmodalDetailBtn');
     const src=document.getElementById('detail-'+_curCard.id);
     const dest=document.getElementById('wmodalFull');
     if(src){
@@ -1258,8 +1264,13 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
           el.appendChild(f);
         });
       });
+      // 스텝플레이어/아코디언/캐러셀 재초기화 (클론된 DOM)
+      const st=dest.querySelector('.stepper'); if(st){st.removeAttribute('data-step-init');initStepper(st);}
+      const rn=dest.querySelector('.rnd-section,[id^="facialRnd"]'); if(rn){rn.removeAttribute('data-rnd-init');initRnd(rn);}
+      if(typeof initSkinCarousel==='function'){const sc=dest.querySelector('.skin-carousel,#skinTrack,[id^="skin"]'); if(sc)initSkinCarousel(dest);}
+      btn.style.display='none';
+      dest.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
-    modal.classList.add('full');
   });
   document.getElementById('wmodalClose').addEventListener('click',close);
   overlay.addEventListener('click',e=>{if(e.target===overlay)close();});

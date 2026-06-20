@@ -702,88 +702,44 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
         <h3 data-i18n="r2.title"></h3>
         <p class="lead" data-i18n="r2.lead"></p>
 
-        <div class="rig-linear" id="bodyLinear">
-            <div class="rig-row">
-              <div class="rig-info">
-                <div class="rig-num">01</div>
-                <div class="rig-title" data-i18n="r2.st1"></div>
-                <div class="rig-desc" data-i18n="r2.d1"></div>
-              </div>
-              <div class="rig-media">
-                <img src="gif/body_torso.webp" alt="바디 리그 — 몸통 Stretch & Squash" loading="lazy">
-              </div>
+        <div class="stepper" id="bodyStepper">
+          <div class="step-tabs">
+            <button class="step-tab active" data-step="0"><div class="snum">STEP 01</div><div class="stitle" data-i18n="r2.st1"></div></button>
+            <button class="step-tab" data-step="1"><div class="snum">STEP 02</div><div class="stitle" data-i18n="r2.st2"></div></button>
+            <button class="step-tab" data-step="2"><div class="snum">STEP 03</div><div class="stitle" data-i18n="r2.st3"></div></button>
+            <button class="step-tab" data-step="3"><div class="snum">STEP 04</div><div class="stitle" data-i18n="r2.st4"></div></button>
+            <button class="step-tab" data-step="4"><div class="snum">STEP 05</div><div class="stitle" data-i18n="r2.st5"></div></button>
+            <button class="step-tab" data-step="5"><div class="snum">STEP 06</div><div class="stitle" data-i18n="r2.st6"></div></button>
+            <button class="step-tab" data-step="6"><div class="snum">STEP 07</div><div class="stitle" data-i18n="r2.st7"></div></button>
+            <button class="step-tab" data-step="7"><div class="snum">STEP 08</div><div class="stitle" data-i18n="r2.st8"></div></button>
+          </div>
+          <div class="step-stage">
+            <div class="step-media">
+              <img data-step-img="0" src="gif/body_torso.webp" alt="바디 리그 — 몸통 Stretch & Squash" loading="lazy" decoding="async">
+              <img data-step-img="1" src="gif/body_arm.webp" alt="바디 리그 — 팔 Twist와 IK/FK 블렌드" loading="lazy" decoding="async">
+              <img data-step-img="2" src="gif/body_clavicle.webp" alt="바디 리그 — Auto Clavicle 자동 어깨 제어" loading="lazy" decoding="async">
+              <img data-step-img="3" src="gif/body_hand.webp" alt="바디 리그 — 손 관절·손가락 컨트롤러" loading="lazy" decoding="async">
+              <img data-step-img="4" src="gif/body_leg.webp" alt="바디 리그 — 다리 Twist와 IK/FK 블렌드" loading="lazy" decoding="async">
+              <img data-step-img="5" src="gif/body_foot.webp" alt="바디 리그 — 3축 Foot Roll" loading="lazy" decoding="async">
+              <img data-step-img="6" src="gif/body_ikfk.webp" alt="바디 리그 — IK/FK Match 포즈 전환" loading="lazy" decoding="async">
+              <img data-step-img="7" src="gif/body_scale.webp" alt="바디 리그 — 전체 스케일 애니메이션" loading="lazy" decoding="async">
+              <div class="ph"><span class="icon"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span><span data-i18n="r2.phtext"></span></div>
+              <button class="step-nav prev" aria-label="prev"><svg class="svgi" width="20" height="20"><use href="#i-chevron-left"/></svg></button>
+              <button class="step-nav next" aria-label="next"><svg class="svgi" width="20" height="20"><use href="#i-chevron-right"/></svg></button>
             </div>
-            <div class="rig-row">
-              <div class="rig-info">
-                <div class="rig-num">02</div>
-                <div class="rig-title" data-i18n="r2.st2"></div>
-                <div class="rig-desc" data-i18n="r2.d2"></div>
-              </div>
-              <div class="rig-media">
-                <img src="gif/body_arm.webp" alt="바디 리그 — 팔 Twist와 IK/FK 블렌드" loading="lazy">
-              </div>
-            </div>
-            <div class="rig-row">
-              <div class="rig-info">
-                <div class="rig-num">03</div>
-                <div class="rig-title" data-i18n="r2.st3"></div>
-                <div class="rig-desc" data-i18n="r2.d3"></div>
-              </div>
-              <div class="rig-media">
-                <img src="gif/body_clavicle.webp" alt="바디 리그 — Auto Clavicle 자동 어깨 제어" loading="lazy">
-              </div>
-            </div>
-            <div class="rig-row">
-              <div class="rig-info">
-                <div class="rig-num">04</div>
-                <div class="rig-title" data-i18n="r2.st4"></div>
-                <div class="rig-desc" data-i18n="r2.d4"></div>
-              </div>
-              <div class="rig-media">
-                <img src="gif/body_hand.webp" alt="바디 리그 — 손 관절·손가락 컨트롤러" loading="lazy">
-              </div>
-            </div>
-            <div class="rig-row">
-              <div class="rig-info">
-                <div class="rig-num">05</div>
-                <div class="rig-title" data-i18n="r2.st5"></div>
-                <div class="rig-desc" data-i18n="r2.d5"></div>
-              </div>
-              <div class="rig-media">
-                <img src="gif/body_leg.webp" alt="바디 리그 — 다리 Twist와 IK/FK 블렌드" loading="lazy">
-              </div>
-            </div>
-            <div class="rig-row">
-              <div class="rig-info">
-                <div class="rig-num">06</div>
-                <div class="rig-title" data-i18n="r2.st6"></div>
-                <div class="rig-desc" data-i18n="r2.d6"></div>
-              </div>
-              <div class="rig-media">
-                <img src="gif/body_foot.webp" alt="바디 리그 — 3축 Foot Roll" loading="lazy">
-              </div>
-            </div>
-            <div class="rig-row feature">
-              <div class="rig-info">
-                <div class="rig-num">07</div>
-                <div class="rig-title" data-i18n="r2.st7"></div>
-                <div class="rig-desc" data-i18n="r2.d7"></div>
-              </div>
-              <div class="rig-media">
-                <img src="gif/body_ikfk.webp" alt="바디 리그 — IK/FK Match 포즈 전환" loading="lazy">
-              </div>
-            </div>
-            <div class="rig-row feature">
-              <div class="rig-info">
-                <div class="rig-num">08</div>
-                <div class="rig-title" data-i18n="r2.st8"></div>
-                <div class="rig-desc" data-i18n="r2.d8"></div>
-              </div>
-              <div class="rig-media">
-                <img src="gif/body_scale.webp" alt="바디 리그 — 전체 스케일 애니메이션" loading="lazy">
-              </div>
+            <div class="step-desc">
+              <div class="d-num">STEP 01</div>
+              <div class="d-text" data-step-desc="0" data-i18n="r2.d1"></div>
+              <div class="d-text" data-step-desc="1" data-i18n="r2.d2" style="display:none"></div>
+              <div class="d-text" data-step-desc="2" data-i18n="r2.d3" style="display:none"></div>
+              <div class="d-text" data-step-desc="3" data-i18n="r2.d4" style="display:none"></div>
+              <div class="d-text" data-step-desc="4" data-i18n="r2.d5" style="display:none"></div>
+              <div class="d-text" data-step-desc="5" data-i18n="r2.d6" style="display:none"></div>
+              <div class="d-text" data-step-desc="6" data-i18n="r2.d7" style="display:none"></div>
+              <div class="d-text" data-step-desc="7" data-i18n="r2.d8" style="display:none"></div>
             </div>
           </div>
+        </div>
       </div>
     </div>
 
@@ -810,7 +766,7 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
           <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
           <span class="tool"><span class="ico ico-logo"><img src="gif/unreal_White.png" alt="Unreal Engine"></span>Unreal Engine</span>
         </div>
-        <div class="media"><div class="yt-facade" data-id="B619JNrayFo" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/B619JNrayFo/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a0.cap"></div></div>
+        <div class="media"><div class="yt-facade" data-id="B619JNrayFo" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/B619JNrayFo/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy" decoding="async"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a0.cap"></div></div>
       </div>
 
       <div class="proj" id="detail-a1">
@@ -822,8 +778,8 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
           <div class="ip-badge"><span class="x">ER ×</span><span class="ip">GUILTY GEAR</span><span class="ch" data-i18n="a1.ch2"></span></div>
         </div>
         <div class="media-grid">
-          <div class="media"><div class="yt-facade" data-id="AjOONh3eT_M" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/AjOONh3eT_M/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Persona 5 The Royal — ⓒ Nimble Neuron</div></div>
-          <div class="media"><div class="yt-facade" data-id="QEb9GMPu3gk" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/QEb9GMPu3gk/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Guilty Gear — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="yt-facade" data-id="AjOONh3eT_M" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/AjOONh3eT_M/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy" decoding="async"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Persona 5 The Royal — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="yt-facade" data-id="QEb9GMPu3gk" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/QEb9GMPu3gk/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy" decoding="async"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Guilty Gear — ⓒ Nimble Neuron</div></div>
         </div>
       </div>
 
@@ -834,9 +790,9 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
         <div class="vid-carousel">
           <button class="vid-arrow va-prev" aria-label="prev"><svg class="svgi" width="18" height="18"><use href="#i-chevron-left"/></svg></button>
           <div class="vid-track" id="skinTrack">
-            <div class="vid-card"><div class="yt-facade" data-id="4QCUIjr-wP4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/4QCUIjr-wP4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Isaac — ⓒ Nimble Neuron</div></div>
+            <div class="vid-card"><div class="yt-facade" data-id="4QCUIjr-wP4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/4QCUIjr-wP4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy" decoding="async"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Isaac — ⓒ Nimble Neuron</div></div>
             <!-- 추가 영상: 아래 형식으로 vid-card 복사해서 ID만 교체
-            <div class="vid-card"><div class="yt-facade" data-id="VIDEO_ID" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/VIDEO_ID/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">캐릭터명 — ⓒ Nimble Neuron</div></div>
+            <div class="vid-card"><div class="yt-facade" data-id="VIDEO_ID" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/VIDEO_ID/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy" decoding="async"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">캐릭터명 — ⓒ Nimble Neuron</div></div>
             -->
           </div>
           <button class="vid-arrow va-next" aria-label="next"><svg class="svgi" width="18" height="18"><use href="#i-chevron-right"/></svg></button>
@@ -846,19 +802,19 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
       <div class="proj" id="detail-a3">
         <div class="proj-num">04 — IN-GAME MOTION</div>
         <h3 data-i18n="a3.title"></h3>
-        <div class="media"><div class="yt-facade" data-id="FYZve9TWifA" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/FYZve9TWifA/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Alonso — ⓒ Nimble Neuron</div></div>
+        <div class="media"><div class="yt-facade" data-id="FYZve9TWifA" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/FYZve9TWifA/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy" decoding="async"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Alonso — ⓒ Nimble Neuron</div></div>
       </div>
 
       <div class="proj" id="detail-a4">
         <div class="proj-num">05 — OUT-GAME MOTION</div>
         <h3 data-i18n="a4.title"></h3>
-        <div class="media"><div class="yt-facade" data-id="3GsJIqkVyw4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/3GsJIqkVyw4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a4.cap"></div></div>
+        <div class="media"><div class="yt-facade" data-id="3GsJIqkVyw4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/3GsJIqkVyw4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy" decoding="async"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a4.cap"></div></div>
       </div>
 
       <div class="proj" id="detail-a5">
         <div class="proj-num">06 — DEMO REEL</div>
         <h3 data-i18n="a5.title"></h3>
-        <div class="media"><div class="yt-facade" data-id="RukpP-9s5FU" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/RukpP-9s5FU/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">Game Animation Reel 2020 / 2023</div></div>
+        <div class="media"><div class="yt-facade" data-id="RukpP-9s5FU" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/RukpP-9s5FU/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy" decoding="async"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">Game Animation Reel 2020 / 2023</div></div>
       </div>
     </div>
 
@@ -908,7 +864,7 @@ ko:{
 "r1.rndlabel":"R&D 과정 자세히 보기","r1.rb1t":"레퍼런스 분석과 하이브리드 설계 목표","r1.rb1d":"정위님·김동석님의 Facial Rig 영상, Snappers Advanced Facial Rig, Blender Rigify 등을 분석했습니다. FaceCap 기반 페이셜 캡처(블렌드쉐입)와 핸드키 애니메이션을 결합하되, 아나토미에 따라 근육 결 방향으로 본을 배치하는 것을 목표로 잡았습니다.","r1.rb2t":"아나토미 기반 본 배치 설계","r1.rb2d":"눈은 안구 중심(A)에서 눈꺼풀 헬퍼(B)로의 방향벡터에 반지름을 곱하는 수식 A+Unit(B-A)*C로 구면 운동을 구현했습니다. 이마는 곡률을 고려해 한쪽 2개씩, 턱·입은 깨물근/턱끝근, 광대는 한쪽 7개 헬퍼 등 해부학적 근육 결을 따라 본을 배치했습니다.","r1.rb3t":"3중 헬퍼 구조와 FaceCap 파이프라인","r1.rb3d":"각 위치에 헬퍼 3개를 배치했습니다. ①Surface Constraint로 블렌드쉐입 표면을 따라가는 헬퍼, ②포지션 리스트·제로·스크립트로 컨트롤러 수동 제어를 받는 헬퍼, ③폴리싱 단계 디테일 수정용 헬퍼. FaceCap(아이폰)→FBX→모퍼 이식→페이셜 케이지 스킨랩→Surface Constraint 배치→스크립트 컨트롤러 연결→최종 본 스키닝 순으로 파이프라인을 구축했고, 케이지는 재활용 가능하게 만들었습니다.","r1.rb4t":"79본 경량화 · Alembic Export 성공","r1.rb4d":"블렌드쉐입 표면을 헬퍼가 실시간 추적하고, 컨트롤러로 비파괴 오프셋을 더하며, 총 79개 본으로 경량화해 Alembic Export까지 성공했습니다. FaceCap 데이터 위에 핸드키를 레이어링하여 직관적 컨트롤과 고품질을 동시에 확보했습니다.",
 "r1.g1":"표면 추적 GIF","r1.c1":"헬퍼가 블렌드쉐입 표면을 실시간 추적","r1.g2":"FaceCap+핸드키 레이어링 GIF","r1.c2":"캡처 데이터 위에 핸드키 레이어링",
 "r2.title":"커스텀 바디 리그","r2.lead":"Scale Expression 기반 신축 시스템과 IK/FK, Auto Clavicle, Foot Roll을 갖춘 풀바디 리그입니다. 부위별 셋업을 위에서 아래로 정리했습니다.",
-"r2.phtext":"왼쪽 항목을 선택하세요","r2.st1":"몸통 Stretch&Squash","r2.st2":"팔 Twist & IK/FK","r2.st3":"Auto Clavicle","r2.st4":"손 컨트롤러","r2.st5":"다리 Twist & IK/FK","r2.st6":"발 Foot Roll","r2.st7":"IK / FK Match","r2.st8":"전체 스케일","r2.d1":"Scale Expression으로 Stretch & Squash를 구현하고, IK/FK pelvis 블렌드를 지원합니다.","r2.d2":"늘어나는 트위스트본과 IK/FK 블렌드를 갖춘 팔 리깅입니다.","r2.d3":"팔 움직임 -30°~70° 구간에서 어깨가 자동으로 제어됩니다.","r2.d4":"각 관절별 컨트롤러와 손가락 줄기별 컨트롤러, 중수골까지 제어합니다.","r2.d5":"늘어나는 트위스트본과 IK/FK 블렌드를 갖춘 다리 리깅입니다.","r2.d6":"뒤꿈치 축·앞꿈치 축·발목까지 총 3개 축으로 사용 가능한 Foot Roll입니다.","r2.d7":"커스텀 어트리뷰트에 포즈 매치 알고리즘을 넣어 IK/FK 전환이 용이하도록 했습니다.","r2.d8":"기존 바이패드로 불가능한 전체 스케일 애니메이션이 가능합니다. 바이패드를 컨트롤러로 이용해 레이어·BIP·복사/붙여넣기를 그대로 사용할 수 있습니다.",
+"r2.phtext":"이미지 로딩 중…","r2.st1":"몸통 Stretch&Squash","r2.st2":"팔 Twist & IK/FK","r2.st3":"Auto Clavicle","r2.st4":"손 컨트롤러","r2.st5":"다리 Twist & IK/FK","r2.st6":"발 Foot Roll","r2.st7":"IK / FK Match","r2.st8":"전체 스케일","r2.d1":"Scale Expression으로 Stretch & Squash를 구현하고, IK/FK pelvis 블렌드를 지원합니다.","r2.d2":"늘어나는 트위스트본과 IK/FK 블렌드를 갖춘 팔 리깅입니다.","r2.d3":"팔 움직임 -30°~70° 구간에서 어깨가 자동으로 제어됩니다.","r2.d4":"각 관절별 컨트롤러와 손가락 줄기별 컨트롤러, 중수골까지 제어합니다.","r2.d5":"늘어나는 트위스트본과 IK/FK 블렌드를 갖춘 다리 리깅입니다.","r2.d6":"뒤꿈치 축·앞꿈치 축·발목까지 총 3개 축으로 사용 가능한 Foot Roll입니다.","r2.d7":"커스텀 어트리뷰트에 포즈 매치 알고리즘을 넣어 IK/FK 전환이 용이하도록 했습니다.","r2.d8":"기존 바이패드로 불가능한 전체 스케일 애니메이션이 가능합니다. 바이패드를 컨트롤러로 이용해 레이어·BIP·복사/붙여넣기를 그대로 사용할 수 있습니다.",
 "an.btitle":"Animation Works","an.bsub":"",
 "a0.title":"언리얼 피직스 세컨더리 애니메이션","a0.lead":"퍼스트 디센던트 캐릭터 리깅 및 언리얼 피직스 셋업 작업. Kawaii Physics 기반 물리와 Chaos Physics 기반 클로스 물리를 섞어 세컨더리 애니메이션을 구현했습니다.","a0.cap":"First Descendant — ⓒ NEXON Games",
 "a1.title":"IP 콜라보 스킨 — Persona 5 · Guilty Gear","a1.lead":"리타게팅을 기반으로 세컨더리 추가와 전체 애니메이션 수정 작업을 진행했습니다.","a1.ch1":"팬서 · 라우라","a1.ch2":"엘페르트 · 아야","a1.g1":"ER × Persona 5 콜라보 영상","a1.g2":"ER × Guilty Gear 콜라보 영상",
@@ -951,7 +907,7 @@ en:{
 "r1.rndlabel":"View R&D process","r1.rb1t":"Reference analysis & hybrid design goal","r1.rb1d":"Analyzed facial rig videos by industry riggers, Snappers Advanced Facial Rig, and Blender Rigify. The goal: combine FaceCap-based facial capture (blendshapes) with hand-key animation, placing bones along muscle flow based on anatomy.","r1.rb2t":"Anatomy-based bone placement","r1.rb2d":"For the eyes, spherical motion was built with the formula A+Unit(B-A)*C — a direction vector from eyeball center (A) to eyelid helper (B), scaled by radius. Bones were placed along anatomical muscle flow: two per side on the forehead for curvature, masseter/mentalis around the jaw and mouth, seven helpers per side around the cheeks.","r1.rb3t":"Triple-helper structure & FaceCap pipeline","r1.rb3d":"Three helpers per location: (1) tracking the blendshape surface via Surface Constraint, (2) receiving manual control through position list/zero/script, (3) for detail tweaks during polishing. Pipeline: FaceCap (iPhone) → FBX → morpher transfer → facial cage skin-wrap → Surface Constraint placement → script controller link → final bone skinning. The cage is reusable.","r1.rb4t":"79 bones · Alembic Export success","r1.rb4d":"Helpers track the blendshape surface in real time, controllers add non-destructive offsets, and the rig was optimized to 79 bones with successful Alembic Export. Hand-key layered on FaceCap data secured both intuitive control and high fidelity.",
 "r1.g1":"Surface tracking GIF","r1.c1":"Helpers tracking blendshape surface in real time","r1.g2":"FaceCap+hand-key layering GIF","r1.c2":"Hand-key layering over capture data",
 "r2.title":"Custom Body Rig","r2.lead":"A full-body rig with Scale Expression stretch, IK/FK, Auto Clavicle, and Foot Roll. Each setup is organized top to bottom.",
-"r2.phtext":"Select an item on the left","r2.st1":"Torso Stretch&Squash","r2.st2":"Arm Twist & IK/FK","r2.st3":"Auto Clavicle","r2.st4":"Hand Controllers","r2.st5":"Leg Twist & IK/FK","r2.st6":"Foot Roll","r2.st7":"IK / FK Match","r2.st8":"Full Scale","r2.d1":"Stretch & Squash via Scale Expression, with IK/FK pelvis blend support.","r2.d2":"Arm rig with stretchy twist bones and IK/FK blend.","r2.d3":"The shoulder is automatically controlled across -30deg to 70deg of arm movement.","r2.d4":"Controls per-joint controllers, per-finger controllers, and the metacarpals.","r2.d5":"Leg rig with stretchy twist bones and IK/FK blend.","r2.d6":"Foot Roll usable across three axes: heel pivot, toe pivot, and ankle.","r2.d7":"A pose-match algorithm in custom attributes makes IK/FK switching seamless.","r2.d8":"Enables full-scale animation impossible with standard biped. Using biped as a controller keeps layers, BIP, and copy/paste fully usable.",
+"r2.phtext":"Loading…","r2.st1":"Torso Stretch&Squash","r2.st2":"Arm Twist & IK/FK","r2.st3":"Auto Clavicle","r2.st4":"Hand Controllers","r2.st5":"Leg Twist & IK/FK","r2.st6":"Foot Roll","r2.st7":"IK / FK Match","r2.st8":"Full Scale","r2.d1":"Stretch & Squash via Scale Expression, with IK/FK pelvis blend support.","r2.d2":"Arm rig with stretchy twist bones and IK/FK blend.","r2.d3":"The shoulder is automatically controlled across -30deg to 70deg of arm movement.","r2.d4":"Controls per-joint controllers, per-finger controllers, and the metacarpals.","r2.d5":"Leg rig with stretchy twist bones and IK/FK blend.","r2.d6":"Foot Roll usable across three axes: heel pivot, toe pivot, and ankle.","r2.d7":"A pose-match algorithm in custom attributes makes IK/FK switching seamless.","r2.d8":"Enables full-scale animation impossible with standard biped. Using biped as a controller keeps layers, BIP, and copy/paste fully usable.",
 "an.btitle":"Animation Works","an.bsub":"",
 "a0.title":"Unreal Physics Secondary Animation","a0.lead":"First Descendant character rigging and Unreal physics setup. Combined Kawaii Physics-based dynamics with Chaos Physics-based cloth simulation to drive secondary animation.","a0.cap":"First Descendant — ⓒ NEXON Games",
 "a1.title":"IP Collaboration Skins — Persona 5 · Guilty Gear","a1.lead":"Built on retargeting, added secondary motion and reworked the full animation.","a1.ch1":"Panther · Laura","a1.ch2":"Elphelt · Aya","a1.g1":"ER × Persona 5 collab video","a1.g2":"ER × Guilty Gear collab video",
@@ -995,7 +951,7 @@ zh:{
 "r1.s1t":"表面追踪","r1.s":"Surface Constraint辅助体实时参照blendshape网格的表面坐标。","r1.p":"运算控制器与辅助体坐标，驱动结构上分离的蒙皮用骨骼笼。","r1.s3t":"优化","r1.so":"以共79根骨骼轻量化，保持骨骼方式的轻容量并实现引擎友好设计。",
 "r1.g1":"表面追踪 GIF","r1.c1":"辅助体实时追踪blendshape表面","r1.g2":"FaceCap+手K分层 GIF","r1.c2":"在捕捉数据之上叠加手K",
 "r2.title":"自定义身体绑定","r2.lead":"具备Scale Expression伸缩系统、IK/FK、Auto Clavicle、Foot Roll的全身绑定。各部位设置自上而下整理。",
-"r2.phtext":"请选择左侧项目","r2.st1":"躯干 Stretch&Squash","r2.st2":"手臂 Twist & IK/FK","r2.st3":"Auto Clavicle","r2.st4":"手部控制器","r2.st5":"腿部 Twist & IK/FK","r2.st6":"Foot Roll","r2.st7":"IK / FK Match","r2.st8":"整体缩放","r2.d1":"以Scale Expression实现Stretch & Squash，支持IK/FK pelvis混合。","r2.d2":"具备伸缩扭曲骨骼与IK/FK混合的手臂绑定。","r2.d3":"在手臂运动-30°~70°区间自动控制肩部。","r2.d4":"控制各关节控制器、各手指控制器及掌骨。","r2.d5":"具备伸缩扭曲骨骼与IK/FK混合的腿部绑定。","r2.d6":"可用脚跟轴·脚尖轴·脚踝共3个轴的Foot Roll功能。","r2.d7":"在自定义属性中加入姿势匹配算法，使IK/FK切换更便捷。","r2.d8":"实现标准biped无法做到的整体缩放动画。将biped用作控制器，图层·BIP·复制/粘贴均可正常使用。",
+"r2.phtext":"加载中…","r2.st1":"躯干 Stretch&Squash","r2.st2":"手臂 Twist & IK/FK","r2.st3":"Auto Clavicle","r2.st4":"手部控制器","r2.st5":"腿部 Twist & IK/FK","r2.st6":"Foot Roll","r2.st7":"IK / FK Match","r2.st8":"整体缩放","r2.d1":"以Scale Expression实现Stretch & Squash，支持IK/FK pelvis混合。","r2.d2":"具备伸缩扭曲骨骼与IK/FK混合的手臂绑定。","r2.d3":"在手臂运动-30°~70°区间自动控制肩部。","r2.d4":"控制各关节控制器、各手指控制器及掌骨。","r2.d5":"具备伸缩扭曲骨骼与IK/FK混合的腿部绑定。","r2.d6":"可用脚跟轴·脚尖轴·脚踝共3个轴的Foot Roll功能。","r2.d7":"在自定义属性中加入姿势匹配算法，使IK/FK切换更便捷。","r2.d8":"实现标准biped无法做到的整体缩放动画。将biped用作控制器，图层·BIP·复制/粘贴均可正常使用。",
 "an.btitle":"动画作品","an.bsub":"",
 "a0.title":"虚幻引擎物理次级动画","a0.lead":"First Descendant 角色绑定及虚幻引擎物理设置。混合使用基于Kawaii Physics的物理与基于Chaos Physics的布料模拟，实现次级动画。","a0.cap":"First Descendant — ⓒ NEXON Games",
 "a1.title":"IP联动皮肤 — Persona 5 · Guilty Gear","a1.lead":"以重定向为基础，进行了次级动作的追加与整体动画的修改。","a1.ch1":"潘瑟 · 劳拉","a1.ch2":"艾尔菲特 · 阿娅","a1.g1":"ER × Persona 5 联动视频","a1.g2":"ER × Guilty Gear 联动视频",
@@ -1106,7 +1062,7 @@ function initStepper(stepper){
   const tabs=[...stepper.querySelectorAll('.step-tab')];
   const imgs=[...stepper.querySelectorAll('[data-step-img]')];
   const descs=[...stepper.querySelectorAll('[data-step-desc]')];
-  const dnum=stepper.querySelector('[id^="facialDnum"]')||document.getElementById('facialDnum');
+  const dnum=stepper.querySelector('.d-num');
   const total=tabs.length;
   if(!total) return;
   let cur=0;
@@ -1128,7 +1084,7 @@ function initStepper(stepper){
   const prev=stepper.querySelector('.step-nav.prev'), next=stepper.querySelector('.step-nav.next');
   if(prev) prev.addEventListener('click',()=>show(cur-1));
   if(next) next.addEventListener('click',()=>show(cur+1));
-  show(3);
+  show(0);
 }
 function initRnd(rnd){
   if(!rnd || rnd.dataset.rndInit) return;
@@ -1202,9 +1158,9 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
 
   function thumbHTML(c){
     const cat='<span class="wcard-cat">'+catLabel[c.cat]+'</span>';
-    if(c.yt) return '<div class="wcard-thumb"><img src="https://i.ytimg.com/vi/'+c.yt+'/hqdefault.jpg" alt=""><span class="wcard-play"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span>'+cat+'</div>';
+    if(c.yt) return '<div class="wcard-thumb"><img src="https://i.ytimg.com/vi/'+c.yt+'/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="wcard-play"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span>'+cat+'</div>';
     if(c.ph||!c.media) return '<div class="wcard-thumb"><div class="ph">미디어 준비중</div>'+cat+'</div>';
-    return '<div class="wcard-thumb"><img src="'+c.media[0]+'" alt="" loading="lazy">'+cat+'</div>';
+    return '<div class="wcard-thumb"><img src="'+c.media[0]+'" alt="" loading="lazy" decoding="async">'+cat+'</div>';
   }
   function render(cat){
     grid.innerHTML='';
@@ -1221,7 +1177,7 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
   function mediaHTML(c){
     if(c.yt) return '<iframe src="https://www.youtube-nocookie.com/embed/'+c.yt+'?rel=0" title="video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>';
     if(c.ph||!c.media) return '<div class="ph">미디어 준비중</div>';
-    return '<img src="'+c.media[0]+'" alt="">';
+    return '<img src="'+c.media[0]+'" alt="" decoding="async">';
   }
   function openModal(c){
     _curCard=c;
@@ -1268,6 +1224,21 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
       const st=dest.querySelector('.stepper'); if(st){st.removeAttribute('data-step-init');initStepper(st);}
       const rn=dest.querySelector('.rnd-section,[id^="facialRnd"]'); if(rn){rn.removeAttribute('data-rnd-init');initRnd(rn);}
       if(typeof initSkinCarousel==='function'){const sc=dest.querySelector('.skin-carousel,#skinTrack,[id^="skin"]'); if(sc)initSkinCarousel(dest);}
+      // 무거운 webp 그리드(바디리그 등) 순차 로딩: 한 번에 하나씩 받아 첫 이미지가 빨리 뜨도록
+      (function(){
+        const seq=[...dest.querySelectorAll('.rig-media img')];
+        if(seq.length<2) return;
+        seq.forEach(im=>{const s=im.getAttribute('src'); if(s){im.dataset.src=s; im.removeAttribute('src');}});
+        let qi=0;
+        (function next(){
+          if(qi>=seq.length) return;
+          const im=seq[qi++];
+          if(!im.dataset.src){next();return;}
+          im.addEventListener('load',next,{once:true});
+          im.addEventListener('error',next,{once:true});
+          im.src=im.dataset.src;
+        })();
+      })();
       btn.style.display='none';
       dest.scrollIntoView({behavior:'smooth',block:'nearest'});
     }

@@ -321,7 +321,7 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 .wmodal-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
 .wchip{font-size:12px;padding:5px 11px;border-radius:20px;background:var(--bg-raised);border:1px solid var(--line);color:var(--text-dim)}
 .wdetail{display:none;border-top:1px solid var(--line);margin-top:8px;padding-top:24px}
-.wmodal.expanded .wdetail{display:block}
+.wmodal.expanded .wdetail{display:none}
 .wpsi{display:grid;gap:18px;margin-bottom:8px}
 @media(min-width:680px){.wpsi{grid-template-columns:repeat(3,1fr)}}
 .wpsi-cell .st{font-size:11px;letter-spacing:.1em;font-weight:700;color:var(--accent);margin-bottom:7px}
@@ -331,6 +331,28 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 .wbtn:hover{border-color:var(--accent)}
 .wbtn-primary{background:var(--accent);border-color:var(--accent);color:#0d1117;font-weight:600}
 .wmodal.expanded .wbtn-detail{display:none}
+.wmodal.full{max-width:920px}
+.wfull{display:none;border-top:1px solid var(--line);margin-top:20px;padding-top:24px}
+.wmodal.full .wfull{display:block}
+.wfull .proj-num{display:none}
+.wfull h3{font-size:18px;margin-bottom:10px}
+.wfull .lead{color:var(--text-dim);font-weight:300;margin-bottom:18px;font-size:14px}
+.wfull .media-grid{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:600px){.wfull .media-grid{grid-template-columns:1fr}}
+.wfull .media{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg-media)}
+.wfull .media img{width:100%;display:block}
+.wfull .caption{padding:10px 12px;font-size:12px;color:var(--text-dim);background:var(--bg-raised)}
+.wfull .story,.wfull .result-row,.wfull .toolrow,.wfull .banner,.wfull .rnd-section,.wfull .skin-carousel{margin-bottom:18px}
+
+
+/* ===== 풀 상세 섹션 (앵커 타겟) ===== */
+.detail-sec{display:none!important}
+.detail-sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+.detail-back{background:transparent;border:1px solid var(--line-strong);color:var(--text);padding:9px 18px;border-radius:8px;font-size:13px;cursor:pointer;transition:border-color .2s}
+.detail-back:hover{border-color:var(--accent)}
+.detail-block{display:none}
+.detail-block.show{display:block}
+.detail-sec .banner{margin-bottom:24px}
 </style>
 </head>
 <body>
@@ -408,6 +430,7 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
       <div class="wmodal-tools" id="wmodalTools"></div>
       <div class="wmodal-cta"><button class="wbtn wbtn-primary wbtn-detail" id="wmodalDetailBtn"></button></div>
       <div class="wdetail"><div class="wpsi" id="wmodalPsi"></div></div>
+      <div class="wfull" id="wmodalFull"></div>
     </div>
   </div>
 </div>
@@ -462,6 +485,376 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<section class="detail-sec" id="fulldetail">
+  <div class="wrap">
+    <div class="detail-sec-head">
+      <div class="eyebrow" style="color:var(--accent);font-size:12px;letter-spacing:.18em;font-weight:700;margin-bottom:10px">FULL DETAIL</div>
+      <button class="detail-back" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">← 카드로 돌아가기</button>
+    </div>
+    <div class="detail-block" id="detail-plugin">
+      <div class="banner" data-index="01">
+        <div class="banner-content">
+          <div class="ctx">ETERNAL RETURN · NIMBLE NEURON · ANIMATION TEAM</div>
+          <h2 data-i18n="pl.btitle"></h2>
+          <div class="sub" data-i18n="pl.bsub"></div>
+        </div>
+      </div>
+      <div class="toolrow">
+        <span class="tlabel">TOOLKIT</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/python.png" alt="Python"></span>Python</span>
+        <span class="tool">MaxScript</span>
+      </div>
+
+      <div class="proj" id="detail-p1">
+        <div class="proj-num">01 — BATCH RETARGETING TOOL</div>
+        <h3 data-i18n="p1.title"></h3>
+        <p class="lead" data-i18n="p1.lead"></p>
+        <div class="result-row">
+          <div class="result-card"><div class="big" data-i18n="p1.r1b"></div><div class="cap" data-i18n="p1.r1c"></div></div>
+          <div class="result-card"><div class="big" data-i18n="p1.r2b"></div><div class="cap" data-i18n="p1.r2c"></div></div>
+        </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p1.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p1.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p1.i"></p></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><img src="gif/plugin_retarget1.webp" alt="3ds Max 배치 리타게팅 툴 — 파일 리스트와 일괄 처리 UI"><div class="caption" data-i18n="p1.c1"></div></div>
+          <div class="media"><img src="gif/plugin_retarget2.webp" alt="배치 리타게팅 처리 결과 뷰포트"><div class="caption" data-i18n="p1.c2"></div></div>
+        </div>
+      </div>
+
+      <div class="proj" id="detail-p2">
+        <div class="proj-num">02 — BATCH EXPORT TOOL</div>
+        <h3 data-i18n="p2.title"></h3>
+        <p class="lead" data-i18n="p2.lead"></p>
+        <div class="result-row">
+          <div class="result-card"><div class="big" data-i18n="p2.r1b"></div><div class="cap" data-i18n="p2.r1c"></div></div>
+        </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p2.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p2.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p2.i"></p></div>
+        </div>
+        <div class="media"><img src="gif/plugin_export.webp" alt="Selection Sets 기반 일괄 익스포트 툴 실행 화면"><div class="caption" data-i18n="p2.c1"></div></div>
+      </div>
+
+      <div class="proj" id="detail-p3">
+        <div class="proj-num">03 — CHARACTER SETUP TOOL</div>
+        <h3 data-i18n="p3.title"></h3>
+        <p class="lead" data-i18n="p3.lead"></p>
+        <div class="result-row">
+          <div class="result-card"><div class="big" data-i18n="p3.r1b"></div><div class="cap" data-i18n="p3.r1c"></div></div>
+          <div class="result-card"><div class="big" data-i18n="p3.r2b"></div><div class="cap" data-i18n="p3.r2c"></div></div>
+        </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p3.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p3.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p3.i"></p></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><img src="gif/plugin_setup1.webp" alt="캐릭터 셋업 자동화 툴 — Fig 파일 리스트와 포즈 로드"><div class="caption" data-i18n="p3.c1"></div></div>
+          <div class="media"><img src="gif/plugin_setup2.webp" alt="Twist·관절 본 자동 생성 결과 뷰포트"><div class="caption" data-i18n="p3.c2"></div></div>
+        </div>
+      </div>
+
+      <div class="proj" id="detail-p4">
+        <div class="proj-num">04 — RIGGING MANAGER</div>
+        <h3 data-i18n="p4.title"></h3>
+        <p class="lead" data-i18n="p4.lead"></p>
+        <div class="toolrow"><span class="tlabel">SPEC</span><span class="tool">Python 3.11</span><span class="tool">pymxs</span><span class="tool">3ds Max 2025+</span><span class="tool">EN · KO · ZH · JP</span></div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p4.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p4.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p4.i"></p></div>
+        </div>
+        <div class="media"><img src="gif/plugin_rigmgr.webp" alt="Rigging Manager — 리깅·검증·스키닝 통합 인터페이스"><div class="caption" data-i18n="p4.c1"></div></div>
+      </div>
+
+      <div class="proj" id="detail-p5">
+        <div class="proj-num">05 — MORPH ANIMATION TOOL</div>
+        <h3 data-i18n="p5.title"></h3>
+        <p class="lead" data-i18n="p5.lead"></p>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p5.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p5.p"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p5.so"></p></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><img src="gif/plugin_morph1.webp" alt="모프 프리셋 툴 — 페이셜 시안 제작 UI"><div class="caption" data-i18n="p5.c1"></div></div>
+          <div class="media"><img src="gif/plugin_morph2.webp" alt="모프 애니메이션 원클릭 복사 결과"><div class="caption" data-i18n="p5.c2"></div></div>
+        </div>
+      </div>
+
+      <div class="proj" id="detail-p6">
+        <div class="proj-num">06 — FBX INSPECTOR</div>
+        <h3 data-i18n="p6.title"></h3>
+        <p class="lead" data-i18n="p6.lead"></p>
+        <div class="toolrow" style="margin:6px 0 16px">
+          <span class="tool"><span class="ico ico-logo"><img src="gif/python.png" alt="Python"></span>Python</span>
+          <span class="tool">PySide6</span>
+          <span class="tool">ModernGL</span>
+          <span class="tool">Binary FBX Parser</span>
+        </div>
+        <div class="story">
+          <div class="story-cell"><div class="st">PROBLEM</div><p data-i18n="p6.s"></p></div>
+          <div class="story-cell"><div class="st">SOLUTION</div><p data-i18n="p6.so"></p></div>
+          <div class="story-cell"><div class="st">IMPACT</div><p data-i18n="p6.i"></p></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><div class="ph"><span class="icon"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span><span data-i18n="p6.ph"></span></div><div class="caption" data-i18n="p6.c1"></div></div>
+          <div class="media"><div class="ph"><span class="icon"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span><span data-i18n="p6.ph"></span></div><div class="caption" data-i18n="p6.c2"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-block" id="detail-rigging">
+      <div class="banner" data-index="02">
+        <div class="banner-content">
+          <div class="ctx">RIGGING SHOWCASE · 3DS MAX</div>
+          <h2 data-i18n="rg.btitle"></h2>
+          <div class="sub" data-i18n="rg.bsub"></div>
+        </div>
+      </div>
+      <div class="toolrow">
+        <span class="tlabel">TOOLKIT</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
+        <span class="tool">Expression Controller</span>
+        <span class="tool">Script Controller</span>
+      </div>
+
+      <div class="proj" id="facialProj">
+        <div class="proj-num">01 — CUSTOM FACIAL RIG</div>
+        <h3 data-i18n="r1.title"></h3>
+        <p class="lead" data-i18n="r1.lead"></p>
+
+        <div class="stepper" id="facialStepper">
+          <div class="step-tabs">
+            <button class="step-tab active" data-step="0"><div class="snum">STEP 01</div><div class="stitle" data-i18n="r1.st1"></div></button>
+            <button class="step-tab" data-step="1"><div class="snum">STEP 02</div><div class="stitle" data-i18n="r1.st2"></div></button>
+            <button class="step-tab" data-step="2"><div class="snum">STEP 03</div><div class="stitle" data-i18n="r1.st3"></div></button>
+            <button class="step-tab" data-step="3"><div class="snum">STEP 04</div><div class="stitle" data-i18n="r1.st4"></div></button>
+          </div>
+          <div class="step-stage">
+            <div class="step-media">
+              <img data-step-img="0" src="gif/facial_step1.webp" alt="페이셜 리그 STEP 01 — 서페이스 추적 셋업">
+              <img data-step-img="1" src="gif/facial_step2.webp" alt="페이셜 리그 STEP 02 — 비파괴 오프셋 레이어">
+              <img data-step-img="2" src="gif/facial_step3.webp" alt="페이셜 리그 STEP 03 — 본 케이지 79본 구조">
+              <img data-step-img="3" src="gif/facial_step4.webp" alt="페이셜 리그 STEP 04 — 핸드키 레이어링 최종 결과">
+              <div class="ph"><span class="icon"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span><span data-i18n="r1.phtext"></span></div>
+              <button class="step-nav prev" aria-label="prev"><svg class="svgi" width="20" height="20"><use href="#i-chevron-left"/></svg></button>
+              <button class="step-nav next" aria-label="next"><svg class="svgi" width="20" height="20"><use href="#i-chevron-right"/></svg></button>
+            </div>
+            <div class="step-desc">
+              <div class="d-num" id="facialDnum">STEP 01</div>
+              <div class="d-text" data-step-desc="0" data-i18n="r1.d1"></div>
+              <div class="d-text" data-step-desc="1" data-i18n="r1.d2" style="display:none"></div>
+              <div class="d-text" data-step-desc="2" data-i18n="r1.d3" style="display:none"></div>
+              <div class="d-text" data-step-desc="3" data-i18n="r1.d4" style="display:none"></div>
+            </div>
+          </div>
+
+          <div class="rnd" id="facialRnd">
+            <button class="rnd-toggle"><span class="rl" data-i18n="r1.rndlabel"></span><span class="chev"><svg class="svgi" width="16" height="16"><use href="#i-chevron-down"/></svg></span></button>
+            <div class="rnd-body">
+              <div class="rnd-inner">
+                <div class="rnd-block">
+                  <div class="rb-tag">01 · REFERENCE & GOAL</div>
+                  <div class="rb-title" data-i18n="r1.rb1t"></div>
+                  <div class="rb-text" data-i18n="r1.rb1d"></div>
+                </div>
+                <div class="rnd-block">
+                  <div class="rb-tag">02 · FACIAL DESIGN</div>
+                  <div class="rb-title" data-i18n="r1.rb2t"></div>
+                  <div class="rb-text" data-i18n="r1.rb2d"></div>
+                </div>
+                <div class="rnd-block">
+                  <div class="rb-tag">03 · RIG STRUCTURE</div>
+                  <div class="rb-title" data-i18n="r1.rb3t"></div>
+                  <div class="rb-text" data-i18n="r1.rb3d"></div>
+                </div>
+                <div class="rnd-block">
+                  <div class="rb-tag">04 · RESULT</div>
+                  <div class="rb-title" data-i18n="r1.rb4t"></div>
+                  <div class="rb-text" data-i18n="r1.rb4d"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj" id="detail-r2">
+        <div class="proj-num">02 — CUSTOM BODY RIG</div>
+        <h3 data-i18n="r2.title"></h3>
+        <p class="lead" data-i18n="r2.lead"></p>
+
+        <div class="rig-linear" id="bodyLinear">
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">01</div>
+                <div class="rig-title" data-i18n="r2.st1"></div>
+                <div class="rig-desc" data-i18n="r2.d1"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_torso.webp" alt="바디 리그 — 몸통 Stretch & Squash" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">02</div>
+                <div class="rig-title" data-i18n="r2.st2"></div>
+                <div class="rig-desc" data-i18n="r2.d2"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_arm.webp" alt="바디 리그 — 팔 Twist와 IK/FK 블렌드" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">03</div>
+                <div class="rig-title" data-i18n="r2.st3"></div>
+                <div class="rig-desc" data-i18n="r2.d3"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_clavicle.webp" alt="바디 리그 — Auto Clavicle 자동 어깨 제어" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">04</div>
+                <div class="rig-title" data-i18n="r2.st4"></div>
+                <div class="rig-desc" data-i18n="r2.d4"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_hand.webp" alt="바디 리그 — 손 관절·손가락 컨트롤러" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">05</div>
+                <div class="rig-title" data-i18n="r2.st5"></div>
+                <div class="rig-desc" data-i18n="r2.d5"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_leg.webp" alt="바디 리그 — 다리 Twist와 IK/FK 블렌드" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row">
+              <div class="rig-info">
+                <div class="rig-num">06</div>
+                <div class="rig-title" data-i18n="r2.st6"></div>
+                <div class="rig-desc" data-i18n="r2.d6"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_foot.webp" alt="바디 리그 — 3축 Foot Roll" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row feature">
+              <div class="rig-info">
+                <div class="rig-num">07</div>
+                <div class="rig-title" data-i18n="r2.st7"></div>
+                <div class="rig-desc" data-i18n="r2.d7"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_ikfk.webp" alt="바디 리그 — IK/FK Match 포즈 전환" loading="lazy">
+              </div>
+            </div>
+            <div class="rig-row feature">
+              <div class="rig-info">
+                <div class="rig-num">08</div>
+                <div class="rig-title" data-i18n="r2.st8"></div>
+                <div class="rig-desc" data-i18n="r2.d8"></div>
+              </div>
+              <div class="rig-media">
+                <img src="gif/body_scale.webp" alt="바디 리그 — 전체 스케일 애니메이션" loading="lazy">
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="detail-block" id="detail-anim">
+      <div class="banner" data-index="03">
+        <div class="banner-content">
+          <div class="ctx">ETERNAL RETURN · NIMBLE NEURON</div>
+          <h2 data-i18n="an.btitle"></h2>
+          <div class="sub" data-i18n="an.bsub"></div>
+        </div>
+      </div>
+      <div class="toolrow">
+        <span class="tlabel">TOOLKIT</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/unity.png" alt="Unity"></span>Unity Timeline</span>
+        <span class="tool"><span class="ico ico-logo"><img src="gif/xsense.png" alt="X-sense MoCap"></span>X-sense MoCap</span>
+      </div>
+
+      <div class="proj" id="detail-a0">
+        <div class="proj-num" style="color:var(--accent)">01 — FIRST DESCENDANT · NEXON GAMES</div>
+        <h3 data-i18n="a0.title"></h3>
+        <p class="lead" data-i18n="a0.lead"></p>
+        <div class="toolrow" style="margin:6px 0 16px">
+          <span class="tool"><span class="ico ico-logo"><img src="gif/3dsmax.png" alt="3ds Max"></span>3ds Max</span>
+          <span class="tool"><span class="ico ico-logo"><img src="gif/unreal_White.png" alt="Unreal Engine"></span>Unreal Engine</span>
+        </div>
+        <div class="media"><div class="yt-facade" data-id="B619JNrayFo" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/B619JNrayFo/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a0.cap"></div></div>
+      </div>
+
+      <div class="proj" id="detail-a1">
+        <div class="proj-num">02 — IP COLLABORATION SKINS</div>
+        <h3 data-i18n="a1.title"></h3>
+        <p class="lead" data-i18n="a1.lead"></p>
+        <div class="ip-row">
+          <div class="ip-badge"><span class="x">ER ×</span><span class="ip">PERSONA 5 The Royal</span><span class="ch" data-i18n="a1.ch1"></span></div>
+          <div class="ip-badge"><span class="x">ER ×</span><span class="ip">GUILTY GEAR</span><span class="ch" data-i18n="a1.ch2"></span></div>
+        </div>
+        <div class="media-grid">
+          <div class="media"><div class="yt-facade" data-id="AjOONh3eT_M" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/AjOONh3eT_M/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Persona 5 The Royal — ⓒ Nimble Neuron</div></div>
+          <div class="media"><div class="yt-facade" data-id="QEb9GMPu3gk" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/QEb9GMPu3gk/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER × Guilty Gear — ⓒ Nimble Neuron</div></div>
+        </div>
+      </div>
+
+      <div class="proj" id="detail-a2">
+        <div class="proj-num">03 — CHARACTER SKIN RETARGETING</div>
+        <h3 data-i18n="a2.title"></h3>
+        <p class="lead" data-i18n="a2.lead"></p>
+        <div class="vid-carousel">
+          <button class="vid-arrow va-prev" aria-label="prev"><svg class="svgi" width="18" height="18"><use href="#i-chevron-left"/></svg></button>
+          <div class="vid-track" id="skinTrack">
+            <div class="vid-card"><div class="yt-facade" data-id="4QCUIjr-wP4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/4QCUIjr-wP4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Isaac — ⓒ Nimble Neuron</div></div>
+            <!-- 추가 영상: 아래 형식으로 vid-card 복사해서 ID만 교체
+            <div class="vid-card"><div class="yt-facade" data-id="VIDEO_ID" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/VIDEO_ID/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">캐릭터명 — ⓒ Nimble Neuron</div></div>
+            -->
+          </div>
+          <button class="vid-arrow va-next" aria-label="next"><svg class="svgi" width="18" height="18"><use href="#i-chevron-right"/></svg></button>
+        </div>
+      </div>
+
+      <div class="proj" id="detail-a3">
+        <div class="proj-num">04 — IN-GAME MOTION</div>
+        <h3 data-i18n="a3.title"></h3>
+        <div class="media"><div class="yt-facade" data-id="FYZve9TWifA" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/FYZve9TWifA/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">ER · Alonso — ⓒ Nimble Neuron</div></div>
+      </div>
+
+      <div class="proj" id="detail-a4">
+        <div class="proj-num">05 — OUT-GAME MOTION</div>
+        <h3 data-i18n="a4.title"></h3>
+        <div class="media"><div class="yt-facade" data-id="3GsJIqkVyw4" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/3GsJIqkVyw4/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption" data-i18n="a4.cap"></div></div>
+      </div>
+
+      <div class="proj" id="detail-a5">
+        <div class="proj-num">06 — DEMO REEL</div>
+        <h3 data-i18n="a5.title"></h3>
+        <div class="media"><div class="yt-facade" data-id="RukpP-9s5FU" role="button" tabindex="0" aria-label="Play video"><img src="https://i.ytimg.com/vi/RukpP-9s5FU/hqdefault.jpg" alt="YouTube 영상 썸네일" loading="lazy"><span class="yt-play"><svg class="svgi" width="26" height="26"><use href="#i-play"/></svg></span></div><div class="caption">Game Animation Reel 2020 / 2023</div></div>
+      </div>
+    </div>
+
+
   </div>
 </section>
 
@@ -796,7 +1189,9 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
   const lang=()=>document.documentElement.lang||'ko';
   const L=(o)=> o ? (o[lang()]||o.ko||'') : '';
   const catLabel={plugin:'PLUGIN',rigging:'RIGGING',animation:'ANIMATION'};
-  const detailTxt={ko:'상세 보기 →',en:'View detail →',zh:'查看详情 →'};
+  const detailTxt={ko:'상세 보기 ↗',en:'View full detail ↗',zh:'查看详情 ↗'};
+  const fullTxt={ko:'전체 보기 ↗',en:'Full page ↗',zh:'查看全部 ↗'};
+  let _curCard=null;
 
   function thumbHTML(c){
     const cat='<span class="wcard-cat">'+catLabel[c.cat]+'</span>';
@@ -822,6 +1217,7 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
     return '<img src="'+c.media[0]+'" alt="">';
   }
   function openModal(c){
+    _curCard=c;
     modal.classList.remove('expanded');
     document.getElementById('wmodalMedia').innerHTML=mediaHTML(c);
     document.getElementById('wmodalCat').textContent=catLabel[c.cat]+' · '+c.num;
@@ -830,21 +1226,41 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
     document.getElementById('wmodalTools').innerHTML=(c.tools||[]).map(t=>'<span class="wchip">'+t+'</span>').join('');
     const detailBtn=document.getElementById('wmodalDetailBtn');
     const psi=document.getElementById('wmodalPsi');
-    if(c.problem){
-      psi.innerHTML='<div class="wpsi-cell"><div class="st">PROBLEM</div><p>'+L(c.problem)+'</p></div>'+
-                    '<div class="wpsi-cell"><div class="st">SOLUTION</div><p>'+L(c.solution)+'</p></div>'+
-                    '<div class="wpsi-cell"><div class="st">IMPACT</div><p>'+L(c.impact)+'</p></div>';
+    psi.innerHTML='';
+    const hasDetail=document.getElementById('detail-'+c.id);
+    if(hasDetail){
       detailBtn.textContent=detailTxt[lang()];
       detailBtn.style.display='';
     } else {
-      psi.innerHTML='';
       detailBtn.style.display='none';
     }
     overlay.classList.add('open');
     document.body.style.overflow='hidden';
   }
-  function close(){overlay.classList.remove('open');document.body.style.overflow='';document.getElementById('wmodalMedia').innerHTML='';}
-  document.getElementById('wmodalDetailBtn').addEventListener('click',()=>modal.classList.add('expanded'));
+  function close(){overlay.classList.remove('open');document.body.style.overflow='';document.getElementById('wmodalMedia').innerHTML='';modal.classList.remove('full','expanded');document.getElementById('wmodalFull').innerHTML='';}
+  document.getElementById('wmodalDetailBtn').addEventListener('click',()=>{
+    modal.classList.add('expanded');
+    if(!_curCard) return;
+    const src=document.getElementById('detail-'+_curCard.id);
+    const dest=document.getElementById('wmodalFull');
+    if(src){
+      const clone=src.cloneNode(true);
+      clone.removeAttribute('id');
+      dest.innerHTML='';
+      dest.appendChild(clone);
+      dest.querySelectorAll('.yt-facade').forEach(el=>{
+        el.addEventListener('click',()=>{
+          if(el.querySelector('iframe'))return;
+          const f=document.createElement('iframe');
+          f.src='https://www.youtube-nocookie.com/embed/'+el.dataset.id+'?rel=0&autoplay=1';
+          f.allow='accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';
+          f.setAttribute('allowfullscreen','');
+          el.appendChild(f);
+        });
+      });
+    }
+    modal.classList.add('full');
+  });
   document.getElementById('wmodalClose').addEventListener('click',close);
   overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))close();});

@@ -297,7 +297,7 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 .wcard-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .wcard-thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:12px;background:repeating-linear-gradient(45deg,var(--bg-soft),var(--bg-soft) 10px,var(--bg-card) 10px,var(--bg-card) 20px)}
 .wcard-cat{position:absolute;top:10px;left:10px;font-size:10px;letter-spacing:.1em;font-weight:700;padding:4px 9px;border-radius:5px;background:rgba(13,17,23,.78);color:var(--accent);backdrop-filter:blur(4px)}
-.wcard-cc{position:absolute;right:10px;bottom:10px;font-size:10px;letter-spacing:.04em;font-weight:600;padding:4px 8px;border-radius:5px;background:rgba(13,17,23,.78);color:rgba(255,255,255,.82);backdrop-filter:blur(4px);pointer-events:none}
+.wcard-cc{margin-left:auto;color:var(--text-faint);font-size:10.5px;font-weight:500;letter-spacing:.02em;white-space:nowrap}
 .wcard-play{position:absolute;inset:0;margin:auto;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(13,17,23,.7);color:var(--text);border:1px solid var(--line-strong)}
 .wcard:hover .wcard-play{background:var(--accent);color:#0d1117}
 .wcard-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
@@ -305,7 +305,7 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 .wcard-title{font-size:16px;font-weight:500;margin-bottom:8px;line-height:1.35}
 .wcard-desc{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.55;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .wcard-tools{margin-top:10px;font-size:11px;letter-spacing:.03em;font-weight:500;color:#e3a7b3;line-height:1.5}
-.wcard-foot{margin-top:14px;color:var(--text-faint);font-size:12px}
+.wcard-foot{margin-top:auto;padding-top:14px;color:var(--text-faint);font-size:12px;display:flex;align-items:center;gap:8px}
 .wcard:hover .wcard-foot{color:var(--accent)}
 /* 모달 */
 .wmodal-overlay{position:fixed;inset:0;z-index:1100;background:rgba(8,11,15,.82);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:5vmin;opacity:0;pointer-events:none;transition:opacity .25s}
@@ -1163,17 +1163,14 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
 
   function thumbHTML(c){
     const cat='<span class="wcard-cat">'+catLabel[c.cat]+'</span>';
-    const cc=c.cc?'<span class="wcard-cc">ⓒ '+c.cc+'</span>':'';
-    if(c.yt) return '<div class="wcard-thumb"><img src="https://i.ytimg.com/vi/'+c.yt+'/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="wcard-play"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span>'+cat+cc+'</div>';
-    if(c.ph||!c.media) return '<div class="wcard-thumb"><div class="ph">미디어 준비중</div>'+cat+cc+'</div>';
-    return '<div class="wcard-thumb"><img src="'+c.media[0]+'" alt="" loading="lazy" decoding="async">'+cat+cc+'</div>';
+    if(c.yt) return '<div class="wcard-thumb"><img src="https://i.ytimg.com/vi/'+c.yt+'/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="wcard-play"><svg class="svgi" width="22" height="22"><use href="#i-play"/></svg></span>'+cat+'</div>';
+    if(c.ph||!c.media) return '<div class="wcard-thumb"><div class="ph">미디어 준비중</div>'+cat+'</div>';
+    return '<div class="wcard-thumb"><img src="'+c.media[0]+'" alt="" loading="lazy" decoding="async">'+cat+'</div>';
   }
   function cardEl(c){
     const el=document.createElement('div');
     el.className='wcard';
-    const _tl=(c.ctools||c.tools||[]);
-    const _tools=_tl.length?'<div class="wcard-tools">'+_tl.join(' · ')+'</div>':'';
-    el.innerHTML=thumbHTML(c)+'<div class="wcard-body"><div class="wcard-num">'+c.num+'</div><div class="wcard-title">'+L(c.title)+'</div><div class="wcard-desc">'+L(c.lead)+'</div>'+_tools+'<div class="wcard-foot">'+detailTxt[lang()]+'</div></div>';
+    el.innerHTML=thumbHTML(c)+'<div class="wcard-body"><div class="wcard-title">'+L(c.title)+'</div><div class="wcard-foot"><span class="wcard-detail">'+detailTxt[lang()]+'</span>'+(c.cc?'<span class="wcard-cc">ⓒ '+c.cc+'</span>':'')+'</div></div>';
     el.addEventListener('click',()=>openModal(c));
     return el;
   }

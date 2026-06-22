@@ -288,6 +288,9 @@ footer{padding:48px 24px;border-top:1px solid var(--line);text-align:center;marg
 .wfilter:hover{border-color:var(--line-strong);color:var(--text)}
 .wfilter.active{background:var(--accent);border-color:var(--accent);color:#0d1117;font-weight:600}
 .works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.works-grid.by-cat{grid-template-columns:repeat(3,1fr);align-items:start}
+.works-col{display:flex;flex-direction:column;gap:18px;min-width:0}
+@media(max-width:680px){.works-grid.by-cat{grid-template-columns:1fr}}
 .wcard{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .25s,transform .25s;display:flex;flex-direction:column}
 .wcard:hover{border-color:var(--accent-dim);transform:translateY(-3px)}
 .wcard-thumb{aspect-ratio:16/10;background:var(--bg-media);position:relative;overflow:hidden}
@@ -1162,15 +1165,27 @@ document.querySelectorAll('.yt-facade').forEach(el=>{
     if(c.ph||!c.media) return '<div class="wcard-thumb"><div class="ph">미디어 준비중</div>'+cat+'</div>';
     return '<div class="wcard-thumb"><img src="'+c.media[0]+'" alt="" loading="lazy" decoding="async">'+cat+'</div>';
   }
+  function cardEl(c){
+    const el=document.createElement('div');
+    el.className='wcard';
+    el.innerHTML=thumbHTML(c)+'<div class="wcard-body"><div class="wcard-num">'+c.num+'</div><div class="wcard-title">'+L(c.title)+'</div><div class="wcard-desc">'+L(c.lead)+'</div><div class="wcard-foot">'+detailTxt[lang()]+'</div></div>';
+    el.addEventListener('click',()=>openModal(c));
+    return el;
+  }
   function render(cat){
     grid.innerHTML='';
-    CARDS.filter(c=>cat==='all'||c.cat===cat).forEach(c=>{
-      const el=document.createElement('div');
-      el.className='wcard';
-      el.innerHTML=thumbHTML(c)+'<div class="wcard-body"><div class="wcard-num">'+c.num+'</div><div class="wcard-title">'+L(c.title)+'</div><div class="wcard-desc">'+L(c.lead)+'</div><div class="wcard-foot">'+detailTxt[lang()]+'</div></div>';
-      el.addEventListener('click',()=>openModal(c));
-      grid.appendChild(el);
-    });
+    if(cat==='all'){
+      grid.classList.add('by-cat');
+      ['plugin','rigging','animation'].forEach(ct=>{
+        const col=document.createElement('div');
+        col.className='works-col';
+        CARDS.filter(c=>c.cat===ct).forEach(c=>col.appendChild(cardEl(c)));
+        grid.appendChild(col);
+      });
+    } else {
+      grid.classList.remove('by-cat');
+      CARDS.filter(c=>c.cat===cat).forEach(c=>grid.appendChild(cardEl(c)));
+    }
   }
   const overlay=document.getElementById('wmodalOverlay');
   const modal=document.getElementById('wmodal');
